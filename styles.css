@@ -1,0 +1,167 @@
+body{
+    padding-top: 10px;
+    padding-left: 20px;
+	font-family: "Arial";
+}
+h2{
+    font-family: "Arial";
+    margin-bottom: 10px;
+	margin-top: 2px;
+	font-size: 19px;
+	text-transform: uppercase;
+	color: #000000;
+}
+#apiKey{
+	width: 130px !important;
+	margin-left: 5px;
+}
+#wrapperdiv{
+	width: 1730px;
+	margin-top: 20px;
+	background-color: #EEEEEE;
+}
+#sidebar{
+	width: 200px;
+	height: 800px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+	font-size: 12px;
+	margin: 10px;
+	margin-left: 20px;
+	margin-bottom: 10px;
+	float: left;
+}
+#account{
+	padding: 10px;
+	margin: 0px;
+	
+}
+#barchartpart{
+	width: 830px;
+	height: 450px;
+	display: inline-block;
+	float: left;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+}
+#piechartpart{
+	width: 620px;
+	height: 800px;
+	margin: 10px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+}
+#achievementpart{
+	width: 830px;
+	height: 330px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	float: left;
+	float: top;
+}
+#sunburstinnerwrapper{
+    width: 600px;
+	height: 120px;
+}
+#error{
+	margin-bottom: 20px;
+	padding: 10px;
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+#menu2{
+	overflow-y: scroll;
+	height: 510px;
+}
+.axis text{
+  font: 12px "Arial";
+}
+.axis path,
+.axis line{
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.legend{
+    font-family: "Arial";
+    font-size: 11px;
+}
+.bar:hover{
+  fill: "steelblue";
+}
+.accountdiv{
+    padding: 0;
+    margin: 0;
+}
+.accinfo{
+    margin: 0;
+}
+.charname{
+    font-size: 20px;
+    margin: 0;
+}
+.charprofession{
+    font-size: 20px;
+    margin: 0;
+}
+.charage{
+    margin: 0;
+}
+.accinfo{
+    font-size: 14px;
+}
+.sunbursttext{
+    margin: 0 auto;
+	font-size: 12px;
+}
+.tooltip{
+  position: absolute;
+  text-align: left;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  font: 12px Arial;
+  background: #555555;
+  border: #777777 1px solid;
+  border-radius: 0px;
+  pointer-events: none;
+  color: white;
+}
+.menulist{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.nav{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: black;
+    background-color: #999999;
+}
+a{
+	color: black;
+}
+ul{
+    list-style-type: none;
+}
+div ul li{
+    margin: 5px;
+}    
+img{
+    vertical-align: middle;
+	padding-right: 5px;
+}
+div ul li p{
+    display: inline-block;
+    vertical-align: middle;
+}
+path{
+    stroke: #DDDDDD;
+}

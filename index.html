@@ -1,0 +1,134 @@
+<!-- 
+	Renske Talsma 10896503
+    
+	Webpage that visualizes character gear and infusions (agony resist) based on the supplied API key.
+    Data is obtained using the offical Guild Wars 2 API. For more information consult https://wiki.guildwars2.com/wiki/API:Main
+    
+-->
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+	
+		<title>Week 6 and 7</title>
+		<meta charset="utf-8">
+		
+		<!-- External scripts and stylesheets. -->
+		<link rel="stylesheet" href="Libraries/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles.css">
+		<script src="Libraries/d3.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="Libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script src="Libraries/legend.js"></script>
+        <script src="Libraries/queue.v1.min.js"></script>
+		<script src="Libraries/d3.tip.v0.6.3.js"></script>
+		<script src="whatever.js"></script>
+		
+	</head>
+    
+	<body>
+	
+		<!-- Link back to github pages. -->
+        <p>Renske Talsma 10896503 <a href="../../index.html">[ «« Go back ]</a></p>
+		
+		<!-- Error message span. -->
+		<span class="error" id="error"></span>
+		
+		<!-- Divs that contain the actual content. -->
+		<div id= "wrapperdiv">
+        
+            <!-- Sidebar. -->
+			<div id="sidebar">
+				<p>
+						Please insert your API key to continue. 
+						Your key will need the following permissions to function: characters, wallet, account, builds and progression.<br><br>
+						Made using the official GW2 API. </p>
+				
+				<input type="text" id="apiKey" value="">
+				<button onclick="getUserApi()">Go!</button> 
+	
+				<!-- Bootstrap part with 4 toggles. -->
+				<div class = "bootstrap">
+					<ul class="nav nav-pills">
+						<li class="active navcolor"><a data-toggle="tab" href="#home">Account</a></li>
+						<li class="navcolor"><a data-toggle="tab" href="#menu1">Legend</a></li>
+						<li class="navcolor"><a data-toggle="tab" href="#menu2">Use/Story</a></li>
+						<li class="navcolor"><a data-toggle="tab" href="#menu3">Credits</a></li>
+					</ul>
+					
+					<!-- Bootstrap tab contents. -->
+					<div class="tab-content">
+					
+					<!-- Account info. -->
+						<div id="home" class="tab-pane fade in active">
+							<h2>Account</h2>
+								<div id="accountdiv">
+									<img id="accountloading" src="Static/spinner.gif" alt="Loading...">
+									<ul id="account">
+										<li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
+										<li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
+										<li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
+										<li id="fractalLevel"><img class="listimg" src="Static/fractallevel.png" alt="Account Name"><p class="accinfo" id="fraclevel">frac level</p></li>
+									</ul>
+								</div>
+						</div>
+						
+						<!-- Legend. -->
+						<div id="menu1" class="tab-pane fade">
+							<h2>Legend</h2>
+							<img src="Static/legend.png" alt="legend">
+						</div>
+						
+						<!-- Usage. -->
+						<div id="menu2" class="tab-pane fade">
+							<h2>Story and Usage</h2>
+							<p>
+								USAGE:
+								Once the API key is entered and all permissions are there, the visualisation will render a bar chart, this bar chart shows an overview of all characters and their respective agony resist. Below the barchart is a visualisation of all regular fractal achievements, showing the completed ones in green and the incomplete ones in grey. When a character in the barchart is clicked, a sunburst showing their gear will be rendered. The colors of the partitions indicate the rarity.
+								Be careful not to refresh too often per minute, as some things are cached but not all of them due to the live nature of the API. The API allows a maximum of 600 requests per minute, so normal usage should be fine. =) 
+								<br> <br>
+								STORY:
+								This visualisation shows an overview of information about Fractals of the Mists in Guild Wars 2. Fractals are a series of mini-dungeons with increasing difficulty (there are 100 total). To stay alive on higher levels, you need agony resistance, which can generally only be slotted in ascended gear (pink quality or higher) with a few exceptions. The visualisation has 3 parts, the barchart gives an overview of each character with their respective agony resist. The bar chart is clickable and upon clicking on a character a sunburst will be generated, showing an overview of the gear on that character, giving insight in how much of their gear is of what quality and where there could be improvements. Especially for people with quite some characters, this can prove practical, as reviewing all of this in game separately by logging in each character and inspecing their gear can be tedious, especially if one just wants to quickly remember which characters are equipped to deal with agony resist. The third part does not actually visualize character data but rather account data and gives an overview of all fractals, indicating whether the user has completed the fractal on this level or not. Thus the total visualisation gives a good overview of everything that is important regarding fractals.
+								<br><br>
+									With the sunburst, the visualization makes use of the details-on-demand strategy, providing extra information about a character should the user wish to have it. Also there is a consistent layout of the page, even though there can be different kinds of data visualized, the general layout of the page does not change. The order is slightly dictated in the sense that the bar graph will always render first, thus there is no fully free exploration. After wards though the user is free to select the character they want to browse the data, or to swap between the tabs on the left. This way of presenting data slightly matches the martini glass structure. In this sense the visualisation would fit the genre of the "partitioned poster" most, probably.
+							</p>
+						</div>
+						
+						<!-- Story. -->
+						<div id="menu3" class="tab-pane fade">
+							<h2>Credits</h2>
+							<div id="pie">
+								<p>Veel dank aan stackoverflow. En natuurlijk de absoluut geweldige docenten van dit vak wauw, hoe kan je die vergeten?? Zo veel toewijding enzo. Zie js file voor uitgebreide credits. Dit is een monchou taart!</p>
+								<img src="Static/monchou.png" alt="monchou">
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			
+            <!-- Barchart. -->
+			<div id="barchartpart">
+                <h2 class="divtitle"><img class="listimg" src="Static/agonyresistance.png" alt="AR"> Agony Resistance (AR) per character</h2>
+                <img id="barchartloading" src="Static/spinner.gif" alt="Loading...">
+            </div>
+            
+            <!-- Achievements. -->
+			<div id="achievementpart">
+                <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2>
+                <img id="achievementloading" src="Static/spinner.gif" alt="Loading...">
+            </div>
+            
+            <!-- Sunburst. -->
+			<div id ="piechartpart">
+                <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Character Equipment</h2>
+                <img id="sunburstloading" src="Static/spinner.gif" alt="Loading...">
+                <div id= "sunburstinnerwrapper">
+                    <p id="sunburstwait">Select a character from the bar chart to see their gear.</p>
+                    <div id="sunburstextra"></div>
+                </div>	
+            </div>
+		</div>	
+    </body>
+</html>
+
