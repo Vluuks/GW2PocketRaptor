@@ -33,20 +33,6 @@ function Item(id, name, rarity, infusions, type, slot, weaponSlot) {
     this.size = 1;
 }
 
-// Actual globals
-
-var account = {
-    name: "",
-    apiKey: "",
-    hoursPlayed: -1,
-    characters: [],
-    characterAmount: -1,
-    fractalLevel: -1,
-    fractalRelics: -1,
-    fractalPristine: -1,
-    characterDictionary: {}
-}
-
 function SunburstBase(){
     
     this.name = "Equipment";
@@ -69,4 +55,17 @@ function SunburstBase(){
             "children": []
         },
     ];   
+}
+
+// Global account Variable.
+var account = {
+    name: "",
+    apiKey: "",
+    hoursPlayed: -1,
+    characters: [],
+    characterAmount: -1,
+    fractalLevel: -1,
+    fractalRelics: -1,
+    fractalPristine: -1,
+    characterDictionary: {}
 }
