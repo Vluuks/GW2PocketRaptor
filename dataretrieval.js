@@ -3,7 +3,7 @@
 Created by Renske Spring 2017
 
 This file retrieves all the necessary data from the Guild Wars 2 API. This data is used
-to create various data visualizations.
+to create various data visualizations. 
 
 */
 
@@ -485,6 +485,7 @@ function onDataReady() {
 
     // When calculating the AR is done, we can make the barchart.
     makeBarChart(dataArray);
+    makePieChart();
 }
 
 /* Get the array of fractal achievements from the API. */
