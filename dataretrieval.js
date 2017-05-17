@@ -277,6 +277,14 @@ function getGeneralCharacterInfo() {
                     character.profession = characterObject.profession;
                     character.hoursPlayed = (characterObject.age / 3600).toFixed(0);
                     
+                    account.professionDictionary[character.profession]++;
+                    account.raceDictionary[character.race]++;
+                    console.log(account.professionDictionary);
+                    console.log("WHERE WE AT THO")
+                    console.log(account.raceDictionary);
+                    account.genderDictionary[characterObject.gender]++;
+                    console.log(account.genderDictionary);
+                    
                     // Add to account dictionary.
                     account.characterDictionary[characterObject.name] = character;
 

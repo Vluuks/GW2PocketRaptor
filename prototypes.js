@@ -84,5 +84,9 @@ var account = {
         "Human" : 0,
         "Norn" : 0,
         "Sylvari" : 0
+    },
+    genderDictionary: {
+        "Male" : 0,
+        "Female" : 0
     }
 }
