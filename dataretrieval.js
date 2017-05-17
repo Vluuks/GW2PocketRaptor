@@ -277,13 +277,12 @@ function getGeneralCharacterInfo() {
                     character.profession = characterObject.profession;
                     character.hoursPlayed = (characterObject.age / 3600).toFixed(0);
                     
-                    account.professionDictionary[character.profession]++;
+                    // Add data to account object to later create piecharts.
+                    account.professionDictionary[professionToIndexDictionary[character.profession]].value++;
                     account.raceDictionary[character.race]++;
-                    console.log(account.professionDictionary);
-                    console.log("WHERE WE AT THO")
-                    console.log(account.raceDictionary);
                     account.genderDictionary[characterObject.gender]++;
-                    console.log(account.genderDictionary);
+                    
+                    console.log(account.professionDictionary);
                     
                     // Add to account dictionary.
                     account.characterDictionary[characterObject.name] = character;

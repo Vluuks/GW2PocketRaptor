@@ -128,3 +128,16 @@ var infusionDictionary = {
     "undefined": 0,
     NaN: 0
 };
+
+var professionToIndexDictionary = {
+    
+    "Guardian" : 0,
+    "Warrior" : 1,
+    "Revenant" : 2,
+    "Ranger" : 3, 
+    "Engineer" : 4,
+    "Thief" : 5, 
+    "Elementalist" : 6, 
+    "Mesmer" : 7,
+    "Necromancer" : 8  
+};

@@ -67,17 +67,44 @@ var account = {
     fractalRelics: -1,
     fractalPristine: -1,
     characterDictionary: {},
-    professionDictionary: {
-        "Guardian" : 0,
-        "Warrior" : 0,
-        "Revenant" : 0,
-        "Mesmer" : 0,
-        "Elementalist" : 0,
-        "Necromancer" : 0,
-        "Ranger" : 0,
-        "Engineer" : 0,
-        "Thief" : 0
-    },
+    professionDictionary: [
+        { 
+            "label" : "Guardian",
+            "value" : 0,
+        },
+        { 
+            "label" : "Warrior",
+            "value" : 0,
+        },
+        { 
+            "label" : "Revenant",
+            "value" : 0,
+        },
+        { 
+            "label" : "Ranger",
+            "value" : 0,
+        },
+        { 
+            "label" : "Engineer",
+            "value" : 0,
+        },
+        { 
+            "label" : "Thief",
+            "value" : 0,
+        },
+        { 
+            "label" : "Elementalist",
+            "value" : 0,
+        },
+        { 
+            "label" : "Mesmer",
+            "value" : 0,
+        },
+        { 
+            "label" : "Necromancer",
+            "value" : 0,
+        }
+    ],
     raceDictionary: {
         "Asura" : 0,
         "Charr" : 0,

@@ -19,6 +19,7 @@ h2{
 	width: 1730px;
 	margin-top: 20px;
 	background-color: #EEEEEE;
+    margin-bottom: 20px
 }
 #sidebar{
 	width: 200px;
@@ -50,6 +51,15 @@ h2{
 	width: 620px;
 	height: 800px;
 	margin: 10px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+}
+#actualpiechartpart{
+	width: 1050px;
+	height: 200px;
+	margin: 10px;
+    margin-left: 20px;
 	display: inline-block;
 	padding: 10px;
 	background-color: #DDDDDD;

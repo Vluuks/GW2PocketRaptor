@@ -27,13 +27,9 @@ function showAccountInfo() {
 }
 
 function showCurrencies(){
-    
-    console.log("DA MOTHAFUCKIN CALLBACK SON");
-    console.log(account.fractalRelics);
-    
+   
     $('#fractalrelics').text("Relics " + account.fractalRelics);
     $('#pristinerelics').text("Pristines " + account.fractalPristine);
-    
 }
 
 /* Draws the bar chart that shows each character and their level of agony resist. The maximum 
@@ -456,4 +452,10 @@ function showCharacterData(character) {
         '<p class =\"charage\"> Played for ' + account.characterDictionary[character].hoursPlayed + ' hours </p>'
     );
     $('#sunburstextra').show();
+}
+
+/* EEN HELE MOOIE FUNCTIE */
+function makePieChart(){
+
+   //
 }
