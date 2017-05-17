@@ -105,13 +105,28 @@ var account = {
             "value" : 0,
         }
     ],
-    raceDictionary: {
-        "Asura" : 0,
-        "Charr" : 0,
-        "Human" : 0,
-        "Norn" : 0,
-        "Sylvari" : 0
-    },
+    raceDictionary: [
+        { 
+            "label" : "Asura",
+            "value" : 0,
+        },
+        { 
+            "label" : "Charr",
+            "value" : 0,
+        },
+        { 
+            "label" : "Human",
+            "value" : 0,
+        },
+        { 
+            "label" : "Norn",
+            "value" : 0,
+        },
+        { 
+            "label" : "Sylvari",
+            "value" : 0,
+        }
+    ],
     genderDictionary: {
         "Male" : 0,
         "Female" : 0

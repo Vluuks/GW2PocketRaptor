@@ -129,7 +129,7 @@ var infusionDictionary = {
     NaN: 0
 };
 
-var professionToIndexDictionary = {
+var indexDictionary = {
     
     "Guardian" : 0,
     "Warrior" : 1,
@@ -139,5 +139,11 @@ var professionToIndexDictionary = {
     "Thief" : 5, 
     "Elementalist" : 6, 
     "Mesmer" : 7,
-    "Necromancer" : 8  
+    "Necromancer" : 8,
+    
+    "Asura" : 0,
+    "Charr" : 1,
+    "Human" : 2,
+    "Norn" : 3,
+    "Sylvari" : 4
 };
