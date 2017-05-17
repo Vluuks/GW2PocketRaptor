@@ -457,5 +457,5 @@ function showCharacterData(character) {
 /* EEN HELE MOOIE FUNCTIE */
 function makePieChart(){
 
-   //
+   //WOOOOW
 }
