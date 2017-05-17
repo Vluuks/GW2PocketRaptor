@@ -26,6 +26,16 @@ function showAccountInfo() {
 
 }
 
+function showCurrencies(){
+    
+    console.log("DA MOTHAFUCKIN CALLBACK SON");
+    console.log(account.fractalRelics);
+    
+    $('#fractalrelics').text("Relics " + account.fractalRelics);
+    $('#pristinerelics').text("Pristines " + account.fractalPristine);
+    
+}
+
 /* Draws the bar chart that shows each character and their level of agony resist. The maximum 
 amount is infinite in theory but more than 150 makes no sense, so the max of the chart is set at 150. */
 function makeBarChart(data) {
@@ -143,7 +153,7 @@ function prepareFractalAchievements(dataArray) {
 
         // Initialize an array full of true. 
         achievementBoolArray = new Array(25);
-        for (var j = 0; j < achievementBoolArray.length; j++) {
+        for (var j = 0, l = achievementBoolArray.length; j < l; j++) {
             achievementBoolArray[j] = true;
         }
 
@@ -231,8 +241,6 @@ function transformDataForSunburst(character) {
     
     // Check if the data has been cached to avoid recreating the object for nothing.
     if (account.characterDictionary[character].sunburstDataCache == undefined) {
-        
-        console.log("new character");
 
         // Get the equipment array containing objects form the character dictionary.
         var equipment = account.characterDictionary[character].equipmentRarity;

@@ -28,8 +28,6 @@ function showError(errorMessage) {
     $('#error').text(errorMessage);
 }
 
-/* DATA RETRIEVAL **********************************************************************************************/
-
 /* Check the given API and then start retrieving data if it has been verified. 
 This function is invoked by pressing the button on the webpage. */
 function getUserApi() {
@@ -142,6 +140,9 @@ function apiCheckCallback(apiKey) {
 
     // Get general account info such as name, amount of chars, age etc.
     getGeneralAccountInfo(showAccountInfo);
+    
+    // Get information about account currencies.
+    getCurrencies(showCurrencies);
 
     // Retrieve the fractal achievements and perform display cb.
     getFractalAchievements(prepareFractalAchievements);
@@ -173,6 +174,43 @@ function getGeneralAccountInfo(callback) {
         }
     });
 }
+
+/* Retrieves general information about the account, such as name, age, etc. */
+function getCurrencies(callback) {
+
+    $.ajax({
+        type: "GET",
+        async: true,
+        url: "https://api.guildwars2.com/v2/account/wallet?access_token=" + account.apiKey,
+        cache: false,
+        dataType: 'text',
+
+        success: function() {},
+        error: function() {
+            showError("Something went wrong fetching the account currencies.");
+        },
+        complete: function(data) {
+
+            accountCurrencies = JSON.parse(data.responseText); 
+            for (var i = 0, l = accountCurrencies.length; i < l; i++) {
+                
+                if (accountCurrencies[i].id == "7") {
+                    account.fractalRelics = accountCurrencies[i].value;
+                }
+                else if (accountCurrencies[i].id == "24") {
+                    account.fractalPristine = accountCurrencies[i].value;
+                }
+                else if (accountCurrencies[i].id > 24) {
+                    break;
+                }
+            }
+            
+            // Notify that the data has been retrieved and we can display it.
+            callback();
+        }
+    });
+}
+
 
 /* This function retrieves a list of the characters on the account from the API and then
 calls the callback which will retrieve additional info based on the character names. */

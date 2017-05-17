@@ -16,9 +16,6 @@
 	> https://jsfiddle.net/8sh069ns/
     > http://plnkr.co/edit/tct95toQ2IjyUkQJQPB9?p=preview  
     
-    
-    
-    
     TODO:
     > make pie chart of class distribution
     > also race

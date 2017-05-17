@@ -37,7 +37,6 @@ function SunburstBase(){
     
     this.name = "Equipment";
     this.children = [
-
         {
             "name": "Armor",
             "children": []
@@ -67,5 +66,23 @@ var account = {
     fractalLevel: -1,
     fractalRelics: -1,
     fractalPristine: -1,
-    characterDictionary: {}
+    characterDictionary: {},
+    professionDictionary: {
+        "Guardian" : 0,
+        "Warrior" : 0,
+        "Revenant" : 0,
+        "Mesmer" : 0,
+        "Elementalist" : 0,
+        "Necromancer" : 0,
+        "Ranger" : 0,
+        "Engineer" : 0,
+        "Thief" : 0
+    },
+    raceDictionary: {
+        "Asura" : 0,
+        "Charr" : 0,
+        "Human" : 0,
+        "Norn" : 0,
+        "Sylvari" : 0
+    }
 }
