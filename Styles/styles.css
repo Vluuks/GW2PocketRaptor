@@ -49,7 +49,7 @@ h2{
 }
 #piechartpart{
 	width: 620px;
-	height: 800px;
+	height: 900px;
 	margin: 10px;
 	display: inline-block;
 	padding: 10px;
@@ -66,6 +66,26 @@ h2{
 }
 #achievementpart{
 	width: 830px;
+	height: 330px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	float: left;
+	float: top;
+}
+#characterinfopart{
+	width: 405px;
+	height: 330px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	float: left;
+	float: top;
+}
+#tooltippart{
+	width: 405px;
 	height: 330px;
 	display: inline-block;
 	padding: 10px;
