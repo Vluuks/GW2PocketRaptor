@@ -282,9 +282,6 @@ function getGeneralCharacterInfo() {
                     account.raceDictionary[indexDictionary[character.race]].value++;
                     account.genderDictionary[characterObject.gender]++;
                     
-                    console.log(account.professionDictionary);
-                    console.log(account.raceDictionary);
-                    
                     // Add to account dictionary.
                     account.characterDictionary[characterObject.name] = character;
 
