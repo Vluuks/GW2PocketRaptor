@@ -48,43 +48,76 @@
             
             <input type="text" id="apiKey" value="">
             <button onclick="getUserApi()">Go!</button> 
-
+            
+            <div id="accountdiv">
+                <h3>General account infor</h3>
+                <img id="accountloading" src="Static/spinner.gif" alt="Loading...">
+                <ul id="account">
+                    <li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
+                    <li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
+                    <li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
+                    <br>
+                    <br>
+                    <li id="fractalRelics"><img class="listimg" src="Static/fractalrelic.png" alt="Age"><p class="accinfo" id="fractalrelics">relics</p></li>
+                    <li id="fractalPristine"><img class="listimg" src="Static/pristinefractalrelic.png" alt="Age"><p class="accinfo" id="pristinerelics">pristine relics</p></li>
+                    
+                    
+                </ul>
+            </div>
             
             
         </div>
 
         <!--- AGONY RESIST AND GEARCHECK ---->  
         <div id="menu1" class="tab-pane fade">
+        
+            <div id ="mainwrapper">
+            
+                <!-- Left wrapper div. -->
+                <div id="leftwrapper">
 
-            <!-- Barchart. -->
-            <div id="barchartpart">
-                <h2 class="divtitle"><img class="listimg" src="Static/agonyresistance.png" alt="AR"> Agony Resistance (AR) per character</h2>
-                <img id="barchartloading" src="Static/spinner.gif" alt="Loading...">
-            </div>
-            
-            <!-- Sunburst. -->
-            <div id ="piechartpart">
-                <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Character Equipment</h2>
-                <img id="sunburstloading" src="Static/spinner.gif" alt="Loading...">
-                <div id= "sunburstinnerwrapper">
-                    <p id="sunburstwait">Select a character from the bar chart to see their gear.</p>
-                    <div id="sunburstextra"></div>
-                </div>	
-            </div>
-            
-            <!--- Character info --->
-            <div id="characterinfopart">
-                <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2>
-                <img id="achievementloading" src="Static/spinner.gif" alt="Loading...">
-            </div>
-                
-            <!--- Tooltip area --->
-            <div id="tooltippart">
-                <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2>
-                <img id="achievementloading" src="Static/spinner.gif" alt="Loading...">
-            </div>
+                    <!-- Barchart. -->
+                    <div id="barchartpart">
+                        <h2 class="divtitle"><img class="listimg" src="Static/agony.png" alt="AR"> Agony Resistance (AR) per character</h2>
+                        <img id="barchartloading" src="Static/spinner.gif" alt="Loading...">
+                    </div>
+                    
+                    <!--- Character info --->
+                    <div id="characterinfopart">
+                        <h2 class="divtitle"><img class="listimg" src="Static/accountname.png" alt="Achievements"> Character information</h2>
+                        <div id="sunburstextra"></div>
+                    </div>
                         
-
+                    <!--- Tooltip area --->
+                    <div id="tooltippart">
+                        <h2 class="divtitle"><img class="listimg" src="Static/agonyresistance.png" alt="Achievements"> Equipment Tooltip</h2>
+                        <img id="achievementloading" src="Static/spinner.gif" alt="Loading...">
+                    </div>
+                
+                </div>
+                
+                <!-- Right wrapper div. -->
+                <div id="rightwrapper">
+                
+                    <!-- Sunburst. -->
+                    <div id ="piechartpart">
+                        <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Character Equipment</h2>
+                        <img id="sunburstloading" src="Static/spinner.gif" alt="Loading...">
+                        <div id= "sunburstinnerwrapper">
+                            <p id="sunburstwait">Select a character from the bar chart to see their gear.</p>
+                        
+                        </div>	
+                    </div>
+                
+                
+                    <!-- Sunburst. -->
+                    <div id ="legendpart">
+                        <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Legend</h2>
+                        <!-- <div> <img id="legend" src="Static/legend.png" alt="legend"></div> -->
+                    </div>
+                        
+                </div>
+            </div>
         </div>
 
         <!--- ACCOUNT STATISTICS ----> 

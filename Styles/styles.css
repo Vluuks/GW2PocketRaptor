@@ -47,10 +47,22 @@ h2{
 	background-color: #DDDDDD;
 	margin: 10px;
 }
-#piechartpart{
-	width: 620px;
-	height: 900px;
+#legendpart{
+	width: 300px;
+	height: 800px;
 	margin: 10px;
+    margin-left: 0 auto;
+	display: inline-block;
+	padding: 10px;
+    float: top;
+	background-color: #DDDDDD;
+}
+#piechartpart{
+    float: top;
+	width: 620px;
+	height: 800px;
+	margin: 10px;
+    margin-left: 0 auto;
 	display: inline-block;
 	padding: 10px;
 	background-color: #DDDDDD;
@@ -82,7 +94,8 @@ h2{
 	background-color: #DDDDDD;
 	margin: 10px;
 	float: left;
-	float: top;
+    margin-right: 0 auto;
+	
 }
 #tooltippart{
 	width: 405px;
@@ -92,11 +105,30 @@ h2{
 	background-color: #DDDDDD;
 	margin: 10px;
 	float: left;
-	float: top;
+    margin-right: 0 auto;
+
 }
 #sunburstinnerwrapper{
     width: 600px;
 	height: 120px;
+}
+#leftwrapper {
+    padding: 0 auto;
+    display: inline-block;
+    height: 820px;
+    width: 850px;
+    overflow: hidden;
+    margin-right: 0 auto;
+    padding: 0 auto;
+}
+#rightwrapper {
+    display: inline-block;
+    width: 980px;
+    float: top;
+    height: 820px;
+    overflow: hidden;
+    margin-left: 0 auto;
+    padding: 0 auto;
 }
 #error{
 	margin-bottom: 20px;
@@ -194,4 +226,7 @@ div ul li p{
 }
 path{
     stroke: #DDDDDD;
+}
+#legend{
+    display: inline-block;
 }
