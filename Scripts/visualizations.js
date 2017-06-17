@@ -456,22 +456,22 @@ function showCharacterData(character) {
 /* EEN HELE MOOIE FUNCTIE */
 function makePieChart(){
 
+    // Set width, height and radius. 
     var w = 400;
     var h = 400;
     var r = h/2;
-    var aColor = [
-        'rgb(178, 55, 56)',
-        'rgb(213, 69, 70)',
-        'rgb(230, 125, 126)',
-        'rgb(239, 183, 182)'
-    ]
-    
-    // 
 
     var data = account.professionDictionary;
 
+    // If piechart already exists, remove.
+    var svgChart = $("#piechartsvg");
+    if (svgChart !== undefined)
+        svgChart.remove();
+    
+    // Create pie chart.
     var vis = d3.select('#actualpiechartpart')
         .append("svg:svg")
+        .attr("id", "piechartsvg")
         .data([data])
         .attr("width", w)
         .attr("height", h)
