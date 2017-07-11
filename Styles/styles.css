@@ -229,4 +229,6 @@ path{
 }
 #legend{
     display: inline-block;
+    float: top !important; 
+    margin: 0 auto;
 }

@@ -54,8 +54,11 @@ function getUserApi() {
     // Grab api key from field and check.
     var apiKey = $("#apiKey").val().trim();
     
-    apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
-    // apiKey = "A2D523A7-B023-554F-898C-A7D631E287B40F27ED03-D8EA-4304-B0B6-E839DA12F709";
+    
+    //apiKey = ""
+    // apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
+    apiKey = "A2D523A7-B023-554F-898C-A7D631E287B40F27ED03-D8EA-4304-B0B6-E839DA12F709";
+    //apiKey =  "A1E2840E-BF5E-8747-9D5D-BAA2140590B2356E83AA-68BE-4391-9083-F0DCC3DA3950";
 
     if (apiKey == "" || apiKey == undefined) {
         showError("Please do not omit the field");
@@ -280,7 +283,7 @@ function getGeneralCharacterInfo() {
                     // Add data to account object to later create piecharts.
                     account.professionDictionary[indexDictionary[character.profession]].value++;
                     account.raceDictionary[indexDictionary[character.race]].value++;
-                    account.genderDictionary[characterObject.gender]++;
+                    account.genderDictionary[indexDictionary[characterObject.gender]].value++;
                     
                     // Add to account dictionary.
                     account.characterDictionary[characterObject.name] = character;
@@ -314,6 +317,22 @@ function fetchEquipment() {
                 var baseUrl = "https://api.guildwars2.com/v2/items?ids=";
                 var infusionsPerPieceDict = {};
                 var slotInformationDict = {};
+                
+                
+                var idArray = [];
+                for (let i = 0; i < equipmentArray.length; i++){
+                    
+                    idArray.push(equipmentArray[i].id);
+
+                }
+                
+                                    
+                    // Check for duplicate ids in case of dual wielding or trinkets.
+                    
+                    // create array with the ids
+                    // check if ids are duplicate within this array
+                    // if an id is duplicate, add it to a dictionary with the id and the count
+                
 
                 for (let i = 0; i < equipmentArray.length; i++) {
 
@@ -323,6 +342,7 @@ function fetchEquipment() {
                     // Create id indexed dictionary for infusions.
                     infusionsPerPieceDict[equipmentArray[i].id] = equipmentArray[i].infusions;
                     slotInformationDict[equipmentArray[i].id] = equipmentArray[i].slot;
+                                  
                 }
 
                 // Request all the item ids  from the API at once.
@@ -360,9 +380,14 @@ function fetchEquipment() {
                                 
                                 // Push to equipment array. 
                                 account.characterDictionary[character].equipmentRarity.push(itemObject);
+                                
+                                if (itemObject.type == ("Trinket"))
+                                    console.log(itemObject);
                             }
                         }
 
+                        console.log(account.characterDictionary[character].equipmentRarity);
+                        
                         // If it's the last character, notify callback.
                         if (character == account.characters[account.characterAmount - 1]) {
                             onDataReady();

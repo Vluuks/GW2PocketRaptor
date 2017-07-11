@@ -13,6 +13,8 @@ This script creates the various visualizations of the Guild Wars 2 API data.
 
 /* Updates the sidebar with information about the current account that is being viewed.*/
 function showAccountInfo() {
+    
+    console.log("wtf");
 
     // Hide loading spinner.
     $('#accountloading').hide();
@@ -23,6 +25,7 @@ function showAccountInfo() {
     $('#chars').text(account.characterAmount + " characters");
     $('#accage').text(account.hoursPlayed + " hours played");
     $('#fraclevel').text("Fractal Level " + account.fractalLevel);
+
 }
 
 function showCurrencies(){
@@ -260,8 +263,12 @@ function transformDataForSunburst(character) {
             else if (currentPiece.slot == "HelmAquatic" || currentPiece.slot == "Trident" || currentPiece.slot == "Harpoon" || currentPiece.slot == "Speargun") {
                 sunburstObject.children[3].children.push(currentPiece);
             }
+            
+                    console.log(currentPiece);
         }
 
+
+        
         // Cache it so that it does not need to be remade if we reclick this character.
         account.characterDictionary[character].sunburstDataCache = sunburstObject;
 
@@ -284,6 +291,7 @@ function makeSunburst(data) {
     // Hide the information message.
     $('#sunburstwait').hide();
     $('#sunburstloading').hide();
+    $('#tooltipcontent').hide();
 
     // Check if there was already a sunburst, if so then remove it.
     var svgChart = $("#sunburstsvg");
@@ -367,7 +375,6 @@ function makeSunburst(data) {
 			tooltip.style("opacity", 0);
 		});
 
-
     // Append text to  each block of the sunburst. 
     var text = g.append("text")
         .attr("class", "sunbursttext")
@@ -375,6 +382,7 @@ function makeSunburst(data) {
         .attr('text-anchor', function (d) { return computeTextRotation(d) > 180 ? "end" : "start"; })
         .attr('dx', function (d) { return computeTextRotation(d) > 180 ? "40" : "-40"; })
         .attr("dy", ".35em")
+        .on("click", click)
         .text(function(d) {
             if (d.name == "Equipment") {
                 return "";
@@ -389,6 +397,8 @@ function makeSunburst(data) {
 
     // Function that handles clicks on the sunburst so that it can zoom.
     function click(d) {
+        
+        showItemTooltip(d);
 
         // Fade out text elements.
         text.transition()
@@ -440,6 +450,25 @@ function makeSunburst(data) {
     } 
 }
 
+/* Shows details about the item currently selected in the sunburst. */
+function showItemTooltip(item) {
+    
+    $('#tooltipcontent').hide();
+    
+    // If it's an actual item proceed to show tooltip
+    if (item.slot != undefined) {
+        
+        $('#tooltipcontent').html(
+            '<p class=\"itemname\">' + item.name + '</p>' +
+            '<p class=\"itemrarity\" style=\"color:' + colorDictionary[item.rarity] + ' \">' + item.rarity + '</p>' +
+            '<p class=\"itemtype\">' + item.slot + '</p>'
+        );
+        $('#tooltipcontent').show();
+        
+    }
+   
+}
+
 /* Show data about the character to accompany the sunburst. */
 function showCharacterData(character) {
 
@@ -456,46 +485,50 @@ function showCharacterData(character) {
 /* EEN HELE MOOIE FUNCTIE */
 function makePieChart(){
 
-    // Set width, height and radius. 
     var w = 400;
     var h = 400;
     var r = h/2;
+    var aColor = [
+        'rgb(178, 55, 56)',
+        'rgb(213, 69, 70)',
+        'rgb(230, 125, 126)',
+        'rgb(239, 183, 182)'
+    ]
 
-    var data = account.professionDictionary;
-
-    // If piechart already exists, remove.
-    var svgChart = $("#piechartsvg");
-    if (svgChart !== undefined)
-        svgChart.remove();
-    
-    // Create pie chart.
+    var data = account.professionDictionary,
+        data2 = account.raceDictionary,
+        data3 = account.genderDictionary;
+        
+        
     var vis = d3.select('#actualpiechartpart')
         .append("svg:svg")
-        .attr("id", "piechartsvg")
         .data([data])
         .attr("width", w)
         .attr("height", h)
         .append("svg:g")
         .attr("transform", "translate(" + r + "," + r + ")");
 
-    var pie = d3.layout.pie().value(function(d) { return d.value; });
+    var pie = d3.layout.pie().value(function(d){ return d.value; });
 
     // Declare an arc generator function
     var arc = d3.svg.arc().outerRadius(r);
 
     // Select paths, use arc generator to draw
-    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+    var arcs = vis.selectAll("g.slice")
+        .data(pie).enter()
+        .append("svg:g")
+        .attr("class", "slice");
     arcs.append("svg:path")
-        .attr("fill", function(d, i) { console.log(d); return colorDictionary[data[i].label]; })
+        .attr("fill", function(d, i){ return colorDictionary[data[i].label]; })
         .attr("d", function (d) { return arc(d); });
 
-// Add the text
-arcs.append("svg:text")
-    .attr("transform", function(d){
-        d.innerRadius = 100; /* Distance of label to the center*/
-        d.outerRadius = r;
-        return "translate(" + arc.centroid(d) + ")";}
-    )
-    .attr("text-anchor", "middle")
-    .text( function(d, i) {return data[i].value + '%';});
+    // Add the text
+    arcs.append("svg:text")
+        .attr("transform", function(d){
+            d.innerRadius = 100; 
+            d.outerRadius = r;
+            return "translate(" + arc.centroid(d) + ")";}
+        )
+        .attr("text-anchor", "middle")
+        .text( function(d, i) { return data[i].value; });
 }

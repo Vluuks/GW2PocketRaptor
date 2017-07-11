@@ -127,8 +127,14 @@ var account = {
             "value" : 0,
         }
     ],
-    genderDictionary: {
-        "Male" : 0,
-        "Female" : 0
-    }
+    genderDictionary: [
+        { 
+            "label" : "Male",
+            "value" : 0,
+        },
+        { 
+            "label" : "Female",
+            "value" : 0,
+        }
+    ]
 }

@@ -145,5 +145,8 @@ var indexDictionary = {
     "Charr" : 1,
     "Human" : 2,
     "Norn" : 3,
-    "Sylvari" : 4
+    "Sylvari" : 4,
+    
+    "Male" : 0,
+    "Female" : 1
 };
