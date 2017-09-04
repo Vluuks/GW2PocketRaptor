@@ -1,5 +1,5 @@
 /* 
-
+TIM IS LIEF TEST
 Created by Renske Spring 2017
 
 This file retrieves all the necessary data from the Guild Wars 2 API. This data is used
