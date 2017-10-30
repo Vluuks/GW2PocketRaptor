@@ -245,7 +245,7 @@ function transformDataForSunburst(character) {
 
         // Loop over the equipment pieces and construct data accordingly.
         for (var piece in equipment) {
-            var currentPiece = equipment[piece];
+            var currentPiece = equipment[piece]; // TODO but wtf why then
 
             // If it's an armor piece but not an underwater piece
             if (currentPiece.type == "Armor" && currentPiece.slot != "HelmAquatic") {
@@ -263,12 +263,8 @@ function transformDataForSunburst(character) {
             else if (currentPiece.slot == "HelmAquatic" || currentPiece.slot == "Trident" || currentPiece.slot == "Harpoon" || currentPiece.slot == "Speargun") {
                 sunburstObject.children[3].children.push(currentPiece);
             }
-            
-                    console.log(currentPiece);
         }
 
-
-        
         // Cache it so that it does not need to be remade if we reclick this character.
         account.characterDictionary[character].sunburstDataCache = sunburstObject;
 
