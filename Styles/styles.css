@@ -4,13 +4,29 @@ body{
 	font-family: "Arial";
 }
 h2{
-    font-family: "Trebuchet MS";
-    margin-bottom: 10px;
-	margin-top: 2px;
-	font-size: 19px;
+  
+	float: top;
+	float: left;
+	font-family: "Arial";
+  margin-bottom: 10px;
+	margin-top: 4px;
+	font-size: 16px;
 	text-transform: uppercase;
 	color: #000000;
+	letter-spacing: 2px;
+	
 }
+.nav-pills > li > a{
+	border-radius: 0px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: #555555;
+}
+.nav-pills > li > a:hover{
+	color: #000000;
+
+}
+
 #apiKey{
 	width: 130px !important;
 	margin-left: 5px;
@@ -230,7 +246,8 @@ div ul li{
     margin: 5px;
 }    
 img{
-    vertical-align: middle;
+ 
+	vertical-align: top;
 	padding-right: 5px;
 }
 div ul li p{
