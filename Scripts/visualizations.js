@@ -1,9 +1,9 @@
-/* 
+/*
 
 Created by Renske Spring 2017
 
-This script creates the various visualizations of the Guild Wars 2 API data. 
-    
+This script creates the various visualizations of the Guild Wars 2 API data.
+
     > General account info
     > Bar chart showing character agony resist
     > Overview of complete/incomplete fractal achievements
@@ -13,7 +13,7 @@ This script creates the various visualizations of the Guild Wars 2 API data.
 
 /* Updates the sidebar with information about the current account that is being viewed.*/
 function showAccountInfo() {
-    
+
     console.log("wtf");
 
     // Hide loading spinner.
@@ -29,12 +29,12 @@ function showAccountInfo() {
 }
 
 function showCurrencies(){
-   
+
     $('#fractalrelics').text("Relics " + account.fractalRelics);
     $('#pristinerelics').text("Pristines " + account.fractalPristine);
 }
 
-/* Draws the bar chart that shows each character and their level of agony resist. The maximum 
+/* Draws the bar chart that shows each character and their level of agony resist. The maximum
 amount is infinite in theory but more than 150 makes no sense, so the max of the chart is set at 150. */
 function makeBarChart(data) {
 
@@ -58,7 +58,7 @@ function makeBarChart(data) {
 		.domain(data.map(function(d) {
 			return d.characterName;
 		}));
-		
+
     var y = d3.scale.linear()
 		.range([height, 0])
 		.domain([0, 150]);
@@ -99,7 +99,7 @@ function makeBarChart(data) {
         .attr("transform", "rotate(-90)")
         .attr("y", -43)
         .attr("dy", ".71em")
-        .style("text-anchor", "end")
+    //    .style("text-anchor", "end")
         .attr("fill", "#666666")
         .text("total Agony Resistance");
 
@@ -149,7 +149,7 @@ function prepareFractalAchievements(dataArray) {
     // Turn the array into a more useful/uniform data format.
     for (var i = 0; i < dataArray.length; i++) {
 
-        // Initialize an array full of true. 
+        // Initialize an array full of true.
         achievementBoolArray = new Array(25);
         for (var j = 0, l = achievementBoolArray.length; j < l; j++) {
             achievementBoolArray[j] = true;
@@ -228,7 +228,7 @@ function makeAchievementGraph(data) {
 
 /* Function that transforms the obtained data about agony resist and armor pieces and combines them into a
 structure that is suitable for a sunburst visualization. This needs to be done after since the item object itself and
-the agony resist are not retrieved at the same time, so making this can only occur after calculating AR is done. 
+the agony resist are not retrieved at the same time, so making this can only occur after calculating AR is done.
 Request is done on a per character basis because sunburst is only made once a specific bar is clicked. However,
 the result is stored  after creating it once so it does not need to be remade every time after.  */
 function transformDataForSunburst(character) {
@@ -236,7 +236,7 @@ function transformDataForSunburst(character) {
     // Set loading spinner.
     $('#sunburstloading').show();
     var sunburstObject = new SunburstBase();
-    
+
     // Check if the data has been cached to avoid recreating the object for nothing.
     if (account.characterDictionary[character].sunburstDataCache == undefined) {
 
@@ -268,7 +268,7 @@ function transformDataForSunburst(character) {
         // Cache it so that it does not need to be remade if we reclick this character.
         account.characterDictionary[character].sunburstDataCache = sunburstObject;
 
-    } 
+    }
 	else {
         sunburstObject = account.characterDictionary[character].sunburstDataCache;
     }
@@ -313,7 +313,7 @@ function makeSunburst(data) {
         .attr("id", "sunburstsvg")
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-		
+
 	// Tooltip.
 	var tooltip = d3.select("#piechartpart").append("div")
 	  .attr("class", "tooltip")
@@ -353,25 +353,25 @@ function makeSunburst(data) {
             }
             if (d.name == "Equipment") {
                 return "#DDDDDD";
-            } 
+            }
 			else {
                 return colorDictionary[d.rarity];
             }
         })
         .on("click", click)
-		.on("mouseover", function(d){ 
+		.on("mouseover", function(d){
 			tooltip
 				.text(d.name)
 				.style("opacity", 1)
 				.style("left", (d3.event.pageX) + 0 + "px")
 				.style("top", (d3.event.pageY) - 0 + "px");
-			
+
 		})
 		.on("mouseout", function(d) {
 			tooltip.style("opacity", 0);
 		});
 
-    // Append text to  each block of the sunburst. 
+    // Append text to  each block of the sunburst.
     var text = g.append("text")
         .attr("class", "sunbursttext")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
@@ -385,7 +385,7 @@ function makeSunburst(data) {
             }
             else if (d.name.length > 13) {
                 return d.name.substring(0, 13) + "...";
-            } 
+            }
             else {
                 return d.name;
             }
@@ -393,7 +393,7 @@ function makeSunburst(data) {
 
     // Function that handles clicks on the sunburst so that it can zoom.
     function click(d) {
-        
+
         showItemTooltip(d);
 
         // Fade out text elements.
@@ -405,8 +405,8 @@ function makeSunburst(data) {
             .duration(750)
             .attrTween("d", arcTween(d))
             .each("end", function(e, i) {
-				
-                // Check if it lies within the angle span.	
+
+                // Check if it lies within the angle span.
                 if (e.x >= d.x && e.x < (d.x + d.dx)) {
 
                     // Get a selection of the associated text element.
@@ -422,7 +422,7 @@ function makeSunburst(data) {
             });
     }
 
-    // Interpolate the scales. 
+    // Interpolate the scales.
     function arcTween(d) {
         var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
             yd = d3.interpolate(y.domain(), [d.y, 1]),
@@ -443,26 +443,26 @@ function makeSunburst(data) {
     function computeTextRotation(d) {
         var ang = (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
         return (ang > 90) ? 180 + ang : ang;
-    } 
+    }
 }
 
 /* Shows details about the item currently selected in the sunburst. */
 function showItemTooltip(item) {
-    
+
     $('#tooltipcontent').hide();
-    
+
     // If it's an actual item proceed to show tooltip
     if (item.slot != undefined) {
-        
+
         $('#tooltipcontent').html(
             '<p class=\"itemname\">' + item.name + '</p>' +
             '<p class=\"itemrarity\" style=\"color:' + colorDictionary[item.rarity] + ' \">' + item.rarity + '</p>' +
             '<p class=\"itemtype\">' + item.slot + '</p>'
         );
         $('#tooltipcontent').show();
-        
+
     }
-   
+
 }
 
 /* Show data about the character to accompany the sunburst. */
@@ -494,8 +494,8 @@ function makePieChart(){
     var data = account.professionDictionary,
         data2 = account.raceDictionary,
         data3 = account.genderDictionary;
-        
-        
+
+
     var vis = d3.select('#actualpiechartpart')
         .append("svg:svg")
         .data([data])
@@ -521,7 +521,7 @@ function makePieChart(){
     // Add the text
     arcs.append("svg:text")
         .attr("transform", function(d){
-            d.innerRadius = 100; 
+            d.innerRadius = 100;
             d.outerRadius = r;
             return "translate(" + arc.centroid(d) + ")";}
         )
