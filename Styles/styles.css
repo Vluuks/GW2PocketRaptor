@@ -4,17 +4,17 @@ body{
 	font-family: "Arial";
 }
 h2{
-  
+
 	float: top;
 	float: left;
 	font-family: "Arial";
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 	margin-top: 4px;
 	font-size: 16px;
 	text-transform: uppercase;
 	color: #000000;
 	letter-spacing: 2px;
-	
+
 }
 .nav-pills > li > a{
 	border-radius: 0px;
@@ -52,7 +52,7 @@ h2{
 #account{
 	padding: 10px;
 	margin: 0px;
-	
+
 }
 #barchartpart{
 	width: 830px;
@@ -77,12 +77,12 @@ h2{
 	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #piechartpart{
-  float: top;
-  float: left;
+    float: top;
+    float: left;
 	width: 620px;
 	height: 800px;
 	margin: 10px;
-  margin-left: 0;
+    margin-left: 0;
 	display: inline-block;
 	padding: 10px;
 	background-color: #DDDDDD;
@@ -92,7 +92,7 @@ h2{
 	width: 1050px;
 	height: 600px;
 	margin: 10px;
-  margin-left: 20px;
+    margin-left: 20px;
 	display: inline-block;
 	padding: 10px;
 	background-color: #DDDDDD;
@@ -118,9 +118,9 @@ h2{
 	margin: 10px;
 	margin-left: 0px;
 	float: left;
-  margin-right: 0 auto;
+    margin-right: 0 auto;
 	box-shadow: 2px 2px 3px #EFEFEF;
-	
+
 }
 #tooltippart{
 	width: 405px;
@@ -130,13 +130,13 @@ h2{
 	background-color: #DDDDDD;
 	margin: 10px;
 	float: left;
-  margin-right: 0 auto;
+    margin-right: 0 auto;
 	box-shadow: 2px 2px 3px #EFEFEF;
 
 }
 #sunburstinnerwrapper{
     width: 600px;
-	  height: 120px;
+    height: 120px;
 }
 #leftwrapper {
     padding: 0 auto;
@@ -166,28 +166,34 @@ h2{
 	overflow-y: scroll;
 	height: 510px;
 }
+#legend{
+    display: inline-block;
+    float: top !important;
+	padding-left: 0px;
+    margin: 0 auto;
+}
 .divtitle{
 	background-color: 000000;
 	outline: antiquewhite;
 	outline-width: 3px;
 }
 .axis text{
-  font: 11.4px "Arial";
-  letter-spacing: 0.5px;
-  text-anchor: end;
+    font: 11.4px "Arial";
+    letter-spacing: 0.5px;
+    text-anchor: end;
 }
 .axis path,
 .axis line{
-  fill: none;
-  stroke: #00000070;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #00000070;
+    shape-rendering: crispEdges;
 }
 .legend{
     font-family: "Arial";
     font-size: 11px;
 }
 .bar:hover{
-  fill: "steelblue";
+    fill: "steelblue";
 }
 .accountdiv{
     padding: 0;
@@ -197,11 +203,11 @@ h2{
     margin: 0;
 }
 .charname{
-    font-size: 20px;
+    font-size: 25px;
     margin: 0;
 }
 .charprofession{
-    font-size: 20px;
+    font-size: 25px;
     margin: 0;
 }
 .charage{
@@ -215,17 +221,17 @@ h2{
 	font-size: 12px;
 }
 .tooltip{
-  position: absolute;
-  text-align: left;
-  width: auto;
-  height: auto;
-  padding: 8px;
-  font: 12px Arial;
-  background: #555555;
-  border: #777777 1px solid;
-  border-radius: 0px;
-  pointer-events: none;
-  color: white;
+    position: absolute;
+    text-align: left;
+    width: auto;
+    height: auto;
+    padding: 8px;
+    font: 12px Arial;
+    background: #555555;
+    border: #777777 1px solid;
+    border-radius: 0px;
+    pointer-events: none;
+    color: white;
 }
 .menulist{
 	list-style-type: none;
@@ -248,9 +254,9 @@ ul{
 }
 div ul li{
     margin: 5px;
-}    
+}
 img{
- 
+
 	vertical-align: top;
 	padding-right: 5px;
 }
@@ -260,10 +266,4 @@ div ul li p{
 }
 path{
     stroke: #DDDDDD;
-}
-#legend{
-    display: inline-block;
-    float: top !important; 
-	padding-left: 0px;
-    margin: 0 auto;
 }

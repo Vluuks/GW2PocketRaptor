@@ -304,14 +304,11 @@ function getGeneralCharacterInfo() {
 /* Takes the specialization object from the character, going through it and finding the specialization
 ids, based on this we then determine what elite spec is being run from our dictionary. We get PvE spec
 array, take the 3rd entry (this is the slot that holds elite specs) and then determine the id from this. */
-function determineEliteSpec(characterSpecs, charactername){
+function determineEliteSpec(characterSpecs){
 
     // Get PvE spec overview
     if(characterSpecs.pve[2] != undefined){
         var eliteSpecId = characterSpecs.pve[2].id;
-
-        // Stringify for dict entry
-        console.log("char " + charactername + " found elite spec number" + eliteSpecId + " | " + eliteSpecDictionary[eliteSpecId]);
         return eliteSpecDictionary[eliteSpecId];
     }
     // No 3rd spec has been set, so it can never be an elite spec
