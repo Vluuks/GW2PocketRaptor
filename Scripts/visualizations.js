@@ -466,14 +466,23 @@ function showItemTooltip(item) {
 }
 
 /* Show data about the character to accompany the sunburst. */
-function showCharacterData(character) {
+function showCharacterData(characterName) {
+
+    // Determine whether to display vanilla class or elitespec
+    var character = account.characterDictionary[characterName];
+    var profession = character.profession;
+
+    if(character.eliteSpec != undefined) {
+        profession = character.eliteSpec;
+    }
 
     // Select the div and append html.
     $('#sunburstextra').html(
-        '<p class=\"charname\">' + character + '</p>' +
-        '<p class=\"charage"> Level ' + account.characterDictionary[character].level + '</p>' +
-        '<p class =\"charprofession\" style=\"color:' + colorDictionary[account.characterDictionary[character].profession] + ' \">' + account.characterDictionary[character].profession + '</p>' +
-        '<p class =\"charage\"> Played for ' + account.characterDictionary[character].hoursPlayed + ' hours </p>'
+        '<p class=\"charname\">' + characterName + '</p>' +
+        '<p class=\"charage"> Level ' + character.level + '</p>' +
+        '<p class =\"charprofession\" style=\"color:' + colorDictionary[character.profession] + ' \">' + profession + '</p>' +
+        '<p class =\"charage\"> Played for ' + character.hoursPlayed + ' hours </p>' +
+        '<p class =\"charage\">' + character.deaths + ' deaths </p>'
     );
     $('#sunburstextra').show();
 }

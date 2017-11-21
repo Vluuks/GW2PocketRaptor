@@ -1,9 +1,9 @@
-/* 
+/*
 TIM IS LIEF TEST
 Created by Renske Spring 2017
 
 This file retrieves all the necessary data from the Guild Wars 2 API. This data is used
-to create various data visualizations. 
+to create various data visualizations.
 
 */
 
@@ -28,10 +28,10 @@ function showError(errorMessage) {
     $('#error').text(errorMessage);
 }
 
-/* Check the given API and then start retrieving data if it has been verified. 
+/* Check the given API and then start retrieving data if it has been verified.
 This function is invoked by pressing the button on the webpage. */
 function getUserApi() {
-	
+
     // Check if svgs were already made, if so, delete.
     if ($("#barchartsvg")) {
         $("#barchartsvg").remove();
@@ -53,8 +53,8 @@ function getUserApi() {
 
     // Grab api key from field and check.
     var apiKey = $("#apiKey").val().trim();
-    
-    
+
+
     //apiKey = ""
     apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
     //apiKey = "A2D523A7-B023-554F-898C-A7D631E287B40F27ED03-D8EA-4304-B0B6-E839DA12F709";
@@ -62,10 +62,10 @@ function getUserApi() {
 
     if (apiKey == "" || apiKey == undefined) {
         showError("Please do not omit the field");
-    } 
+    }
 	else {
 
-		// Check if API is valid using regex. 
+		// Check if API is valid using regex.
         if (/^[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{20}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$/.test(apiKey)) {
 
             $.ajax({
@@ -115,7 +115,7 @@ function getUserApi() {
                         // Check if permission requirements were met, if so, invoke callback function.
                         if (permissionCount == 4) {
                             apiCheckCallback(apiKey);
-                        } 
+                        }
 						else {
                             showError("Your API key is missing permissions.");
                         }
@@ -143,7 +143,7 @@ function apiCheckCallback(apiKey) {
 
     // Get general account info such as name, amount of chars, age etc.
     getGeneralAccountInfo(showAccountInfo);
-    
+
     // Get information about account currencies.
     getCurrencies(showCurrencies);
 
@@ -194,9 +194,9 @@ function getCurrencies(callback) {
         },
         complete: function(data) {
 
-            accountCurrencies = JSON.parse(data.responseText); 
+            accountCurrencies = JSON.parse(data.responseText);
             for (var i = 0, l = accountCurrencies.length; i < l; i++) {
-                
+
                 if (accountCurrencies[i].id == "7") {
                     account.fractalRelics = accountCurrencies[i].value;
                 }
@@ -207,7 +207,7 @@ function getCurrencies(callback) {
                     break;
                 }
             }
-            
+
             // Notify that the data has been retrieved and we can display it.
             callback();
         }
@@ -271,20 +271,22 @@ function getGeneralCharacterInfo() {
                     var characterObject = JSON.parse(data.responseText);
                     counter++;
 
-                    // Add properties to the object.
+                    // Set properties of the character object.
                     var character = new Character();
-                    
+                    character.name = characterObject.name;
                     character.race = characterObject.race;
                     character.level = characterObject.level;
                     character.equipment = characterObject.equipment;
                     character.profession = characterObject.profession;
+                    character.eliteSpec = determineEliteSpec(characterObject.specializations, characterObject.name);
                     character.hoursPlayed = (characterObject.age / 3600).toFixed(0);
-                    
+                    character.deaths = characterObject.deaths;
+
                     // Add data to account object to later create piecharts.
                     account.professionDictionary[indexDictionary[character.profession]].value++;
                     account.raceDictionary[indexDictionary[character.race]].value++;
                     account.genderDictionary[indexDictionary[characterObject.gender]].value++;
-                    
+
                     // Add to account dictionary.
                     account.characterDictionary[characterObject.name] = character;
 
@@ -298,8 +300,29 @@ function getGeneralCharacterInfo() {
     }
 }
 
+
+/* Takes the specialization object from the character, going through it and finding the specialization
+ids, based on this we then determine what elite spec is being run from our dictionary. We get PvE spec
+array, take the 3rd entry (this is the slot that holds elite specs) and then determine the id from this. */
+function determineEliteSpec(characterSpecs, charactername){
+
+    // Get PvE spec overview
+    if(characterSpecs.pve[2] != undefined){
+        var eliteSpecId = characterSpecs.pve[2].id;
+
+        // Stringify for dict entry
+        console.log("char " + charactername + " found elite spec number" + eliteSpecId + " | " + eliteSpecDictionary[eliteSpecId]);
+        return eliteSpecDictionary[eliteSpecId];
+    }
+    // No 3rd spec has been set, so it can never be an elite spec
+    else {
+        return "";
+    }
+}
+
+
 /* This function extracts the equipment array from the dictionary of characters and their info
-and checks for every piece what type it is and whether it is of ascended (best in slot) rarity. 
+and checks for every piece what type it is and whether it is of ascended (best in slot) rarity.
 For every item we look up the rarity and the type and this is stored in an object which in turn is stored
 in the dictionary with the character name as a key. This dictionary is globally accessible and will, after
 the callback, be available for use by the visualizations. */
@@ -314,12 +337,12 @@ function fetchEquipment() {
                 var equipmentArray = account.characterDictionary[character].equipment;
                 console.log(equipmentArray);
 
-                // Loop over the equipment array and demand API for item details in bulk.   
+                // Loop over the equipment array and demand API for item details in bulk.
                 var baseUrl = "https://api.guildwars2.com/v2/items?ids=";
                 var infusionsPerPieceDict = {};
-                var slotInformationDict = {}; 
+                var slotInformationDict = {};
                 var duplicatesDict = {};
-                
+
                 for (let i = 0; i < equipmentArray.length; i++) {
 
                     // Append ID to url.
@@ -332,7 +355,7 @@ function fetchEquipment() {
                     else {
                         duplicatesDict[equipmentArray[i].id]++;
                     }
-                    
+
                     // Create id indexed dictionary for infusions.
                     if(equipmentArray[i].infusions != undefined) {
                         infusionsPerPieceDict[equipmentArray[i].id] = equipmentArray[i].infusions;
@@ -340,14 +363,14 @@ function fetchEquipment() {
                     else {
                         infusionsPerPieceDict[equipmentArray[i].id] = [];
                     }
-                    
+
                     // Add slot info
                     slotInformationDict[equipmentArray[i].id] = equipmentArray[i].slot;
-                                  
+
                 }
 
                 console.log(duplicatesDict);
-                
+
                 // Request all the item ids  from the API at once.
                 $.ajax({
                     type: "GET",
@@ -370,27 +393,27 @@ function fetchEquipment() {
 
                             // Store item properties in object and store object in the array of items on the character.
                             if (itemObject.type == ("Armor") || itemObject.type == ("Trinket") || itemObject.type == ("Weapon") || itemObject.type == ("Back")) {
-                                
+
                                 var itemObject = new Item(
                                     itemObject.id,
                                     itemObject.name,
                                     itemObject.rarity,
-                                    infusionsPerPieceDict[itemObject.id], 
+                                    infusionsPerPieceDict[itemObject.id],
                                     itemObject.type,
                                     itemObject.details["type"],
                                     slotInformationDict[itemObject.id]
                                 )
-                                
-                                // Push to equipment array. 
+
+                                // Push to equipment array.
                                 account.characterDictionary[character].equipmentRarity.push(itemObject);
-                                
+
                                 if (itemObject.type == ("Trinket"))
                                     console.log(itemObject);
                             }
                         }
 
                         console.log(account.characterDictionary[character].equipmentRarity);
-                        
+
                         // If it's the last character, notify callback.
                         if (character == account.characters[account.characterAmount - 1]) {
                             onDataReady();
@@ -403,9 +426,9 @@ function fetchEquipment() {
 }
 
 /* For a given armor piece, calculate the agony infusions present, and based on the ID of these
-infusions return the total amount of agony resist present in the armor piece, trinket or weapon. 
-There are many different infusions in this game due to ArenaNet's inconsistent additions and 
-revamps of the system, which makes a dictionary necessary to account for all possible types. 
+infusions return the total amount of agony resist present in the armor piece, trinket or weapon.
+There are many different infusions in this game due to ArenaNet's inconsistent additions and
+revamps of the system, which makes a dictionary necessary to account for all possible types.
 If no infusions are present the infusionsarray will not exist and the function will return 0. */
 function calculateAgonyResist(equipment, character) {
 
@@ -462,7 +485,7 @@ function calculateAgonyResist(equipment, character) {
 
                     if (equipment[item].slot != "HelmAquatic") {
                         agonyResist.armor += infusionDictionary[infusion];
-                    } 
+                    }
                     else {
                         agonyResist.aquatic += infusionDictionary[infusion];
                     }
@@ -477,10 +500,10 @@ function calculateAgonyResist(equipment, character) {
     // Take the weapon set with the higher agony resist.
     if (agonyResist.weaponsA < agonyResist.weaponsB) {
         agonyResist.total += agonyResist.weaponsB;
-    } 
+    }
 	else if (agonyResist.weaponsA > agonyResist.weaponsB) {
         agonyResist.total += agonyResist.weaponsA;
-    } 
+    }
 	else {
         agonyResist.total += agonyResist.weaponsA;
     }
@@ -516,7 +539,7 @@ function onDataReady() {
 /* Get the array of fractal achievements from the API. */
 function getFractalAchievements(callback) {
 
-    // Get the array of API 
+    // Get the array of API
     $.ajax({
         type: "GET",
         async: true,
@@ -565,8 +588,8 @@ function getFractalAchievements(callback) {
     });
 }
 
-/* This function writes the data that has been retrieved from the API to a text file in JSON format. 
-This ensures that even if the API is down the visualization can be run with this data. The back up 
+/* This function writes the data that has been retrieved from the API to a text file in JSON format.
+This ensures that even if the API is down the visualization can be run with this data. The back up
 data is stored locally an can be used to replace the finished "account" object in onDataReady.*/
 function makeBackUp() {
 
@@ -574,7 +597,7 @@ function makeBackUp() {
 
     if (jsonString != undefined) {
         console.log(jsonString);
-    } 
+    }
 	else {
         console.log("Could not transform to JSON.");
     }
