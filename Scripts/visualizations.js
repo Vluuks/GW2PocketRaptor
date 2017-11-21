@@ -471,12 +471,10 @@ function showCharacterData(characterName) {
     // Determine whether to display vanilla class or elitespec
     var character = account.characterDictionary[characterName];
     var profession = character.profession;
-    console.log(characterName + " | " + profession);
 
-    if(character.eliteSpec != "") {
+    if(character.eliteSpec != "" && character.eliteSpec != undefined) {
         profession = character.eliteSpec;
     }
-    console.log(characterName + " after | " + profession);
 
     // Select the div and append html.
     $('#sunburstextra').html(
