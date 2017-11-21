@@ -32,131 +32,140 @@
             <li><a data-toggle="tab" href="#menu1">Agony Resist and Gear</a></li>
             <li><a data-toggle="tab" href="#menu2">General Account Statistics</a></li>
             <li><a data-toggle="tab" href="#menu3">Fractal Dailes and Achievements</a></li>
-            <li><a data-toggle="tab" href="#menu3">Very Bad(Ass) Scatterplot</a></li>
+            <li><a data-toggle="tab" href="#menu4">Very Bad(Ass) Scatterplot</a></li>
         </ul>
 
         <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+            <div id="home" class="tab-pane fade in active">
 
-          <!--- API KEY RETRIEVAL AND INFORMATION ---->
-
-
-            <h3>Insert your API key</h3>
-            <p>
-                    Please insert your API key to continue.
-                    Your key will need the following permissions to function: characters, wallet, account, builds and progression.<br><br>
-                    Made using the official GW2 API. </p>
-
-            <input type="text" id="apiKey" value="">
-            <button onclick="getUserApi()">Go!</button>
-
-            <div id="accountdiv">
-                <h3>General account information</h3>
-                <img id="accountloading" src="Static/spinner.gif" alt="Loading...">
-                <ul id="account">
-                    <li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
-                    <li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
-                    <li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
-                    <br>
-                    <br>
-                    <li id="fractalRelics"><img class="listimg" src="Static/fractalrelic.png" alt="Age"><p class="accinfo" id="fractalrelics">relics</p></li>
-                    <li id="fractalPristine"><img class="listimg" src="Static/pristinefractalrelic.png" alt="Age"><p class="accinfo" id="pristinerelics">pristine relics</p></li>
+              <!--- API KEY RETRIEVAL AND INFORMATION ---->
 
 
-                </ul>
-            </div>
+                <h3>Insert your API key</h3>
+                <p>
+                        Please insert your API key to continue.
+                        Your key will need the following permissions to function: characters, wallet, account, builds and progression.<br><br>
+                        Made using the official GW2 API. </p>
 
+                <input type="text" id="apiKey" value="">
+                <button onclick="getUserApi()">Go!</button>
 
-        </div>
-
-        <!--- AGONY RESIST AND GEARCHECK ---->
-        <div id="menu1" class="tab-pane fade">
-
-            <div id ="mainwrapper">
-
-                <!-- Left wrapper div. -->
-                <div id="leftwrapper">
-
-                    <!-- Barchart. -->
-                    <div id="barchartpart">
-                        <h2 class="divtitle"><img class="listimg" src="Static/agony.png" alt="AR"> Agony Resistance (AR) per character</h2>
+                <div id="accountdiv">
+                    <h3>General account information</h3>
+                    <img id="accountloading" src="Static/spinner.gif" alt="Loading...">
+                    <ul id="account">
+                        <li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
+                        <li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
+                        <li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
                         <br>
                         <br>
-                        <img id="barchartloading" src="Static/spinner.gif" alt="Loading...">
-                    </div>
+                        <li id="fractalRelics"><img class="listimg" src="Static/fractalrelic.png" alt="Age"><p class="accinfo" id="fractalrelics">relics</p></li>
+                        <li id="fractalPristine"><img class="listimg" src="Static/pristinefractalrelic.png" alt="Age"><p class="accinfo" id="pristinerelics">pristine relics</p></li>
 
-                    <!--- Character info --->
-                    <div id="characterinfopart">
-                        <h2 class="divtitle"><img class="listimg" src="Static/accountname.png" alt="Achievements"> Character information</h2>
-                        <br>
-                        <br>
-                        <div id="sunburstextra"></div>
-                    </div>
 
-                    <!--- Tooltip area --->
-                    <div id="tooltippart">
-                        <h2 class="divtitle"><img class="listimg" src="Static/agonyresistance.png" alt="Achievements"> Equipment Tooltip</h2>
-                        <br>
-                        <br>
-                        <p id="tooltipcontent"></p>
-                        <img id="achievementloading" src="Static/spinner.gif" alt="Loading...">
-                    </div>
-
+                    </ul>
                 </div>
 
-                <!-- Right wrapper div. -->
-                <div id="rightwrapper">
 
-                    <!-- Sunburst. -->
-                    <div id ="piechartpart">
-                        <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Character Equipment</h2>
-                        <div id= "sunburstinnerwrapper">
+            </div>
+
+            <!--- AGONY RESIST AND GEARCHECK ---->
+            <div id="menu1" class="tab-pane fade">
+
+                <div id ="mainwrapper">
+
+                    <!-- Left wrapper div. -->
+                    <div id="leftwrapper">
+
+                        <!-- Barchart. -->
+                        <div id="barchartpart">
+                            <h2 class="divtitle"><img class="listimg" src="Static/agony.png" alt="AR"> Agony Resistance (AR) per character</h2>
                             <br>
                             <br>
-                            <img id="sunburstloading" src="Static/spinner.gif" alt="Loading...">
-                            <p id="sunburstwait">Select a character from the bar chart to see their gear.</p>
-
+                            <img id="barchartloading" src="Static/spinner.gif" alt="Loading...">
                         </div>
+
+                        <!--- Character info --->
+                        <div id="characterinfopart">
+                            <h2 class="divtitle"><img class="listimg" src="Static/accountname.png" alt="Achievements"> Character information</h2>
+                            <br>
+                            <br>
+                            <div id="sunburstextra"></div>
+                        </div>
+
+                        <!--- Tooltip area --->
+                        <div id="tooltippart">
+                            <h2 class="divtitle"><img class="listimg" src="Static/agonyresistance.png" alt="Achievements"> Equipment Tooltip</h2>
+                            <br>
+                            <br>
+                            <p id="tooltipcontent"></p>
+                            <img id="achievementloading" src="Static/spinner.gif" alt="Loading...">
+                        </div>
+
                     </div>
 
+                    <!-- Right wrapper div. -->
+                    <div id="rightwrapper">
 
-                    <!-- Sunburst. -->
-                    <div id ="legendpart">
-                        <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Legend</h2>
-                        <div> <img id="legend" src="Static/legend.png" alt="legend"></div>
+                        <!-- Sunburst. -->
+                        <div id ="piechartpart">
+                            <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Character Equipment</h2>
+                            <div id= "sunburstinnerwrapper">
+                                <br>
+                                <br>
+                                <img id="sunburstloading" src="Static/spinner.gif" alt="Loading...">
+                                <p id="sunburstwait">Select a character from the bar chart to see their gear.</p>
+
+                            </div>
+                        </div>
+
+
+                        <!-- Sunburst. -->
+                        <div id ="legendpart">
+                            <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Legend</h2>
+                            <div> <img id="legend" src="Static/legend.png" alt="legend"></div>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <!--- ACCOUNT STATISTICS ---->
-        <div id="menu2" class="tab-pane fade">
+            <!--- ACCOUNT STATISTICS ---->
+            <div id="menu2" class="tab-pane fade">
 
-            <h3>Account Statistics</h3>
-            <p>Hier komen al die sicke statistiekjes over je account zoals race/class verdeling, gender verdeling en nog veel meer STAY TUNED LADS</p>
+                <h3>Account Statistics</h3>
+                <p>Hier komen al die sicke statistiekjes over je account zoals race/class verdeling, gender verdeling en nog veel meer STAY TUNED LADS</p>
 
-            <!--- Piecharts --->
-            <div id ="actualpiechartpart">
-                <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> pie charts and shit</h2>
+                <!--- Piecharts --->
+                <div id ="actualpiechartpart">
+                    <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> pie charts and shit</h2>
+                </div>
+
             </div>
 
-        </div>
+            <!--- FRACTAL ACHIEVEMENTS ---->
+            <div id="menu3" class="tab-pane fade">
 
-        <!--- FRACTAL ACHIEVEMENTS ---->
-        <div id="menu3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
 
-            <h3>Menu 3</h3>
-            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <!-- Achievements. -->
+                <div id="achievementpart">
+                    <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2>
+                    <!-- <img id="achievementloading" src="Static/spinner.gif" alt="Loading..."> -->
+                </div>
 
-            <!-- Achievements. -->
-            <div id="achievementpart">
-                <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2>
-                <!-- <img id="achievementloading" src="Static/spinner.gif" alt="Loading..."> -->
             </div>
 
-        </div>
-        </div>
+            <!-- SCATTERPLOT OF DOOM -->
+            <div id="menu4" class="tab-pane fade in active">
+
+                <h3>HIER KOMT DE SCATTERPLOT</h3>
+                <p>lelijkheid 10/10</p>
+
+            </div>
+
+        </div> <!-- end of tab content -->
 
     </body>
 
