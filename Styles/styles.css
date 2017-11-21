@@ -209,6 +209,7 @@ h2{
 .charprofession{
     font-size: 25px;
     margin: 0;
+	  margin-top: 5px;
 }
 .charage{
     margin: 0;
@@ -256,7 +257,6 @@ div ul li{
     margin: 5px;
 }
 img{
-
 	vertical-align: top;
 	padding-right: 5px;
 }
@@ -266,4 +266,7 @@ div ul li p{
 }
 path{
     stroke: #DDDDDD;
+}
+.profimg{
+    vertical-align: middle;
 }

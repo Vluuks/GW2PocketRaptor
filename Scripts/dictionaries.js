@@ -17,8 +17,8 @@ var colorDictionary = {
     "Trinkets": "#99837b",
 
     // Professions.
-    "Guardian": "#2a6cd6",
-    "Dragonhunter": "#2a6cd6",
+    "Guardian": "#2a94d6",
+    "Dragonhunter": "#2a94d6",
     "Revenant": "#a85555",
     "Herald": "#a85555",
     "Warrior": "#e2ad18",
@@ -168,6 +168,45 @@ var eliteSpecDictionary = {
     // Mirage
 }
 
+
+var professionImageDictionary = {
+
+    "Guardian" : "guard-big",
+    "Dragonhunter": "dh-big",
+    "Firebrand" : "firebrand-big",
+
+    "Warrior" : "war-big",
+    "Berserker" : "berserker-big",
+    "Spellbreaker" : "spellbreaker-big",
+
+    "Revenant" : "rev-big",
+    "Herald" : "herald-big",
+    "Renegade" : "renegade-big",
+
+    "Ranger" : "ranger-big",
+    "Druid" : "druid-big",
+    "Soulbeast" : "soulbeast-big",
+
+    "Engineer" : "engi-big",
+    "Scrapper" : "scrapper-big",
+    "Holosmith" : "holosmith-big",
+
+    "Thief" : "thief-big",
+    "Daredevil" : "dd-big",
+    "Deadeye" : "deadeye-big",
+
+    "Elementalist" : "ele-big",
+    "Tempest" : "tempest-big",
+    "Weaver" : "weaver-big",
+
+    "Mesmer" : "mes-big",
+    "Chronomancer" : "chrono-big",
+    "Mirage" : "mirage-big",
+
+    "Necromancer" : "necro-big",
+    "Reaper" : "reaper-big",
+    "Scourge" : "scourge-big"
+}
 
 var indexDictionary = {
 

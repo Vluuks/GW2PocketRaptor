@@ -480,12 +480,14 @@ function showCharacterData(characterName) {
     $('#sunburstextra').html(
         '<p class=\"charname\">' + characterName + '</p>' +
         '<p class=\"charage"> Level ' + character.level + '</p>' +
-        '<p class =\"charprofession\" style=\"color:' + colorDictionary[character.profession] + ' \">' + profession + '</p>' +
+        '<p class =\"charprofession\" style=\"color:' + colorDictionary[character.profession] + ' \">' +
+        '<img class="profimg" src="Static/Professions/' + professionImageDictionary[profession] + '.png" alt="Achievements">' + profession + '</p>' +
         '<p class =\"charage\"> Played for ' + character.hoursPlayed + ' hours </p>' +
         '<p class =\"charage\">' + character.deaths + ' deaths </p>'
     );
     $('#sunburstextra').show();
 }
+
 
 /* EEN HELE MOOIE FUNCTIE */
 function makePieChart(){
