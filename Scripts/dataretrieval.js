@@ -415,6 +415,7 @@ function fetchEquipment() {
                             console.log(character);
                             console.log(account.characters);
                             console.log("ON DATA READY BUT ITS A LIE ITS NOT ACTUALLY READY HELP");
+                            console.log(account);
                             onDataReady();
                         }
                     }
@@ -434,14 +435,21 @@ function calculateAgonyResist(equipment, character, dataArray) {
     // Instantiate new agonyresist object.
     var agonyResist = new AgonyResist();
 
+    console.log(equipment);
+    
     // Iterate over all the items.
     for (item in equipment) {
+        
+        console.log("one item at a time...");
+        console.log(equipment[item].infusions);
 
         // If the item has one or multiple infusions.
-        if (equipment[item].infusions != undefined) {
+        if (typeof equipment[item].infusions !== undefined && equipment[item].infusions.length > 0 ) {
             
-            console.log("checking infusions, here's the current object the character is" + character);
-            console.log(agonyResist);
+            //console.log("checking infusions, here's the current object the character is" + character);
+            console.log(equipment[item]);
+            console.log("YOU SHOULD SEE THIS MANY MANY TIMES FOR ANY CHAR WITH INFUSIONS IN THEIR ARMOR");
+            console.log(agonyResist.total + " on " + character);
 
             // Loop over all the infusions in the item.
             for (var i = 0; i < equipment[item].infusions.length; i++) {
@@ -544,21 +552,131 @@ that can be visualized in a bar chart. */
 function onDataReady() {
 
     var dataArray = [];
+    var counter = 0;
     
-    for (let character in account.characterDictionary) {
+    for (character in account.characterDictionary) {
 
         (function(character) {
+            
+            counter++;
+            console.log("de counter voor Tim <3 " + counter);
     
             // Calculate the total agony resist on the gear.
-            let equipment = account.characterDictionary[character].equipmentRarity;
+            var equipment = account.characterDictionary[character].equipmentRarity;
             // account.characterDictionary[character].agonyResist = calculateAgonyResist(equipment, character);
-            calculateAgonyResist(equipment, character, dataArray);
+            //calculateAgonyResist(equipment, character, dataArray);
             
             // dit gebeurt voordat de calculateAgonyResist klaar is met runnen
             // callback in calculateAgonyResist maken
             
-            //console.log("onDataReady being run with the following equipment data " + character);
+            console.log("onDataReady being run with the following equipment data " + character);
+            console.log(equipment);
+            
+             // Instantiate new agonyresist object.
+            var agonyResist = new AgonyResist();
+
             //console.log(equipment);
+            
+            supercounter = 0;
+            // Iterate over all the items.
+            for (item in equipment) {
+                supercounter++;
+                console.log("supercounter: " + supercounter);
+                
+                console.log("one item at a time... this item belongs to" + character);
+                console.log(equipment[item].infusions);
+
+                // If the item has one or multiple infusions.
+                if (typeof equipment[item].infusions !== undefined && equipment[item].infusions.length > 0 ) {
+                    
+                    //console.log("checking infusions, here's the current object the character is" + character);
+                    console.log(equipment[item]);
+                    console.log("YOU SHOULD SEE THIS MANY MANY TIMES FOR ANY CHAR WITH INFUSIONS IN THEIR ARMOR");
+                    console.log(agonyResist.total + " on " + character);
+
+                    // Loop over all the infusions in the item.
+                    for (var i = 0; i < equipment[item].infusions.length; i++) {
+
+                        var infusion = equipment[item].infusions[i];
+
+                        // Add agony resist back to the item object for later reference.
+                        equipment[item].agonyResist += infusionDictionary[infusion];
+
+                        // If it's a weapon, check which one.
+                        if (equipment[item].type == "Weapon") {
+
+                            switch (equipment[item].weaponSlot) {
+
+                                case "WeaponA1":
+                                    agonyResist.weaponsA += infusionDictionary[infusion];
+                                    break;
+                                case "WeaponA2":
+                                    agonyResist.weaponsA += infusionDictionary[infusion];
+                                    break;
+                                case "WeaponB1":
+                                    agonyResist.weaponsB += infusionDictionary[infusion];
+                                    break;
+                                case "WeaponB2":
+                                    agonyResist.weaponsB += infusionDictionary[infusion];
+                                    break;
+                                case "WeaponAquaticA":
+                                    agonyResist.aquatic += infusionDictionary[infusion];
+                                    break;
+                                case "WeaponAquaticB":
+                                    agonyResist.aquatic += infusionDictionary[infusion];
+                                    break;
+                            }
+                        }
+
+                        // If it's a trinket or backpiece, add to total. Discard amulet since these infusions are not AR ones.
+                        else if ((equipment[item].type == "Trinket" && equipment[item].slot != "Amulet") || equipment[item].type == "Back") {
+                            agonyResist.trinkets += infusionDictionary[infusion];
+                        }
+
+                        // If it's armor, check for aquabreather and else add to total.
+                        else if (equipment[item].type == "Armor") {
+
+                            if (equipment[item].slot != "HelmAquatic") {
+                                agonyResist.armor += infusionDictionary[infusion];
+                            }
+                            else {
+                                agonyResist.aquatic += infusionDictionary[infusion];
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Calculate the effective total using the weapon set with the biggest amount and discarding underwater weapons.
+            agonyResist.total = agonyResist.armor + agonyResist.trinkets;
+
+            // Take the weapon set with the higher agony resist.
+            if (agonyResist.weaponsA < agonyResist.weaponsB) {
+                agonyResist.total += agonyResist.weaponsB;
+            }
+            else if (agonyResist.weaponsA > agonyResist.weaponsB) {
+                agonyResist.total += agonyResist.weaponsA;
+            }
+            else {
+                agonyResist.total += agonyResist.weaponsA;
+            }
+
+            // instead of returning, update here?
+            //return agonyResist;
+            account.characterDictionary[character].agonyResist = agonyResist;  
+            console.log("total AR as calculated:" + account.characterDictionary[character].agonyResist.total);
+            
+            
+            // Create a new data array for the bar chart, using the character name and total agony resist.
+            var dataObject = {
+                characterName: character,
+                agonyResist: account.characterDictionary[character].agonyResist.total
+            }
+
+            dataArray.push(dataObject);
+            console.log("this is now your array");
+            console.log(dataArray);
+            
             
          
         }(character));
