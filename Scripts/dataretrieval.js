@@ -7,6 +7,7 @@ to create various data visualizations.
 
 */
 
+
 /* Wait until page is ready. */
 $('document').ready(function() {
 
@@ -332,7 +333,7 @@ function fetchEquipment() {
 
                 // Grab equipment.
                 var equipmentArray = account.characterDictionary[character].equipment;
-                console.log(equipmentArray);
+                //console.log(equipmentArray);
 
                 // Loop over the equipment array and demand API for item details in bulk.
                 var baseUrl = "https://api.guildwars2.com/v2/items?ids=";
@@ -366,7 +367,7 @@ function fetchEquipment() {
 
                 }
 
-                console.log(duplicatesDict);
+                //console.log(duplicatesDict);
 
                 // Request all the item ids  from the API at once.
                 $.ajax({
@@ -404,15 +405,16 @@ function fetchEquipment() {
                                 // Push to equipment array.
                                 account.characterDictionary[character].equipmentRarity.push(itemObject);
 
-                                if (itemObject.type == ("Trinket"))
-                                    console.log(itemObject);
+                                //if (itemObject.type == ("Trinket"))
+                                    //console.log(itemObject);
                             }
                         }
 
-                        console.log(account.characterDictionary[character].equipmentRarity);
-
                         // If it's the last character, notify callback.
                         if (character == account.characters[account.characterAmount - 1]) {
+                            console.log(character);
+                            console.log(account.characters);
+                            console.log("ON DATA READY BUT ITS A LIE ITS NOT ACTUALLY READY HELP");
                             onDataReady();
                         }
                     }
@@ -427,7 +429,7 @@ infusions return the total amount of agony resist present in the armor piece, tr
 There are many different infusions in this game due to ArenaNet's inconsistent additions and
 revamps of the system, which makes a dictionary necessary to account for all possible types.
 If no infusions are present the infusionsarray will not exist and the function will return 0. */
-function calculateAgonyResist(equipment, character) {
+function calculateAgonyResist(equipment, character, dataArray) {
 
     // Instantiate new agonyresist object.
     var agonyResist = new AgonyResist();
@@ -437,6 +439,9 @@ function calculateAgonyResist(equipment, character) {
 
         // If the item has one or multiple infusions.
         if (equipment[item].infusions != undefined) {
+            
+            console.log("checking infusions, here's the current object the character is" + character);
+            console.log(agonyResist);
 
             // Loop over all the infusions in the item.
             for (var i = 0; i < equipment[item].infusions.length; i++) {
@@ -505,7 +510,33 @@ function calculateAgonyResist(equipment, character) {
         agonyResist.total += agonyResist.weaponsA;
     }
 
-    return agonyResist;
+    // instead of returning, update here?
+    //return agonyResist;
+    account.characterDictionary[character].agonyResist = agonyResist;  
+    console.log("total AR as calculated:" + account.characterDictionary[character].agonyResist.total);
+    
+    
+    // Create a new data array for the bar chart, using the character name and total agony resist.
+    var dataObject = {
+        characterName: character,
+        agonyResist: account.characterDictionary[character].agonyResist.total
+    }
+
+    dataArray.push(dataObject);
+    console.log("this is now your array");
+    console.log(dataArray);
+    
+    // Check whether it's the last character, if so, continue?
+    // If it's the last character, notify callback.
+    if (character == account.characters[account.characterAmount - 1] && dataArray.length == account.characterAmount) {
+        console.log(character);
+        console.log(account.characters);
+        console.log("AR CALCULATIONS SHOULD BE DONUTS");
+        console.log(dataArray);
+        makeBarChart(dataArray);
+        makePieChart();
+    }
+    
 }
 
 /* When the data is ready, calculate the total agony resist on the gear and store this in an object
@@ -513,24 +544,39 @@ that can be visualized in a bar chart. */
 function onDataReady() {
 
     var dataArray = [];
-    for (character in account.characterDictionary) {
+    
+    for (let character in account.characterDictionary) {
 
-        // Calculate the total agony resist on the gear.
-        var equipment = account.characterDictionary[character].equipmentRarity;
-        account.characterDictionary[character].agonyResist = calculateAgonyResist(equipment, character);
-
-        // Create a new data array for the bar chart, using the character name and total agony resist.
-        var dataObject = {
-            characterName: character,
-            agonyResist: account.characterDictionary[character].agonyResist.total
-        }
-
-        dataArray.push(dataObject);
+        (function(character) {
+    
+            // Calculate the total agony resist on the gear.
+            let equipment = account.characterDictionary[character].equipmentRarity;
+            // account.characterDictionary[character].agonyResist = calculateAgonyResist(equipment, character);
+            calculateAgonyResist(equipment, character, dataArray);
+            
+            // dit gebeurt voordat de calculateAgonyResist klaar is met runnen
+            // callback in calculateAgonyResist maken
+            
+            //console.log("onDataReady being run with the following equipment data " + character);
+            //console.log(equipment);
+            
+         
+        }(character));
     }
 
     // When calculating the AR is done, we can make the barchart.
-    makeBarChart(dataArray);
-    makePieChart();
+    while(true){
+        if (dataArray.length == account.characterAmount) {
+            //console.log(character);
+            //console.log(account.characters);
+            console.log("AR CALCULATIONS SHOULD BE DONUTS");
+            console.log(dataArray);
+            makeBarChart(dataArray);
+            makePieChart();
+            break; // cries
+    }
+    }
+    
 }
 
 /* Get the array of fractal achievements from the API. */

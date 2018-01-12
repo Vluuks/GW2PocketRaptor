@@ -37,6 +37,9 @@ function showCurrencies(){
 /* Draws the bar chart that shows each character and their level of agony resist. The maximum
 amount is infinite in theory but more than 150 makes no sense, so the max of the chart is set at 150. */
 function makeBarChart(data) {
+    
+    console.log("dank Tim");
+    console.log(data);
 
     // Hide and show dom elements.
     $('#barchartloading').hide();
