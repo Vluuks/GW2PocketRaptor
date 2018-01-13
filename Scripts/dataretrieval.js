@@ -326,6 +326,8 @@ in the dictionary with the character name as a key. This dictionary is globally 
 the callback, be available for use by the visualizations. */
 function fetchEquipment() {
 
+    var promises = [];
+
     // Iterate over the characters in the dictionary and access equipment array for each.
     for (let character in account.characterDictionary) {
         (function(character) {
@@ -367,62 +369,70 @@ function fetchEquipment() {
 
                 }
 
-                //console.log(duplicatesDict);
-
                 // Request all the item ids  from the API at once.
-                $.ajax({
-                    type: "GET",
-                    url: baseUrl.slice(0, -1),
-                    async: true,
-                    cache: false,
-                    dataType: 'text',
+                promises.push(
+                    
+                    $.ajax({
+                        type: "GET",
+                        url: baseUrl.slice(0, -1),
+                        async: true,
+                        cache: false,
+                        dataType: 'text',
 
-                    success: function() {},
-                    error: function() {
-                        showError("Something went wrong fetching the equipment info.");
-                    },
-                    complete: function(data) {
-                        multipleItemObject = JSON.parse(data.responseText);
+                        success: function() {},
+                        error: function() {
+                            showError("Something went wrong fetching the equipment info.");
+                        },
+                        complete: function(data) {
+                            
+                            console.log("ajax done");
+                            multipleItemObject = JSON.parse(data.responseText);
 
-                        // Loop over the returned values and make separate item objects out of it.
-                        for (item in multipleItemObject) {
+                            // Loop over the returned values and make separate item objects out of it.
+                            for (item in multipleItemObject) {
 
-                            var itemObject = multipleItemObject[item];
+                                var itemObject = multipleItemObject[item];
 
-                            // Store item properties in object and store object in the array of items on the character.
-                            if (itemObject.type == ("Armor") || itemObject.type == ("Trinket") || itemObject.type == ("Weapon") || itemObject.type == ("Back")) {
+                                // Store item properties in object and store object in the array of items on the character.
+                                if (itemObject.type == ("Armor") || itemObject.type == ("Trinket") || itemObject.type == ("Weapon") || itemObject.type == ("Back")) {
 
-                                var itemObject = new Item(
-                                    itemObject.id,
-                                    itemObject.name,
-                                    itemObject.rarity,
-                                    infusionsPerPieceDict[itemObject.id],
-                                    itemObject.type,
-                                    itemObject.details["type"],
-                                    slotInformationDict[itemObject.id]
-                                )
+                                    var itemObject = new Item(
+                                        itemObject.id,
+                                        itemObject.name,
+                                        itemObject.rarity,
+                                        infusionsPerPieceDict[itemObject.id],
+                                        itemObject.type,
+                                        itemObject.details["type"],
+                                        slotInformationDict[itemObject.id]
+                                    )
 
-                                // Push to equipment array.
-                                account.characterDictionary[character].equipmentRarity.push(itemObject);
-
-                                //if (itemObject.type == ("Trinket"))
-                                    //console.log(itemObject);
+                                    // Push to equipment array.
+                                    account.characterDictionary[character].equipmentRarity.push(itemObject);
+                                }
                             }
                         }
-
-                        // If it's the last character, notify callback.
-                        if (character == account.characters[account.characterAmount - 1]) {
-                            console.log(character);
-                            console.log(account.characters);
-                            console.log("ON DATA READY BUT ITS A LIE ITS NOT ACTUALLY READY HELP");
-                            console.log(account);
-                            onDataReady();
-                        }
-                    }
-                });
+                    }) // end of ajax
+                ); // end of promise
             }
         }(character));
     }
+   
+    
+    // Run all the promises, and when they are done, notify callback. 
+    console.log(promises);
+    $.when(promises).done(callTheCallback());
+}
+
+
+
+
+
+function callTheCallback(){
+    
+    console.log("de data is klaar jaja");
+    console.log(account.characterDictionary['Asvata'].equipmentRarity);
+    onDataReady();
+    
 }
 
 /* For a given armor piece, calculate the agony infusions present, and based on the ID of these
@@ -430,12 +440,10 @@ infusions return the total amount of agony resist present in the armor piece, tr
 There are many different infusions in this game due to ArenaNet's inconsistent additions and
 revamps of the system, which makes a dictionary necessary to account for all possible types.
 If no infusions are present the infusionsarray will not exist and the function will return 0. */
-function calculateAgonyResist(equipment, character, dataArray) {
+function calculateAgonyResist(equipment, character) {
 
     // Instantiate new agonyresist object.
     var agonyResist = new AgonyResist();
-
-    console.log(equipment);
     
     // Iterate over all the items.
     for (item in equipment) {
@@ -518,33 +526,10 @@ function calculateAgonyResist(equipment, character, dataArray) {
         agonyResist.total += agonyResist.weaponsA;
     }
 
-    // instead of returning, update here?
-    //return agonyResist;
-    account.characterDictionary[character].agonyResist = agonyResist;  
-    console.log("total AR as calculated:" + account.characterDictionary[character].agonyResist.total);
-    
-    
-    // Create a new data array for the bar chart, using the character name and total agony resist.
-    var dataObject = {
-        characterName: character,
-        agonyResist: account.characterDictionary[character].agonyResist.total
-    }
 
-    dataArray.push(dataObject);
-    console.log("this is now your array");
-    console.log(dataArray);
-    
-    // Check whether it's the last character, if so, continue?
-    // If it's the last character, notify callback.
-    if (character == account.characters[account.characterAmount - 1] && dataArray.length == account.characterAmount) {
-        console.log(character);
-        console.log(account.characters);
-        console.log("AR CALCULATIONS SHOULD BE DONUTS");
-        console.log(dataArray);
-        makeBarChart(dataArray);
-        makePieChart();
-    }
-    
+    console.log("total AR as calculated:" + account.characterDictionary[character].agonyResist.total);
+    account.characterDictionary[character].agonyResist = agonyResist;
+
 }
 
 /* When the data is ready, calculate the total agony resist on the gear and store this in an object
@@ -554,7 +539,9 @@ function onDataReady() {
     var dataArray = [];
     var counter = 0;
     
-    for (character in account.characterDictionary) {
+    var promises = [];
+    
+    for (let character in account.characterDictionary) {
 
         (function(character) {
             
@@ -563,138 +550,42 @@ function onDataReady() {
     
             // Calculate the total agony resist on the gear.
             var equipment = account.characterDictionary[character].equipmentRarity;
-            // account.characterDictionary[character].agonyResist = calculateAgonyResist(equipment, character);
-            //calculateAgonyResist(equipment, character, dataArray);
-            
-            // dit gebeurt voordat de calculateAgonyResist klaar is met runnen
-            // callback in calculateAgonyResist maken
-            
             console.log("onDataReady being run with the following equipment data " + character);
             console.log(equipment);
-            
-             // Instantiate new agonyresist object.
-            var agonyResist = new AgonyResist();
-
-            //console.log(equipment);
-            
-            supercounter = 0;
-            // Iterate over all the items.
-            for (item in equipment) {
-                supercounter++;
-                console.log("supercounter: " + supercounter);
-                
-                console.log("one item at a time... this item belongs to" + character);
-                console.log(equipment[item].infusions);
-
-                // If the item has one or multiple infusions.
-                if (typeof equipment[item].infusions !== undefined && equipment[item].infusions.length > 0 ) {
-                    
-                    //console.log("checking infusions, here's the current object the character is" + character);
-                    console.log(equipment[item]);
-                    console.log("YOU SHOULD SEE THIS MANY MANY TIMES FOR ANY CHAR WITH INFUSIONS IN THEIR ARMOR");
-                    console.log(agonyResist.total + " on " + character);
-
-                    // Loop over all the infusions in the item.
-                    for (var i = 0; i < equipment[item].infusions.length; i++) {
-
-                        var infusion = equipment[item].infusions[i];
-
-                        // Add agony resist back to the item object for later reference.
-                        equipment[item].agonyResist += infusionDictionary[infusion];
-
-                        // If it's a weapon, check which one.
-                        if (equipment[item].type == "Weapon") {
-
-                            switch (equipment[item].weaponSlot) {
-
-                                case "WeaponA1":
-                                    agonyResist.weaponsA += infusionDictionary[infusion];
-                                    break;
-                                case "WeaponA2":
-                                    agonyResist.weaponsA += infusionDictionary[infusion];
-                                    break;
-                                case "WeaponB1":
-                                    agonyResist.weaponsB += infusionDictionary[infusion];
-                                    break;
-                                case "WeaponB2":
-                                    agonyResist.weaponsB += infusionDictionary[infusion];
-                                    break;
-                                case "WeaponAquaticA":
-                                    agonyResist.aquatic += infusionDictionary[infusion];
-                                    break;
-                                case "WeaponAquaticB":
-                                    agonyResist.aquatic += infusionDictionary[infusion];
-                                    break;
-                            }
-                        }
-
-                        // If it's a trinket or backpiece, add to total. Discard amulet since these infusions are not AR ones.
-                        else if ((equipment[item].type == "Trinket" && equipment[item].slot != "Amulet") || equipment[item].type == "Back") {
-                            agonyResist.trinkets += infusionDictionary[infusion];
-                        }
-
-                        // If it's armor, check for aquabreather and else add to total.
-                        else if (equipment[item].type == "Armor") {
-
-                            if (equipment[item].slot != "HelmAquatic") {
-                                agonyResist.armor += infusionDictionary[infusion];
-                            }
-                            else {
-                                agonyResist.aquatic += infusionDictionary[infusion];
-                            }
-                        }
-                    }
-                }
+            if(equipment.length < 1){
+                console.log("but of course it was empty....");
             }
-
-            // Calculate the effective total using the weapon set with the biggest amount and discarding underwater weapons.
-            agonyResist.total = agonyResist.armor + agonyResist.trinkets;
-
-            // Take the weapon set with the higher agony resist.
-            if (agonyResist.weaponsA < agonyResist.weaponsB) {
-                agonyResist.total += agonyResist.weaponsB;
-            }
-            else if (agonyResist.weaponsA > agonyResist.weaponsB) {
-                agonyResist.total += agonyResist.weaponsA;
-            }
-            else {
-                agonyResist.total += agonyResist.weaponsA;
-            }
-
-            // instead of returning, update here?
-            //return agonyResist;
-            account.characterDictionary[character].agonyResist = agonyResist;  
-            console.log("total AR as calculated:" + account.characterDictionary[character].agonyResist.total);
             
-            
-            // Create a new data array for the bar chart, using the character name and total agony resist.
-            var dataObject = {
-                characterName: character,
-                agonyResist: account.characterDictionary[character].agonyResist.total
-            }
-
-            dataArray.push(dataObject);
-            console.log("this is now your array");
-            console.log(dataArray);
-            
-            
-         
+            // Add calculation to promises.
+            promises.push(calculateAgonyResist(equipment, character));
+                 
         }(character));
     }
 
-    // When calculating the AR is done, we can make the barchart.
-    while(true){
-        if (dataArray.length == account.characterAmount) {
-            //console.log(character);
-            //console.log(account.characters);
-            console.log("AR CALCULATIONS SHOULD BE DONUTS");
-            console.log(dataArray);
-            makeBarChart(dataArray);
-            makePieChart();
-            break; // cries
-    }
+    $.when(promises).done(makeBarChartData());
+    
+}
+
+
+function makeBarChartData(){
+    
+    var dataArray = [];
+    
+    
+    for (let character in account.characterDictionary) {
+        
+        var dataObject = {
+            characterName: character,
+            agonyResist: account.characterDictionary[character].agonyResist.total
+        }
+
+        dataArray.push(dataObject);
     }
     
+    console.log("this is now your array");
+    console.log(dataArray);
+    
+    makeBarChart(dataArray);
 }
 
 /* Get the array of fractal achievements from the API. */
