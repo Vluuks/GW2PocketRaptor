@@ -51,23 +51,6 @@
                 <input type="text" id="apiKey" value="">
                 <button onclick="getUserApi()">Go!</button>
 
-                <div id="accountdiv">
-                    <h3>General account information</h3>
-                    <img id="accountloading" src="Static/spinner.gif" alt="Loading...">
-                    <ul id="account">
-                        <li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
-                        <li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
-                        <li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
-                        <br>
-                        <br>
-                        <li id="fractalRelics"><img class="listimg" src="Static/fractalrelic.png" alt="Age"><p class="accinfo" id="fractalrelics">relics</p></li>
-                        <li id="fractalPristine"><img class="listimg" src="Static/pristinefractalrelic.png" alt="Age"><p class="accinfo" id="pristinerelics">pristine relics</p></li>
-
-
-                    </ul>
-                </div>
-
-
             </div>
 
             <!--- AGONY RESIST AND GEARCHECK ---->
@@ -135,7 +118,21 @@
             <div id="menu2" class="tab-pane fade">
 
                 <h3>Account Statistics</h3>
-                <p>Hier komen al die sicke statistiekjes over je account zoals race/class verdeling, gender verdeling en nog veel meer STAY TUNED LADS</p>
+                <div id="accountdiv">
+                    <h3>General account information</h3>
+                    <img id="accountloading" src="Static/spinner.gif" alt="Loading...">
+                    <ul id="account">
+                        <li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
+                        <li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
+                        <li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
+                        <br>
+                        <br>
+                        <li id="fractalRelics"><img class="listimg" src="Static/fractalrelic.png" alt="Age"><p class="accinfo" id="fractalrelics">relics</p></li>
+                        <li id="fractalPristine"><img class="listimg" src="Static/pristinefractalrelic.png" alt="Age"><p class="accinfo" id="pristinerelics">pristine relics</p></li>
+
+
+                    </ul>
+                </div>
 
                 <!--- Piecharts --->
                 <div id ="actualpiechartpart">
