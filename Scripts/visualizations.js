@@ -243,6 +243,7 @@ function transformDataForSunburst(character) {
         // Loop over the equipment pieces and construct data accordingly.
         for (var piece in equipment) {
             var currentPiece = equipment[piece];
+            console.log(currentPiece);
 
             // If it's an armor piece but not an underwater piece
             if (currentPiece.type == "Armor" && currentPiece.slot != "HelmAquatic") {
@@ -270,6 +271,8 @@ function transformDataForSunburst(character) {
         sunburstObject = account.characterDictionary[character].sunburstDataCache;
     }
 
+    console.log(sunburstObject);
+    
     // Create the sunburst visualization with this data.
     makeSunburst(sunburstObject);
     showCharacterData(character);
@@ -280,6 +283,8 @@ function transformDataForSunburst(character) {
 information about all the gear that a character has on them, and the rarity and name of these
 items. */
 function makeSunburst(data) {
+    
+    
 
     // Hide the information message.
     $('#sunburstwait').hide();
@@ -486,7 +491,7 @@ function makePieChart(){
     // Select paths, use arc generator to draw
     var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
     arcs.append("svg:path")
-        .attr("fill", function(d, i) { console.log(d); return colorDictionary[data[i].label]; })
+        .attr("fill", function(d, i) { return colorDictionary[data[i].label]; })
         .attr("d", function (d) { return arc(d); });
 
 // Add the text
