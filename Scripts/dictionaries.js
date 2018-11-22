@@ -17,8 +17,8 @@ var colorDictionary = {
     "Trinkets": "#99837b",
 
     // Professions.
-    "Guardian": "#2a6cd6",
-    "Dragonhunter": "#2a6cd6",
+    "Guardian": "#2a94d6",
+    "Dragonhunter": "#2a94d6",
     "Revenant": "#a85555",
     "Herald": "#a85555",
     "Warrior": "#e2ad18",
@@ -35,11 +35,11 @@ var colorDictionary = {
     "Chronomancer": "#ce3bc9",
     "Necromancer": "#3a916e",
     "Reaper": "#3a916e",
-    
+
     // Achievement colors
     "false": "#5b5b5b",
     "true": "#6cc63b"
-    
+
 };
 
 // A dictionary containing key value pairs of item ids and agony resist.
@@ -129,21 +129,103 @@ var infusionDictionary = {
     NaN: 0
 };
 
+var eliteSpecDictionary = {
+
+    // Warrior
+    18 : "Berserker",
+    // Spellbreaker
+
+    // Guardian
+    27 : "Dragonhunter",
+    // Firebrand
+
+    // Revenant
+    52 : "Herald",
+    // Renegade
+
+    // Engineer
+    43 : "Scrapper",
+    57 : "Holosmith",
+
+    // Thief
+    7 :  "Daredevil",
+    // Deadeye
+
+    // Ranger
+    5: "Druid",
+    55 : "Soulbeast",
+
+    // Elementalist
+    48: "Tempest",
+    // Weaver
+
+    // Necromancer
+    34 : "Reaper",
+    // Scourge
+
+    // Mesmer
+    40 : "Chronomancer"
+    // Mirage
+}
+
+
+var professionImageDictionary = {
+
+    "Guardian" : "guard-big",
+    "Dragonhunter": "dh-big",
+    "Firebrand" : "firebrand-big",
+
+    "Warrior" : "war-big",
+    "Berserker" : "berserker-big",
+    "Spellbreaker" : "spellbreaker-big",
+
+    "Revenant" : "rev-big",
+    "Herald" : "herald-big",
+    "Renegade" : "renegade-big",
+
+    "Ranger" : "ranger-big",
+    "Druid" : "druid-big",
+    "Soulbeast" : "soulbeast-big",
+
+    "Engineer" : "engi-big",
+    "Scrapper" : "scrapper-big",
+    "Holosmith" : "holosmith-big",
+
+    "Thief" : "thief-big",
+    "Daredevil" : "dd-big",
+    "Deadeye" : "deadeye-big",
+
+    "Elementalist" : "ele-big",
+    "Tempest" : "tempest-big",
+    "Weaver" : "weaver-big",
+
+    "Mesmer" : "mes-big",
+    "Chronomancer" : "chrono-big",
+    "Mirage" : "mirage-big",
+
+    "Necromancer" : "necro-big",
+    "Reaper" : "reaper-big",
+    "Scourge" : "scourge-big"
+}
+
 var indexDictionary = {
-    
+
     "Guardian" : 0,
     "Warrior" : 1,
     "Revenant" : 2,
-    "Ranger" : 3, 
+    "Ranger" : 3,
     "Engineer" : 4,
-    "Thief" : 5, 
-    "Elementalist" : 6, 
+    "Thief" : 5,
+    "Elementalist" : 6,
     "Mesmer" : 7,
     "Necromancer" : 8,
-    
+
     "Asura" : 0,
     "Charr" : 1,
     "Human" : 2,
     "Norn" : 3,
-    "Sylvari" : 4
+    "Sylvari" : 4,
+
+    "Male" : 0,
+    "Female" : 1
 };

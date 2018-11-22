@@ -1,9 +1,9 @@
-/* 
+/*
 
 Created by Renske Spring 2017
 
-This script creates the various visualizations of the Guild Wars 2 API data. 
-    
+This script creates the various visualizations of the Guild Wars 2 API data.
+
     > General account info
     > Bar chart showing character agony resist
     > Overview of complete/incomplete fractal achievements
@@ -23,121 +23,241 @@ function showAccountInfo() {
     $('#chars').text(account.characterAmount + " characters");
     $('#accage').text(account.hoursPlayed + " hours played");
     $('#fraclevel').text("Fractal Level " + account.fractalLevel);
+
 }
 
-function showCurrencies(){
-   
+function showCurrencies() {
+
     $('#fractalrelics').text("Relics " + account.fractalRelics);
     $('#pristinerelics').text("Pristines " + account.fractalPristine);
 }
 
-/* Draws the bar chart that shows each character and their level of agony resist. The maximum 
-amount is infinite in theory but more than 150 makes no sense, so the max of the chart is set at 150. */
-function makeBarChart(data) {
+/* redraw when new data is present
+ every character iteration?
+ or maybe in batches  */
 
-    // Hide and show dom elements.
-    $('#barchartloading').hide();
-    $('#sunburstwait').show();
+// function updateBarChart() {
 
-    // Set the dimensions of the canvas.
-    var margin = {
-            top: 20,
-            right: 20,
-            bottom: 50,
-            left: 50
-        },
-        width = 800 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+//     // Check if there was already a barchart, if so then remove it.
+//     var svgChart = $("#barchartsvg");
+//     if (svgChart !== undefined)
+//         svgChart.remove();
 
-    // Set the domain and range.
-    var x = d3.scale.ordinal()
-		.rangeRoundBands([0, width], .05)
-		.domain(data.map(function(d) {
-			return d.characterName;
-		}));
-		
-    var y = d3.scale.linear()
-		.range([height, 0])
-		.domain([0, 150]);
+//     data = prepForBarsInefficient();
 
-    // Define the axes.
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
+//     // Hide and show dom elements.
+//     $('#barchartloading').hide();
+//     $('#sunburstwait').show();
 
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(15);
+//     // Set the dimensions of the canvas.
+//     var margin = {
+//             top: 20,
+//             right: 20,
+//             bottom: 50,
+//             left: 50
+//         },
+//         width = 800 - margin.left - margin.right,
+//         height = 400 - margin.top - margin.bottom;
 
-    // Add the SVG element.
-    var svg = d3.select("#barchartpart").append("svg")
-        .attr("id", "barchartsvg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+//     // Set the domain and range.
+//     var x = d3.scale.ordinal()
+// 		.rangeRoundBands([0, width], .05)
+// 		.domain(data.map(function(d) {
+// 			return d.characterName;
+// 		}));
 
-    // Add tooltip.
-    var tip = d3.tip()
-        .attr('class', 'd3-tip')
-        .offset([-2, 0])
-        .html(function(d) {
-            return "<span>" + d.agonyResist + "</span>";
-        });
-    svg.call(tip);
+//     var y = d3.scale.linear()
+// 		.range([height, 0])
+// 		.domain([0, 150]);
 
-    // Add the Y axis.
-    svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", -43)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .attr("fill", "#666666")
-        .text("total Agony Resistance");
+//     // Define the axes.
+//     var xAxis = d3.svg.axis()
+//         .scale(x)
+//         .orient("bottom")
 
-    // Add bar chart.
-    svg.selectAll("bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) {
-            return x(d.characterName);
-        })
-        .attr("width", x.rangeBand())
-        .attr("y", function(d) {
-            return y(d.agonyResist);
-        })
-        .attr("height", function(d) {
-            return height - y(d.agonyResist);
-        })
-        .style("fill", function(d) {
-            return colorDictionary[account.characterDictionary[d.characterName].profession];
-        })
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide)
-        .on("click", function(d) {
-            transformDataForSunburst(d.characterName);
-        });
+//     var yAxis = d3.svg.axis()
+//         .scale(y)
+//         .orient("left")
+//         .ticks(15);
 
-    // Add X axis, done after bar chart so text is over it instead of under it.
-    svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll("text")
-        .style("text-anchor", "start")
-        .attr("dx", "1em")
-        .attr("dy", "-.55em")
-        .attr("transform", "rotate(-90)")
-        .on("click", function(d) {
-            transformDataForSunburst(d);
-        });
-}
+//     // Add the SVG element.
+//     var svg = d3.select("#barchartpart").append("svg")
+//         .attr("id", "barchartsvg")
+//         .attr("width", width + margin.left + margin.right)
+//         .attr("height", height + margin.top + margin.bottom)
+//         .append("g")
+//         .attr("transform",
+//             "translate(" + margin.left + "," + margin.top + ")");
+
+//     // Add tooltip.
+//     var tip = d3.tip()
+//         .attr('class', 'd3-tip')
+//         .offset([-2, 0])
+//         .html(function(d) {
+//             return "<span>" + d.agonyResist + "</span>";
+//         });
+//     svg.call(tip);
+
+//     // Add the Y axis.
+//     svg.append("g")
+//         .attr("class", "y axis")
+//         .call(yAxis)
+//         .append("text")
+//         .attr("transform", "rotate(-90)")
+//         .attr("y", -43)
+//         .attr("dy", ".71em")
+//     //    .style("text-anchor", "end")
+//         .attr("fill", "#666666")
+//         .text("total Agony Resistance");
+
+//     // Add bar chart.
+//     svg.selectAll("bar")
+//         .data(data)
+//         .enter().append("rect")
+//         .attr("class", "bar")
+//         .attr("x", function(d) {
+//             return x(d.characterName);
+//         })
+//         .attr("width", x.rangeBand())
+//         .attr("y", function(d) {
+//             return y(d.agonyResist);
+//         })
+//         .attr("height", function(d) {
+//             return height - y(d.agonyResist);
+//         })
+//         .style("fill", function(d) {
+//             return colorDictionary[account.characterDictionary[d.characterName].profession];
+//         })
+//         .on('mouseover', tip.show)
+//         .on('mouseout', tip.hide)
+//         .on("click", function(d) {
+//             transformDataForSunburst(d.characterName);
+//         });
+
+//     // Add X axis, done after bar chart so text is over it instead of under it.
+//     svg.append("g")
+//         .attr("class", "x axis")
+//         .attr("transform", "translate(0," + height + ")")
+//         .call(xAxis)
+//         .selectAll("text")
+//         .style("text-anchor", "start")
+//         .attr("dx", "1em")
+//         .attr("dy", "-.55em")
+//         .attr("transform", "rotate(-90)")
+//         .on("click", function(d) {
+//             transformDataForSunburst(d);
+//         });
+// }
+
+
+
+// /* Draws the bar chart that shows each character and their level of agony resist. The maximum
+// amount is infinite in theory but more than 150 makes no sense, so the max of the chart is set at 150. */
+// function makeBarChart(data) {
+    
+//     // Hide and show dom elements.
+//     $('#barchartloading').hide();
+//     $('#sunburstwait').show();
+
+//     // Set the dimensions of the canvas.
+//     var margin = {
+//             top: 20,
+//             right: 20,
+//             bottom: 50,
+//             left: 50
+//         },
+//         width = 800 - margin.left - margin.right,
+//         height = 400 - margin.top - margin.bottom;
+
+//     // Set the domain and range.
+//     var x = d3.scale.ordinal()
+// 		.rangeRoundBands([0, width], .05)
+// 		.domain(data.map(function(d) {
+// 			return d.characterName;
+// 		}));
+
+//     var y = d3.scale.linear()
+// 		.range([height, 0])
+// 		.domain([0, 150]);
+
+//     // Define the axes.
+//     var xAxis = d3.svg.axis()
+//         .scale(x)
+//         .orient("bottom")
+
+//     var yAxis = d3.svg.axis()
+//         .scale(y)
+//         .orient("left")
+//         .ticks(15);
+
+//     // Add the SVG element.
+//     var svg = d3.select("#barchartpart").append("svg")
+//         .attr("id", "barchartsvg")
+//         .attr("width", width + margin.left + margin.right)
+//         .attr("height", height + margin.top + margin.bottom)
+//         .append("g")
+//         .attr("transform",
+//             "translate(" + margin.left + "," + margin.top + ")");
+
+//     // Add tooltip.
+//     var tip = d3.tip()
+//         .attr('class', 'd3-tip')
+//         .offset([-2, 0])
+//         .html(function(d) {
+//             return "<span>" + d.agonyResist + "</span>";
+//         });
+//     svg.call(tip);
+
+//     // Add the Y axis.
+//     svg.append("g")
+//         .attr("class", "y axis")
+//         .call(yAxis)
+//         .append("text")
+//         .attr("transform", "rotate(-90)")
+//         .attr("y", -43)
+//         .attr("dy", ".71em")
+//     //    .style("text-anchor", "end")
+//         .attr("fill", "#666666")
+//         .text("total Agony Resistance");
+
+//     // Add bar chart.
+//     svg.selectAll("bar")
+//         .data(data)
+//         .enter().append("rect")
+//         .attr("class", "bar")
+//         .attr("x", function(d) {
+//             return x(d.characterName);
+//         })
+//         .attr("width", x.rangeBand())
+//         .attr("y", function(d) {
+//             return y(d.agonyResist);
+//         })
+//         .attr("height", function(d) {
+//             return height - y(d.agonyResist);
+//         })
+//         .style("fill", function(d) {
+//             return colorDictionary[account.characterDictionary[d.characterName].profession];
+//         })
+//         .on('mouseover', tip.show)
+//         .on('mouseout', tip.hide)
+//         .on("click", function(d) {
+//             transformDataForSunburst(d.characterName);
+//         });
+
+//     // Add X axis, done after bar chart so text is over it instead of under it.
+//     svg.append("g")
+//         .attr("class", "x axis")
+//         .attr("transform", "translate(0," + height + ")")
+//         .call(xAxis)
+//         .selectAll("text")
+//         .style("text-anchor", "start")
+//         .attr("dx", "1em")
+//         .attr("dy", "-.55em")
+//         .attr("transform", "rotate(-90)")
+//         .on("click", function(d) {
+//             transformDataForSunburst(d);
+//         });
+// }
 
 /* Makes the indices of the fractal achievement that have been completed into an array of booleans so
 that both incomplete and complete achievements can be shown accurately. */
@@ -146,7 +266,7 @@ function prepareFractalAchievements(dataArray) {
     // Turn the array into a more useful/uniform data format.
     for (var i = 0; i < dataArray.length; i++) {
 
-        // Initialize an array full of true. 
+        // Initialize an array full of true.
         achievementBoolArray = new Array(25);
         for (var j = 0, l = achievementBoolArray.length; j < l; j++) {
             achievementBoolArray[j] = true;
@@ -225,7 +345,7 @@ function makeAchievementGraph(data) {
 
 /* Function that transforms the obtained data about agony resist and armor pieces and combines them into a
 structure that is suitable for a sunburst visualization. This needs to be done after since the item object itself and
-the agony resist are not retrieved at the same time, so making this can only occur after calculating AR is done. 
+the agony resist are not retrieved at the same time, so making this can only occur after calculating AR is done.
 Request is done on a per character basis because sunburst is only made once a specific bar is clicked. However,
 the result is stored  after creating it once so it does not need to be remade every time after.  */
 function transformDataForSunburst(character) {
@@ -233,7 +353,7 @@ function transformDataForSunburst(character) {
     // Set loading spinner.
     $('#sunburstloading').show();
     var sunburstObject = new SunburstBase();
-    
+
     // Check if the data has been cached to avoid recreating the object for nothing.
     if (account.characterDictionary[character].sunburstDataCache == undefined) {
 
@@ -242,8 +362,7 @@ function transformDataForSunburst(character) {
 
         // Loop over the equipment pieces and construct data accordingly.
         for (var piece in equipment) {
-            var currentPiece = equipment[piece];
-            console.log(currentPiece);
+            var currentPiece = equipment[piece]; // TODO but wtf why then
 
             // If it's an armor piece but not an underwater piece
             if (currentPiece.type == "Armor" && currentPiece.slot != "HelmAquatic") {
@@ -266,13 +385,11 @@ function transformDataForSunburst(character) {
         // Cache it so that it does not need to be remade if we reclick this character.
         account.characterDictionary[character].sunburstDataCache = sunburstObject;
 
-    } 
+    }
 	else {
         sunburstObject = account.characterDictionary[character].sunburstDataCache;
     }
 
-    console.log(sunburstObject);
-    
     // Create the sunburst visualization with this data.
     makeSunburst(sunburstObject);
     showCharacterData(character);
@@ -283,12 +400,11 @@ function transformDataForSunburst(character) {
 information about all the gear that a character has on them, and the rarity and name of these
 items. */
 function makeSunburst(data) {
-    
-    
 
     // Hide the information message.
     $('#sunburstwait').hide();
     $('#sunburstloading').hide();
+    $('#tooltipcontent').hide();
 
     // Check if there was already a sunburst, if so then remove it.
     var svgChart = $("#sunburstsvg");
@@ -314,7 +430,7 @@ function makeSunburst(data) {
         .attr("id", "sunburstsvg")
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
-		
+
 	// Tooltip.
 	var tooltip = d3.select("#piechartpart").append("div")
 	  .attr("class", "tooltip")
@@ -354,39 +470,39 @@ function makeSunburst(data) {
             }
             if (d.name == "Equipment") {
                 return "#DDDDDD";
-            } 
+            }
 			else {
                 return colorDictionary[d.rarity];
             }
         })
         .on("click", click)
-		.on("mouseover", function(d){ 
+		.on("mouseover", function(d){
 			tooltip
 				.text(d.name)
 				.style("opacity", 1)
 				.style("left", (d3.event.pageX) + 0 + "px")
 				.style("top", (d3.event.pageY) - 0 + "px");
-			
+
 		})
 		.on("mouseout", function(d) {
 			tooltip.style("opacity", 0);
 		});
 
-
-    // Append text to  each block of the sunburst. 
+    // Append text to  each block of the sunburst.
     var text = g.append("text")
         .attr("class", "sunbursttext")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
         .attr('text-anchor', function (d) { return computeTextRotation(d) > 180 ? "end" : "start"; })
         .attr('dx', function (d) { return computeTextRotation(d) > 180 ? "40" : "-40"; })
         .attr("dy", ".35em")
+        .on("click", click)
         .text(function(d) {
             if (d.name == "Equipment") {
                 return "";
             }
             else if (d.name.length > 13) {
                 return d.name.substring(0, 13) + "...";
-            } 
+            }
             else {
                 return d.name;
             }
@@ -394,6 +510,8 @@ function makeSunburst(data) {
 
     // Function that handles clicks on the sunburst so that it can zoom.
     function click(d) {
+
+        showItemTooltip(d);
 
         // Fade out text elements.
         text.transition()
@@ -404,8 +522,8 @@ function makeSunburst(data) {
             .duration(750)
             .attrTween("d", arcTween(d))
             .each("end", function(e, i) {
-				
-                // Check if it lies within the angle span.	
+
+                // Check if it lies within the angle span.
                 if (e.x >= d.x && e.x < (d.x + d.dx)) {
 
                     // Get a selection of the associated text element.
@@ -421,7 +539,7 @@ function makeSunburst(data) {
             });
     }
 
-    // Interpolate the scales. 
+    // Interpolate the scales.
     function arcTween(d) {
         var xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx]),
             yd = d3.interpolate(y.domain(), [d.y, 1]),
@@ -442,21 +560,51 @@ function makeSunburst(data) {
     function computeTextRotation(d) {
         var ang = (x(d.x + d.dx / 2) - Math.PI / 2) / Math.PI * 180;
         return (ang > 90) ? 180 + ang : ang;
-    } 
+    }
+}
+
+/* Shows details about the item currently selected in the sunburst. */
+function showItemTooltip(item) {
+
+    $('#tooltipcontent').hide();
+
+    // If it's an actual item proceed to show tooltip
+    if (item.slot != undefined) {
+
+        $('#tooltipcontent').html(
+            '<p class=\"itemname\">' + item.name + '</p>' +
+            '<p class=\"itemrarity\" style=\"color:' + colorDictionary[item.rarity] + ' \">' + item.rarity + '</p>' +
+            '<p class=\"itemtype\">' + item.slot + '</p>'
+        );
+        $('#tooltipcontent').show();
+
+    }
+
 }
 
 /* Show data about the character to accompany the sunburst. */
-function showCharacterData(character) {
+function showCharacterData(characterName) {
+
+    // Determine whether to display vanilla class or elitespec
+    var character = account.characterDictionary[characterName];
+    var profession = character.profession;
+
+    if(character.eliteSpec != "" && character.eliteSpec != undefined) {
+        profession = character.eliteSpec;
+    }
 
     // Select the div and append html.
     $('#sunburstextra').html(
-        '<p class=\"charname\">' + character + '</p>' +
-        '<p class=\"charage"> Level ' + account.characterDictionary[character].level + '</p>' +
-        '<p class =\"charprofession\" style=\"color:' + colorDictionary[account.characterDictionary[character].profession] + ' \">' + account.characterDictionary[character].profession + '</p>' +
-        '<p class =\"charage\"> Played for ' + account.characterDictionary[character].hoursPlayed + ' hours </p>'
+        '<p class=\"charname\">' + characterName + '</p>' +
+        '<p class=\"charage"> Level ' + character.level + '</p>' +
+        '<p class =\"charprofession\" style=\"color:' + colorDictionary[character.profession] + ' \">' +
+        '<img class="profimg" src="Static/Professions/' + professionImageDictionary[profession] + '.png" alt="Achievements">' + profession + '</p>' +
+        '<p class =\"charage\"> Played for ' + character.hoursPlayed + ' hours </p>' +
+        '<p class =\"charage\">' + character.deaths + ' deaths </p>'
     );
     $('#sunburstextra').show();
 }
+
 
 /* EEN HELE MOOIE FUNCTIE */
 function makePieChart(){
@@ -470,10 +618,11 @@ function makePieChart(){
         'rgb(230, 125, 126)',
         'rgb(239, 183, 182)'
     ]
-    
-    // 
 
-    var data = account.professionDictionary;
+    var data = account.professionDictionary,
+        data2 = account.raceDictionary,
+        data3 = account.genderDictionary;
+
 
     var vis = d3.select('#actualpiechartpart')
         .append("svg:svg")
@@ -483,24 +632,27 @@ function makePieChart(){
         .append("svg:g")
         .attr("transform", "translate(" + r + "," + r + ")");
 
-    var pie = d3.layout.pie().value(function(d) { return d.value; });
+    var pie = d3.layout.pie().value(function(d){ return d.value; });
 
     // Declare an arc generator function
     var arc = d3.svg.arc().outerRadius(r);
 
     // Select paths, use arc generator to draw
-    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+    var arcs = vis.selectAll("g.slice")
+        .data(pie).enter()
+        .append("svg:g")
+        .attr("class", "slice");
     arcs.append("svg:path")
-        .attr("fill", function(d, i) { return colorDictionary[data[i].label]; })
+        .attr("fill", function(d, i){ return colorDictionary[data[i].label]; })
         .attr("d", function (d) { return arc(d); });
 
-// Add the text
-arcs.append("svg:text")
-    .attr("transform", function(d){
-        d.innerRadius = 100; /* Distance of label to the center*/
-        d.outerRadius = r;
-        return "translate(" + arc.centroid(d) + ")";}
-    )
-    .attr("text-anchor", "middle")
-    .text( function(d, i) {return data[i].value + '%';});
+    // Add the text
+    arcs.append("svg:text")
+        .attr("transform", function(d){
+            d.innerRadius = 100;
+            d.outerRadius = r;
+            return "translate(" + arc.centroid(d) + ")";}
+        )
+        .attr("text-anchor", "middle")
+        .text( function(d, i) { return data[i].value; });
 }
