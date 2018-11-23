@@ -104,44 +104,26 @@ h2{
 }
 #legendpart{
 	width: 30%;
-
-height: 775px;
-
-  margin: 10px;
-
-margin-left: 0 auto;
-
-display: inline-block;
-
-padding: 10px;
-
-float: top;
-
-background-color: #DDDDDD;
-
-box-shadow: 2px 2px 3px #EFEFEF;
+	height: 775px;
+	margin: 10px;
+	margin-left: 0 auto;
+	display: inline-block;
+	padding: 10px;
+	float: top;
+	background-color: #DDDDDD;
+	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #piechartpart{
 	float: top;
-
 	float: left;
-	
 	width: 65%;
-	
 	height: 775px;
-	
 	margin: 10px;
-	
-		margin-left: 10px;
-	
+	margin-left: 10px;
 	margin-left: 0;
-	
 	display: inline-block;
-	
 	padding: 10px;
-	
 	background-color: #DDDDDD;
-	
 	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #actualpiechartpart{
