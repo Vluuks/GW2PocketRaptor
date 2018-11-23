@@ -5,6 +5,13 @@ Created by Renske Spring 2017
 This file retrieves all the necessary data from the Guild Wars 2 API. This data is used
 to create various data visualizations.
 
+
+TODOS
+- add more details to the tooltip
+- fix duplicate trinkets not showing up
+- make barchart for ascended % ?
+- show rune also if possible
+
 */
 
 

@@ -202,16 +202,19 @@ h2{
 .accinfo{
     margin: 0;
 }
-.charname{
+.charname {
+	font-weight: bold;
     font-size: 25px;
-    margin: 0;
+	margin: 0;
+	padding-left: 50px;
 }
 .charprofession{
     font-size: 25px;
     margin: 0;
-	  margin-top: 5px;
+	margin-top: 5px;
 }
 .charage{
+	padding-left: 50px;
     margin: 0;
 }
 .accinfo{
@@ -233,6 +236,23 @@ h2{
     border-radius: 0px;
     pointer-events: none;
     color: white;
+}
+.itemname {
+	font-size: 25px;
+	margin: 0;
+	font-weight: bold;
+}
+.itemrarity {
+	font-size: 25px;
+    margin: 0;
+}
+.itemtype {
+	font-size: 25px;
+    margin: 0;
+}
+.itemagonyresist {
+	font-size: 25px;
+    margin: 0;
 }
 .menulist{
 	list-style-type: none;

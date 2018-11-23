@@ -476,15 +476,19 @@ function makeSunburst(data) {
             }
         })
         .on("click", click)
-		.on("mouseover", function(d){
+		.on("mouseover", function(d) {
+
+            showItemTooltip(d);
+
 			tooltip
 				.text(d.name)
 				.style("opacity", 1)
 				.style("left", (d3.event.pageX) + 0 + "px")
-				.style("top", (d3.event.pageY) - 0 + "px");
+                .style("top", (d3.event.pageY) - 0 + "px");
 
 		})
 		.on("mouseout", function(d) {
+            // hideItemTooltip();
 			tooltip.style("opacity", 0);
 		});
 
@@ -495,7 +499,6 @@ function makeSunburst(data) {
         .attr('text-anchor', function (d) { return computeTextRotation(d) > 180 ? "end" : "start"; })
         .attr('dx', function (d) { return computeTextRotation(d) > 180 ? "40" : "-40"; })
         .attr("dy", ".35em")
-        .on("click", click)
         .text(function(d) {
             if (d.name == "Equipment") {
                 return "";
@@ -506,10 +509,26 @@ function makeSunburst(data) {
             else {
                 return d.name;
             }
-        });
+        })
+        .on("click", click)
+		.on("mouseover", function(d) {
+            showItemTooltip(d);
+			tooltip
+				.text(d.name)
+				.style("opacity", 1)
+				.style("left", (d3.event.pageX) + 0 + "px")
+                .style("top", (d3.event.pageY) - 0 + "px");
+
+		})
+		.on("mouseout", function(d) {
+            hideItemTooltip();
+			tooltip.style("opacity", 0);
+		});
 
     // Function that handles clicks on the sunburst so that it can zoom.
     function click(d) {
+
+        // console.log(d);
 
         showItemTooltip(d);
 
@@ -566,20 +585,31 @@ function makeSunburst(data) {
 /* Shows details about the item currently selected in the sunburst. */
 function showItemTooltip(item) {
 
+    console.log(item);
+
     $('#tooltipcontent').hide();
 
     // If it's an actual item proceed to show tooltip
     if (item.slot != undefined) {
 
+        // Only show AR for items where it is not NaN
+        // TODO add check for whether item has slots at all
+        let agonyPart = isNaN(item.agonyResist) ? "" : '<p clas=\"itemagonyresist\">' + item.agonyResist + ' Agony Resist</p>';
+
         $('#tooltipcontent').html(
             '<p class=\"itemname\">' + item.name + '</p>' +
             '<p class=\"itemrarity\" style=\"color:' + colorDictionary[item.rarity] + ' \">' + item.rarity + '</p>' +
-            '<p class=\"itemtype\">' + item.slot + '</p>'
+            '<p class=\"itemtype\">' + item.slot + '</p>' +
+            agonyPart
         );
         $('#tooltipcontent').show();
 
     }
 
+}
+
+function hideItemTooltip() {
+    $('#tooltipcontent').hide();
 }
 
 /* Show data about the character to accompany the sunburst. */
@@ -622,7 +652,6 @@ function makePieChart(){
     var data = account.professionDictionary,
         data2 = account.raceDictionary,
         data3 = account.genderDictionary;
-
 
     var vis = d3.select('#actualpiechartpart')
         .append("svg:svg")
