@@ -27,6 +27,9 @@ h2{
 	color: #000000;
 
 }
+.bartooltip {
+	font-size: 12px;
+}
 
 #apiKey{
 	width: 80% !important;

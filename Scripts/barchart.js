@@ -64,7 +64,7 @@ window.onload = function(){
     
         // Add tooltip.
         config.tip = d3.tip()
-        .attr('class', 'd3-tip')
+        .attr('class', 'bartooltip')
         .offset([-2, 0])
         .html(function(d) {
             return "<span>" + d.agonyResist + "</span>";
@@ -143,9 +143,10 @@ window.onload = function(){
         .attr("transform", "translate(0," + config.height + ")")
         .call(config.xAxis)
         .selectAll("text")
+        .style("font-size", "10px")
         .style("text-anchor", "start")
         .attr("dx", "1em")
-        .attr("dy", "-.55em")
+        .attr("dy", "-.56em")
         .attr("transform", "rotate(-90)")
         .on("click", function(d) {
             transformDataForSunburst(d);
