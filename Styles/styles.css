@@ -91,7 +91,7 @@ h2{
 }
 #barchartpart{
 	width: 98%;
-	height: 450px;
+	height: 425px;
 	display: inline-block;
 	float: left;
 	padding: 10px;
@@ -105,9 +105,9 @@ h2{
 #legendpart{
 	width: 30%;
 
-height: 800px;
+height: 775px;
 
-margin: 10px;
+  margin: 10px;
 
 margin-left: 0 auto;
 
@@ -128,7 +128,7 @@ box-shadow: 2px 2px 3px #EFEFEF;
 	
 	width: 65%;
 	
-	height: 800px;
+	height: 775px;
 	
 	margin: 10px;
 	
