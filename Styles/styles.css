@@ -29,7 +29,7 @@ h2{
 }
 
 #apiKey{
-	width: 130px !important;
+	width: 80% !important;
 	margin-left: 5px;
 }
 #wrapperdiv{
@@ -148,7 +148,6 @@ box-shadow: 2px 2px 3px #EFEFEF;
 	float: left;
     margin-right: 0 auto;
 	box-shadow: 2px 2px 3px #EFEFEF;
-
 }
 #tooltippart{
 	width: 405px;
@@ -157,6 +156,19 @@ box-shadow: 2px 2px 3px #EFEFEF;
 	padding: 10px;
 	background-color: #DDDDDD;
 	margin: 10px;
+	float: left;
+    margin-right: 0 auto;
+	box-shadow: 2px 2px 3px #EFEFEF;
+
+}
+#intropart{
+	width: 40%;
+	height: 330px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	margin-left: 0px;
 	float: left;
     margin-right: 0 auto;
 	box-shadow: 2px 2px 3px #EFEFEF;
@@ -245,7 +257,7 @@ box-shadow: 2px 2px 3px #EFEFEF;
     width: auto;
     height: auto;
     padding: 8px;
-    font: 12px Arial;
+    font: 10px Arial;
     background: #555555;
     border: #777777 1px solid;
     border-radius: 0px;
@@ -304,4 +316,7 @@ path{
 }
 .profimg{
     vertical-align: middle;
+}
+.extratext {
+	font-size: 13px;
 }
