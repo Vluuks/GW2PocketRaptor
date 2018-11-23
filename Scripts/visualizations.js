@@ -412,8 +412,8 @@ function makeSunburst(data) {
         svgChart.remove();
 
     // Set dimensions of the visualization.
-    var width = 600,
-        height = 600,
+    var width = 460,
+        height = 460,
         radius = Math.min(width, height) / 2;
 
     // Make x and y scales.
@@ -503,8 +503,8 @@ function makeSunburst(data) {
             if (d.name == "Equipment") {
                 return "";
             }
-            else if (d.name.length > 13) {
-                return d.name.substring(0, 13) + "...";
+            else if (d.name.length > 12) {
+                return d.name.substring(0, 12) + "...";
             }
             else {
                 return d.name;

@@ -12,7 +12,7 @@ window.onload = function(){
         bottom: 50,
         left: 50
     },
-    config.width = 800 - config.margin.left - config.margin.right,
+    config.width = 700 - config.margin.left - config.margin.right,
     config.height = 400 - config.margin.top - config.margin.bottom;
 
     // Add the SVG element.

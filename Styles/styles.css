@@ -4,13 +4,12 @@ body{
 	font-family: "Arial";
 }
 h2{
-
 	float: top;
 	float: left;
 	font-family: "Arial";
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 	margin-top: 4px;
-	font-size: 16px;
+	font-size: 13px;
 	text-transform: uppercase;
 	color: #000000;
 	letter-spacing: 2px;
@@ -21,6 +20,8 @@ h2{
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: #555555;
+	font-size: 13px;
+	
 }
 .nav-pills > li > a:hover{
 	color: #000000;
@@ -32,60 +33,87 @@ h2{
 	margin-left: 5px;
 }
 #wrapperdiv{
-	width: 1730px;
+	width: 100%;
 	margin-top: 20px;
 	background-color: #EEEEEE;
-    margin-bottom: 20px
+  margin-bottom: 20px
 }
-#sidebar{
-	width: 200px;
-	height: 800px;
+#leftwrapper {
+	padding: 0 auto;
 	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	font-size: 12px;
-	margin: 10px;
-	margin-left: 20px;
-	margin-bottom: 10px;
-	float: left;
+	height: 820px;
+	width: 50%;
+	overflow: hidden;
+	margin-right: 0 auto;
+	padding: 0 auto;
 }
+#rightwrapper {
+	display: inline-block;
+	width: 49%;
+	float: top;
+	height: 820px;
+	overflow: hidden;
+	margin-left: 0 auto;
+	padding: 0 auto;
+}
+
 #account{
 	padding: 10px;
 	margin: 0px;
-
 }
 #barchartpart{
-	width: 830px;
+	width: 98%;
 	height: 450px;
 	display: inline-block;
 	float: left;
 	padding: 10px;
 	background-color: #DDDDDD;
 	margin: 10px;
+	margin-left: 10px;
+	margin-left: 10px;
 	margin-left: 0px;
 	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #legendpart{
-	width: 300px;
-	height: 800px;
-	margin: 10px;
-    margin-left: 0 auto;
-	display: inline-block;
-	padding: 10px;
-    float: top;
-	background-color: #DDDDDD;
-	box-shadow: 2px 2px 3px #EFEFEF;
+	width: 30%;
+
+height: 800px;
+
+margin: 10px;
+
+margin-left: 0 auto;
+
+display: inline-block;
+
+padding: 10px;
+
+float: top;
+
+background-color: #DDDDDD;
+
+box-shadow: 2px 2px 3px #EFEFEF;
 }
 #piechartpart{
-    float: top;
-    float: left;
-	width: 620px;
+	float: top;
+
+	float: left;
+	
+	width: 65%;
+	
 	height: 800px;
+	
 	margin: 10px;
-    margin-left: 0;
+	
+		margin-left: 10px;
+	
+	margin-left: 0;
+	
 	display: inline-block;
+	
 	padding: 10px;
+	
 	background-color: #DDDDDD;
+	
 	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #actualpiechartpart{
@@ -135,27 +163,13 @@ h2{
 
 }
 #sunburstinnerwrapper{
-    width: 600px;
+    width: 65%;
     height: 120px;
 }
-#leftwrapper {
-    padding: 0 auto;
-    display: inline-block;
-    height: 820px;
-    width: 850px;
-    overflow: hidden;
-    margin-right: 0 auto;
-    padding: 0 auto;
+#barchartsvg {
+	width: 100%;
 }
-#rightwrapper {
-    display: inline-block;
-    width: 980px;
-    float: top;
-    height: 820px;
-    overflow: hidden;
-    margin-left: 0 auto;
-    padding: 0 auto;
-}
+
 #error{
 	margin-bottom: 20px;
 	padding: 10px;
@@ -167,10 +181,11 @@ h2{
 	height: 510px;
 }
 #legend{
-    display: inline-block;
-    float: top !important;
+  display: inline-block;
+	float: top !important;
+	width: 100%;
 	padding-left: 0px;
-    margin: 0 auto;
+  margin: 0 auto;
 }
 .divtitle{
 	background-color: 000000;
@@ -206,7 +221,7 @@ h2{
 	font-weight: bold;
     font-size: 25px;
 	margin: 0;
-	padding-left: 50px;
+	padding-left: 5px;
 }
 .charprofession{
     font-size: 25px;
@@ -214,15 +229,15 @@ h2{
 	margin-top: 5px;
 }
 .charage{
-	padding-left: 50px;
+	padding-left: 5px;
     margin: 0;
 }
 .accinfo{
     font-size: 14px;
 }
 .sunbursttext{
-    margin: 0 auto;
-	font-size: 12px;
+  margin: 0 auto;
+	font-size: 10px;
 }
 .tooltip{
     position: absolute;
