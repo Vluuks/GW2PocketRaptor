@@ -18,7 +18,6 @@ function showAccountInfo() {
     $('#accountloading').hide();
 
     // Select account data paragraph and set the text.
-    $('#accountdiv').show();
     $('#accname').text(account.name);
     $('#chars').text(account.characterAmount + " characters");
     $('#accage').text(account.hoursPlayed + " hours played");

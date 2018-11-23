@@ -47,6 +47,12 @@ h2{
 	background-color: #EEEEEE;
 	margin-bottom: 20px
 }
+#wrapperdivaccount{
+	width: 100%;
+	margin-top: 20px;
+	background-color: #EEEEEE;
+	margin-bottom: 20px
+}
 #leftwrapper {
 	padding: 0 auto;
 	display: inline-block;
@@ -69,6 +75,19 @@ h2{
 #account{
 	padding: 10px;
 	margin: 0px;
+}
+#accountpart{
+	width: 30%;
+	height: 250px;
+	display: inline-block;
+	float: left;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	margin-left: 10px;
+	margin-left: 10px;
+	margin-left: 0px;
+	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #barchartpart{
 	width: 98%;
@@ -126,7 +145,7 @@ box-shadow: 2px 2px 3px #EFEFEF;
 	box-shadow: 2px 2px 3px #EFEFEF;
 }
 #actualpiechartpart{
-	width: 1050px;
+	width: 67%;
 	height: 600px;
 	margin: 10px;
     margin-left: 20px;
@@ -243,10 +262,6 @@ box-shadow: 2px 2px 3px #EFEFEF;
 }
 .bar:hover{
     fill: "steelblue";
-}
-.accountdiv{
-    padding: 0;
-    margin: 0;
 }
 .accinfo{
     margin: 0;

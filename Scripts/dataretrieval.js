@@ -20,7 +20,6 @@ $('document').ready(function() {
 
     // Manage DOM element visibilities.
     $('#error').hide();
-    $('#accountdiv').hide();
     $('#accountloading').hide();
     $('#sunburstextra').hide();
     $('#sunburstwait').hide();
@@ -53,7 +52,6 @@ function getUserApi() {
 
     // Hide and show corresponding DOM elements.
     $('#error').hide();
-    $('#accountdiv').hide();
     $('#sunburstextra').hide();
     $('#accountloading').show();
     $('#barchartloading').show();
