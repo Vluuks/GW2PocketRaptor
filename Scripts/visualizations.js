@@ -593,8 +593,8 @@ function showItemTooltip(item) {
     if (item.slot != undefined) {
 
         // Only show AR for items where it is not NaN
-        // TODO add check for whether item has slots at all
-        let agonyPart = isNaN(item.agonyResist) ? "" : '<p class=\"itemagonyresist\">' + item.agonyResist + ' Agony Resist</p>';
+        // TODO add check for whether item has slots at all?
+        let agonyPart = isNaN(item.agonyResist) ? "0 Agony Resist" : '<p class=\"itemagonyresist\">' + item.agonyResist + ' Agony Resist</p>';
 
         $('#tooltipcontent').html(
             '<p class=\"itemname\">' + item.name + '</p>' +
@@ -634,7 +634,6 @@ function showCharacterData(characterName) {
     );
     $('#sunburstextra').show();
 }
-
 
 /* EEN HELE MOOIE FUNCTIE */
 function makePieChart(){
@@ -677,7 +676,7 @@ function makePieChart(){
 
     // Add the text
     arcs.append("svg:text")
-        .attr("transform", function(d){
+        .attr("transform", function(d) {
             d.innerRadius = 100;
             d.outerRadius = r;
             return "translate(" + arc.centroid(d) + ")";}

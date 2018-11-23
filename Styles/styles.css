@@ -39,7 +39,13 @@ h2{
 	width: 100%;
 	margin-top: 20px;
 	background-color: #EEEEEE;
-  margin-bottom: 20px
+	margin-bottom: 20px
+}
+#wrapperdivfront{
+	width: 100%;
+	margin-top: 20px;
+	background-color: #EEEEEE;
+	margin-bottom: 20px
 }
 #leftwrapper {
 	padding: 0 auto;
@@ -177,8 +183,21 @@ box-shadow: 2px 2px 3px #EFEFEF;
 	box-shadow: 2px 2px 3px #EFEFEF;
 
 }
+#intropartright{
+	width: 58%;
+	height: 330px;
+	display: inline-block;
+	padding: 10px;
+	background-color: #DDDDDD;
+	margin: 10px;
+	margin-left: 0px;
+	float: left;
+    margin-right: 0 auto;
+	box-shadow: 2px 2px 3px #EFEFEF;
+
+}
 #sunburstinnerwrapper{
-    width: 65%;
+    width: 90%;
     height: 120px;
 }
 #barchartsvg {

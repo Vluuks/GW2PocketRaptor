@@ -40,29 +40,35 @@
             <div id="home" class="tab-pane fade in active">
 
               <!--- API KEY RETRIEVAL AND INFORMATION ---->
-              <div id="intropart">
-                <h2 class="divtitle"><img class="listimg" src="Static/accountname.png" alt="Achievements"> How does it work?</h2>
-                <br>
-                <br>
-                <p class="extratext">
-                    Please insert your Guild Wars 2 API key to continue. Use the tabs at the top to explore different statistics.
-                    Your key will need the following permissions to function: characters, wallet, account, builds and progression.
+              <div id="wrapperdivfront">
+                <div id="intropart">
+                    <h2 class="divtitle"><img class="listimg" src="Static/accountname.png" alt="Achievements"> How does it work?</h2>
                     <br>
-                    <div>
-                        <input type="text" id="apiKey" value="">
-                        <button onclick="getUserApi()">Go!</button>
-                    </div>
                     <br>
                     <p class="extratext">
-                    Made using the official GW2 API. 
-                    <br>
-                    If you do not have an API key and just want to see how it looks, click OK without inserting anything, it will use mine.
-                    <br>
-                    <br>
-                    Keep in mind that many consecutive submissions will cause it to throttle your requests: data might be incomplete. With normal usage, this should not be an issue.
-                    Have fun! ♥
+                        Please insert your Guild Wars 2 API key to continue. Use the tabs at the top to explore different statistics.
+                        Your key will need the following permissions to function: characters, wallet, account, builds and progression.
+                        <br>
+                        <div>
+                            <input type="text" id="apiKey" value="">
+                            <button onclick="getUserApi()">Go!</button>
+                        </div>
+                        <br>
+                        <p class="extratext">
+                        Made using the official GW2 API. 
+                        <br>
+                        If you do not have an API key and just want to see how it looks, click OK without inserting anything, it will use mine.
+                        <br>
+                        <br>
+                        Keep in mind that many consecutive submissions will cause it to throttle your requests: data might be incomplete. With normal usage, this should not be an issue.
+                        Have fun! ♥
+                        </p>
                     </p>
-                </p>
+                </div>
+              </div>
+
+              <div id="intropartright">
+                  <p class="extratext">test</p>
               </div>
 
 

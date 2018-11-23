@@ -553,6 +553,8 @@ function makeBarChartData(){
 
         dataArray.push(dataObject);
     }
+
+    makePieChart();
 }
 
 /* Get the array of fractal achievements from the API. */
