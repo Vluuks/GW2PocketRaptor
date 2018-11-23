@@ -594,7 +594,7 @@ function showItemTooltip(item) {
 
         // Only show AR for items where it is not NaN
         // TODO add check for whether item has slots at all
-        let agonyPart = isNaN(item.agonyResist) ? "" : '<p clas=\"itemagonyresist\">' + item.agonyResist + ' Agony Resist</p>';
+        let agonyPart = isNaN(item.agonyResist) ? "" : '<p class=\"itemagonyresist\">' + item.agonyResist + ' Agony Resist</p>';
 
         $('#tooltipcontent').html(
             '<p class=\"itemname\">' + item.name + '</p>' +

@@ -414,6 +414,9 @@ function fetchEquipment() {
                             }
                         }
 
+                        console.log("AR for character " + character)
+                        console.log(account.characterDictionary[character].equipmentRarity);
+
                         // Equipment data is ready, so we can calculate and store AR.
                         agonyResist = calculateAgonyResist(account.characterDictionary[character].equipmentRarity, character);
                         account.characterDictionary[character].agonyResist = agonyResist;
