@@ -273,12 +273,25 @@ function prepareFractalAchievements(dataArray) {
             achievementBoolArray[j] = true;
         }
 
-        // Set incomplete achievements to false for indices in subarrays.
-        for (var k = 0; k < dataArray[i].length; k++) {
-            achievementBoolArray[dataArray[i][k]] = false;
-        }
+        // If achievement tier exists
+        if(dataArray[i]) {
 
-        dataArray[i] = achievementBoolArray;
+            // Set incomplete achievements to false for indices in subarrays.
+            for (var j = 0; j < dataArray[i].length; j++) {
+                achievementBoolArray[dataArray[i][j]] = false;
+            }
+
+            dataArray[i] = achievementBoolArray;
+        }
+        else {
+
+            // Set all to false since we have not even accessed this tier
+            achievementBoolArray = new Array(25);
+            for (var j = 0, l = achievementBoolArray.length; j < l; j++) {
+                achievementBoolArray[j] = false;
+            }
+            dataArray[i] = achievementBoolArray;
+        }
     }
 
     // Now we can display the data.
