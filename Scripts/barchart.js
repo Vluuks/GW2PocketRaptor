@@ -16,14 +16,14 @@ window.onload = function(){
     config.height = 400 - config.margin.top - config.margin.bottom;
 
     // Add the SVG element.
-    d3.select("#barchartpart").append("svg")
-        .attr("id", "barchartsvg")
-        .attr("width", config.width + config.margin.left + config.margin.right)
-        .attr("height", config.height + config.margin.top + config.margin.bottom)
-        .append("g")
-        .attr("id", "bar-svg-g")
-        .attr("transform",
-            "translate(" + config.margin.left + "," + config.margin.top + ")");
+    // d3.select("#barchartpart").append("svg")
+    //     .attr("id", "barchartsvg")
+    //     .attr("width", config.width + config.margin.left + config.margin.right)
+    //     .attr("height", config.height + config.margin.top + config.margin.bottom)
+    //     .append("g")
+    //     .attr("id", "bar-svg-g")
+    //     .attr("transform",
+    //         "translate(" + config.margin.left + "," + config.margin.top + ")");
 
 }
 
@@ -35,6 +35,15 @@ window.onload = function(){
 
     // If it's the first time, initialize. 
     if(firstTime) {
+
+        d3.select("#barchartpart").append("svg")
+        .attr("id", "barchartsvg")
+        .attr("width", config.width + config.margin.left + config.margin.right)
+        .attr("height", config.height + config.margin.top + config.margin.bottom)
+        .append("g")
+        .attr("id", "bar-svg-g")
+        .attr("transform",
+            "translate(" + config.margin.left + "," + config.margin.top + ")");
         
         firstTime = false;
         // Hide and show dom elements.
@@ -130,6 +139,7 @@ window.onload = function(){
         .on('mouseout', config.tip.hide)
         .on("click", function(d) {
             transformDataForSunburst(d.characterName);
+            console.log(d);
         });
 
     // Add X axis, done after bar chart so text is over it instead of under it.

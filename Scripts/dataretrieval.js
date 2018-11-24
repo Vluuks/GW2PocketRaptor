@@ -49,6 +49,10 @@ function getUserApi() {
     if ($(".achievementsvg")) {
         $(".achievementsvg").remove();
     }
+    if($("#barchartsvg")) {
+        $("#barchartsvg").remove();
+        firstTime = true;
+    }
 
     // Hide and show corresponding DOM elements.
     $('#error').hide();
@@ -60,6 +64,8 @@ function getUserApi() {
     // Grab api key from field and check.
     var apiKey = $("#apiKey").val().trim();
 
+    // Reset account variable
+    resetAccount();
 
     //apiKey = ""
     // apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";

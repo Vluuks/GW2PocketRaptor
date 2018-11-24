@@ -141,3 +141,87 @@ var account = {
         }
     ]
 }
+
+function resetAccount() {
+    account = { 
+        name: "",
+        apiKey: "",
+        hoursPlayed: -1,
+        characters: [],
+        characterAmount: -1,
+        fractalLevel: -1,
+        fractalRelics: -1,
+        fractalPristine: -1,
+        characterDictionary: {},
+        professionDictionary: [
+            {
+                "label" : "Guardian",
+                "value" : 0,
+            },
+            {
+                "label" : "Warrior",
+                "value" : 0,
+            },
+            {
+                "label" : "Revenant",
+                "value" : 0,
+            },
+            {
+                "label" : "Ranger",
+                "value" : 0,
+            },
+            {
+                "label" : "Engineer",
+                "value" : 0,
+            },
+            {
+                "label" : "Thief",
+                "value" : 0,
+            },
+            {
+                "label" : "Elementalist",
+                "value" : 0,
+            },
+            {
+                "label" : "Mesmer",
+                "value" : 0,
+            },
+            {
+                "label" : "Necromancer",
+                "value" : 0,
+            }
+        ],
+        raceDictionary: [
+            {
+                "label" : "Asura",
+                "value" : 0,
+            },
+            {
+                "label" : "Charr",
+                "value" : 0,
+            },
+            {
+                "label" : "Human",
+                "value" : 0,
+            },
+            {
+                "label" : "Norn",
+                "value" : 0,
+            },
+            {
+                "label" : "Sylvari",
+                "value" : 0,
+            }
+        ],
+        genderDictionary: [
+            {
+                "label" : "Male",
+                "value" : 0,
+            },
+            {
+                "label" : "Female",
+                "value" : 0,
+            }
+        ]
+    }
+}
