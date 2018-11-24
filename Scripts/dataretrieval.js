@@ -62,79 +62,78 @@ function getUserApi() {
 
 
     //apiKey = ""
-    apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
+    // apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
     // apiKey = "A2D523A7-B023-554F-898C-A7D631E287B40F27ED03-D8EA-4304-B0B6-E839DA12F709";
     //apiKey =  "A1E2840E-BF5E-8747-9D5D-BAA2140590B2356E83AA-68BE-4391-9083-F0DCC3DA3950";
 
     if (apiKey == "" || apiKey == undefined) {
-        showError("Please do not omit the field");
+        apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
+        showError("Using standard key");
     }
-	else {
+    // Check if API is valid using regex.
+    else if (!(/^[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{20}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$/.test(apiKey))) {
+        showError("Your API key is not valid");
+        return;
+    }
 
-		// Check if API is valid using regex.
-        if (/^[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{20}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$/.test(apiKey)) {
+    // IF all is well
+    $.ajax({
+        type: "GET",
+        async: true,
+        url: "https://api.guildwars2.com/v2/tokeninfo?access_token=" + apiKey,
+        cache: false,
+        dataType: 'text',
 
-            $.ajax({
-                type: "GET",
-                async: true,
-                url: "https://api.guildwars2.com/v2/tokeninfo?access_token=" + apiKey,
-                cache: false,
-                dataType: 'text',
+        success: function() {},
+        error: function() {
+            showError("The GW2 API seems to be down, please come back at a later time.");
+        },
+        // Further check if it's a valid key even if it passed regex.
+        complete: function(data) {
 
-                success: function() {},
-                error: function() {
-                    showError("The GW2 API seems to be down, please come back at a later time.");
-                },
-                // Further check if it's a valid key even if it passed regex.
-                complete: function(data) {
+            var apiResult = JSON.parse(data.responseText);
 
-                    var apiResult = JSON.parse(data.responseText);
+            // If the key matches the expected format but is still invalid.
+            if (apiResult.text && (apiResult.text.equals("endpoint requires authentication") || apiResult.text.equals("invalid key"))) {
+                showError("Your API key is not valid or is missing permissions.");
+                return;
+            }
+            // If the permissions array exists in JSON.
+            if (apiResult.permissions) {
 
-                    // If the key matches the expected format but is still invalid.
-                    if (apiResult.text && (apiResult.text.equals("endpoint requires authentication") || apiResult.text.equals("invalid key")))
-                        showError("Your API key is not valid or is missing permissions.");
+                // Check for the necessary permissions.
+                var permissionCount = 0;
+                for (var i = 0; i < apiResult.permissions.length; i++) {
 
-                    // If the permissions array exists in JSON.
-                    if (apiResult.permissions) {
-
-                        // Check for the necessary permissions.
-                        var permissionCount = 0;
-                        for (var i = 0; i < apiResult.permissions.length; i++) {
-
-                            //Possible permissions can be found at https://wiki.guildwars2.com/wiki/API:2/tokeninfo
-                            switch (apiResult.permissions[i]) {
-                                case "characters":
-                                    permissionCount++;
-                                    break;
-                                case "account":
-                                    permissionCount++;
-                                    break;
-                                case "builds":
-                                    permissionCount++;
-                                    break;
-                                case "progression":
-                                    permissionCount++;
-                                    break;
-                            }
-                        }
-
-                        // Check if permission requirements were met, if so, invoke callback function.
-                        if (permissionCount == 4) {
-                            apiCheckCallback(apiKey);
-                        }
-						else {
-                            showError("Your API key is missing permissions.");
-                        }
+                    // Possible permissions can be found at https://wiki.guildwars2.com/wiki/API:2/tokeninfo
+                    // They do not have a predefined order so looping is necessary since we cannot directly index
+                    switch (apiResult.permissions[i]) {
+                        case "characters":
+                            permissionCount++;
+                            break;
+                        case "account":
+                            permissionCount++;
+                            break;
+                        case "builds":
+                            permissionCount++;
+                            break;
+                        case "progression":
+                            permissionCount++;
+                            break;
                     }
                 }
-            });
-        }
 
-        // If API key didn't pass regex it can never be valid.
-        else {
-            showError("Your API key is not valid");
+                // Check if permission requirements were met, if so, invoke callback function.
+                if (permissionCount == 4) {
+                    apiCheckCallback(apiKey);
+                }
+                else {
+                    showError("Your API key is missing permissions.");
+                    return;
+                }
+            }
         }
-    }
+    }); // end of ajax    
 }
 
 /* Called after the API key has been verified and handles the subsequent calls to other functions
@@ -411,9 +410,6 @@ function fetchEquipment() {
                                 account.characterDictionary[character].equipmentRarity.push(itemObject);
                             }
                         }
-
-                        console.log("AR for character " + character)
-                        console.log(account.characterDictionary[character].equipmentRarity);
 
                         // Equipment data is ready, so we can calculate and store AR.
                         agonyResist = calculateAgonyResist(account.characterDictionary[character].equipmentRarity, character);

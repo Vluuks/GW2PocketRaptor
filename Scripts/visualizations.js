@@ -262,6 +262,8 @@ function showCurrencies() {
 that both incomplete and complete achievements can be shown accurately. */
 function prepareFractalAchievements(dataArray) {
 
+    console.log(dataArray);
+
     // Turn the array into a more useful/uniform data format.
     for (var i = 0; i < dataArray.length; i++) {
 
