@@ -400,7 +400,10 @@ function fetchEquipment() {
                             var itemObject = multipleItemObject[item];
 
                             // Store item properties in object and store object in the array of items on the character.
-                            if (itemObject.type == ("Armor") || itemObject.type == ("Trinket") || itemObject.type == ("Weapon") || itemObject.type == ("Back")) {
+                            if (itemObject.type == ("Armor") || 
+                                itemObject.type == ("Trinket") || 
+                                itemObject.type == ("Weapon") || 
+                                itemObject.type == ("Back")) {
 
                                 var itemObject = new Item(
                                     itemObject.id,
@@ -523,7 +526,6 @@ function prepForBarsInefficient() {
     
     var dataArray = [];
     
-    
     for (let character in account.characterDictionary) {
         
         var dataObject = {
@@ -535,26 +537,6 @@ function prepForBarsInefficient() {
     }
     
     return dataArray;
-}
-
-
-
-function makeBarChartData(){
-    
-    var dataArray = [];
-    
-    
-    for (let character in account.characterDictionary) {
-        
-        var dataObject = {
-            characterName: character,
-            agonyResist: account.characterDictionary[character].agonyResist.total
-        }
-
-        dataArray.push(dataObject);
-    }
-
-    makePieChart();
 }
 
 /* Get the array of fractal achievements from the API. */

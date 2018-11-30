@@ -282,7 +282,7 @@ function makeSunburst(data) {
         .attr("class", "sunbursttext")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
         .attr('text-anchor', function (d) { return computeTextRotation(d) > 180 ? "end" : "start"; })
-        .attr('dx', function (d) { return computeTextRotation(d) > 180 ? "40" : "-40"; })
+        .attr('dx', function (d) { return computeTextRotation(d) > 180 ? "35" : "-35"; }) // higher is more to the inside of sunburst
         .attr("dy", ".35em")
         .text(function(d) {
             if (d.name == "Equipment") {
@@ -421,21 +421,19 @@ function showCharacterData(characterName) {
 }
 
 /* EEN HELE MOOIE FUNCTIE */
-function makePieChart(){
+function makePieChart() {
 
-    var w = 400;
-    var h = 400;
+    console.log("pie");
+
+    var w = 300;
+    var h = 300;
     var r = h/2;
-    var aColor = [
-        'rgb(178, 55, 56)',
-        'rgb(213, 69, 70)',
-        'rgb(230, 125, 126)',
-        'rgb(239, 183, 182)'
-    ]
 
     var data = account.professionDictionary,
-        data2 = account.raceDictionary,
-        data3 = account.genderDictionary;
+        data_races = account.raceDictionary,
+        data_gender = account.genderDictionary;
+
+    console.log(data);
 
     var vis = d3.select('#actualpiechartpart')
         .append("svg:svg")

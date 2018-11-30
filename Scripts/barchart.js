@@ -36,6 +36,9 @@ window.onload = function(){
     // If it's the first time, initialize. 
     if(firstTime) {
 
+        console.log("hoi");
+        makePieChart();
+
         d3.select("#barchartpart").append("svg")
         .attr("id", "barchartsvg")
         .attr("width", config.width + config.margin.left + config.margin.right)
@@ -90,7 +93,6 @@ window.onload = function(){
             .attr("dy", ".71em")
             .attr("fill", "#666666")
             .text("total Agony Resistance");
-           
     }
 
     // Select all the current bars.
