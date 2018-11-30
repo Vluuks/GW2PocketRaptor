@@ -486,7 +486,7 @@ function makePieChart() {
         .append("svg:g")
         .attr("class", "slice");
     arcs.append("svg:path")
-        .attr("fill", function(d, i){ return colorDictionary[data[i].label]; })
+        .attr("fill", function(d, i){ return colorDictionary[data_account[i].label]; })
         .attr("d", function (d) { return arc(d); });
 
     // Add the text
@@ -497,7 +497,7 @@ function makePieChart() {
             return "translate(" + arc.centroid(d) + ")";}
         )
         .attr("text-anchor", "middle")
-        .text( function(d, i) { return data[i].value; });
+        .text( function(d, i) { return data_account[i].value; });
 
     // ------
 
@@ -520,7 +520,7 @@ function makePieChart() {
         .append("svg:g")
         .attr("class", "slice");
     arcs.append("svg:path")
-        .attr("fill", function(d, i){ return colorDictionary[data[i].label]; })
+        .attr("fill", function(d, i){ return colorDictionary[data_gender[i].label]; })
         .attr("d", function (d) { return arc(d); });
 
     // Add the text
@@ -531,5 +531,5 @@ function makePieChart() {
             return "translate(" + arc.centroid(d) + ")";}
         )
         .attr("text-anchor", "middle")
-        .text( function(d, i) { return data[i].value; });
+        .text( function(d, i) { return data_gender[i].value; });
 }
