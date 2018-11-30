@@ -1,6 +1,17 @@
 /* Dictionary containing color info. */
 var colorDictionary = {
 
+    // Gender
+    "Male" : "#7f7f7f",
+    "Female" : "#909090",
+
+    // Races.
+    "Asura": "#7f2aff",
+    "Norn": "#5575ff",
+    "Human": "#ffcc00",
+    "Charr" : "#be0000",
+    "Sylvari" : "#338000",
+
     // Rarities.
     "Basic": "#f2f2f2",
     "Fine": "#569fff",

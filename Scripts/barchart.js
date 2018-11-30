@@ -36,7 +36,7 @@ window.onload = function(){
     // If it's the first time, initialize. 
     if(firstTime) {
 
-        console.log("hoi");
+        console.log("hoi_barchart");
         makePieChart();
 
         d3.select("#barchartpart").append("svg")
