@@ -1,7 +1,12 @@
+html{
+	height: inherit !important;
+}
+
 body{
     padding-top: 10px;
     padding-left: 20px;
 	font-family: "Arial";
+	height: inherit !important;
 }
 h2{
 	float: top;
@@ -70,6 +75,9 @@ h2{
 	overflow: hidden;
 	margin-left: 0 auto;
 	padding: 0 auto;
+}
+#accountwrapper {
+	height: 1000;
 }
 
 #account{
@@ -203,6 +211,14 @@ h2{
 }
 #barchartsvg {
 	width: 100%;
+}
+#piesvgpart {
+	margin-top: 20px;
+	
+}
+#piesvg {
+	margin: 10px;
+	float: left;
 }
 
 #error{

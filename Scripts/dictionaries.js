@@ -3,10 +3,10 @@ var colorDictionary = {
 
     // Gender
     "Male" : "#7f7f7f",
-    "Female" : "#909090",
+    "Female" : "#b0b0b0",
 
     // Races.
-    "Asura": "#7f2aff",
+    "Asura": "#7a11d3",
     "Norn": "#5575ff",
     "Human": "#ffcc00",
     "Charr" : "#be0000",

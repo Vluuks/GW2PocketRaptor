@@ -425,21 +425,27 @@ function makePieChart() {
 
     console.log("pie");
 
-    var w = 300;
-    var h = 300;
+    var w = 270;
+    var h = 270;
     var r = h/2;
 
     var data = account.professionDictionary, 
         data_account = account.raceDictionary,
         data_gender = account.genderDictionary;
 
-    var vis = d3.select('#actualpiechartpart')
+    var vis = d3.select('#piesvgpart')
     .append("svg:svg")
     .data([data])
     .attr("width", w)
     .attr("height", h)
+    .attr("id", "piesvg")
     .append("svg:g")
     .attr("transform", "translate(" + r + "," + r + ")");
+
+    // Tooltip.
+	var tooltip = d3.select("#piesvgpart").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
     var pie = d3.layout.pie().value(function(d) { return d.value; });
 
@@ -453,7 +459,18 @@ function makePieChart() {
         .attr("class", "slice");
     arcs.append("svg:path")
         .attr("fill", function(d, i){ return colorDictionary[data[i].label]; })
-        .attr("d", function (d) { return arc(d); });
+        .attr("d", function (d) { return arc(d); })
+        .on("mouseover", function(d) {
+            tooltip
+                .text(d.data.label)
+                .style("opacity", 1)
+                .style("left", (d3.event.pageX) + 0 + "px")
+                .style("top", (d3.event.pageY) - 0 + "px");
+        
+        })
+        .on("mouseout", function(d) {
+            tooltip.style("opacity", 0);
+        });
 
     // Add the text
     arcs.append("svg:text")
@@ -467,11 +484,12 @@ function makePieChart() {
 
     // ------
 
-    var vis = d3.select('#actualpiechartpart')
+    var vis = d3.select('#piesvgpart')
     .append("svg:svg")
     .data([data_account])
     .attr("width", w)
     .attr("height", h)
+    .attr("id", "piesvg")
     .append("svg:g")
     .attr("transform", "translate(" + r + "," + r + ")");
 
@@ -487,7 +505,18 @@ function makePieChart() {
         .attr("class", "slice");
     arcs.append("svg:path")
         .attr("fill", function(d, i){ return colorDictionary[data_account[i].label]; })
-        .attr("d", function (d) { return arc(d); });
+        .attr("d", function (d) { return arc(d); })
+        .on("mouseover", function(d) {
+            tooltip
+                .text(d.data.label)
+                .style("opacity", 1)
+                .style("left", (d3.event.pageX) + 0 + "px")
+                .style("top", (d3.event.pageY) - 0 + "px");
+        
+        })
+        .on("mouseout", function(d) {
+            tooltip.style("opacity", 0);
+        });
 
     // Add the text
     arcs.append("svg:text")
@@ -501,11 +530,12 @@ function makePieChart() {
 
     // ------
 
-    var vis = d3.select('#actualpiechartpart')
+    var vis = d3.select('#piesvgpart')
     .append("svg:svg")
     .data([data_gender])
     .attr("width", w)
     .attr("height", h)
+    .attr("id", "piesvg")
     .append("svg:g")
     .attr("transform", "translate(" + r + "," + r + ")");
 
@@ -521,7 +551,19 @@ function makePieChart() {
         .attr("class", "slice");
     arcs.append("svg:path")
         .attr("fill", function(d, i){ return colorDictionary[data_gender[i].label]; })
-        .attr("d", function (d) { return arc(d); });
+        .attr("d", function (d) { return arc(d); })
+        .on("mouseover", function(d) {
+            tooltip
+                .text(d.data.label)
+                .style("opacity", 1)
+                .style("left", (d3.event.pageX) + 0 + "px")
+                .style("top", (d3.event.pageY) - 0 + "px");
+        
+        })
+        .on("mouseout", function(d) {
+            tooltip.style("opacity", 0);
+        });
+
 
     // Add the text
     arcs.append("svg:text")
@@ -533,3 +575,5 @@ function makePieChart() {
         .attr("text-anchor", "middle")
         .text( function(d, i) { return data_gender[i].value; });
 }
+
+
