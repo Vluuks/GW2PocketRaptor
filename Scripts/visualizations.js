@@ -425,8 +425,8 @@ function makePieChart() {
 
     console.log("pie");
 
-    var w = 270;
-    var h = 270;
+    var w = 298;
+    var h = 298;
     var r = h/2;
 
     var data = account.professionDictionary, 
@@ -470,7 +470,10 @@ function makePieChart() {
         })
         .on("mouseout", function(d) {
             tooltip.style("opacity", 0);
-        });
+        })
+        .on("click", function(d) { 
+            console.log("click");
+            pieSectionClicked(d) });
 
     // Add the text
     arcs.append("svg:text")
@@ -576,4 +579,29 @@ function makePieChart() {
         .text( function(d, i) { return data_gender[i].value; });
 }
 
+function pieSectionClicked(d) {
+
+    let charactersMatch = [];
+
+    let profession = d.data.label;
+    console.log(profession);
+    for(character in account.characters) {
+
+        console.log(character);
+        if(character.profession == profession) {
+            console.log(character.name);
+            charactersMatch.append(character)
+            // append
+        }
+    }
+
+    // get relevant data from account variable
+    // cache?
+
+    // then render list of characters that belong in that category
+
+    // improve data structure to index by profession on loading? (optional)
+    // could be slow to parse at run time when clicked
+
+}
 
