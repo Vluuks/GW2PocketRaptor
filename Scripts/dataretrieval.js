@@ -488,16 +488,34 @@ function calculateAgonyResist(equipment, character) {
 
                 // If it's a trinket or backpiece, add to total. Discard amulet since these infusions are not AR ones.
                 else if ((equipment[item].type == "Trinket" && equipment[item].slot != "Amulet") || equipment[item].type == "Back") {
-                    agonyResist.trinkets += infusionDictionary[infusion];
+       
+                    // catch unaccounted for (like aurillium)
+                    if(infusionDictionary[infusion]) {
+                        agonyResist.trinkets += infusionDictionary[infusion];
+                    }
                 }
 
                 // If it's armor, check for aquabreather and else add to total.
                 else if (equipment[item].type == "Armor") {
 
                     if (equipment[item].slot != "HelmAquatic") {
-                        agonyResist.armor += infusionDictionary[infusion];
+
+                        // Validate that infusion exists to avoid NaN
+                        if(infusionDictionary[infusion]) {
+                            agonyResist.armor += infusionDictionary[infusion];
+                        }
+
+                        // we need to know what to map this id to because hmm
+                        if(character == "Asvata") {
+
+                            console.log(equipment[item]);
+                            console.log("aurillium" + infusion);
+                            console.log(infusionDictionary[infusion]);
+                        }
                     }
-                    else {
+                    // for under water
+                    else {    
+
                         agonyResist.aquatic += infusionDictionary[infusion];
                     }
                 }

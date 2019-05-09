@@ -111,6 +111,7 @@ var infusionDictionary = {
     "37135": 9,
     "37136": 9,
     "37131": 9,
+    "81715": 9,
 
     // Regular infusions that can be broken down/crafted.
     "49424": 1,
