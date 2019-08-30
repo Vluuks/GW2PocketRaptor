@@ -25,10 +25,11 @@
 
 	<body class="standard-background">
 
+            <span class="error" id="error"></span>
         <img src="Static/Layout/header-pr.png" class="page-header">
 
         <!-- Error message span. -->
-		<span class="error" id="error"></span>
+		
 
         <ul class="nav nav-pills nav-justified">
             <li class="active"><a data-toggle="tab" href="#home">Getting Started</a></li>
@@ -184,16 +185,18 @@
 
 
 
-            <!--- ACCOUNT STATISTICS ---->
+            <!-- ACCOUNT STATISTICS -->
             <div id="menu2" class="tab-pane fade">
-                <div id="accountwrapper">
+                <div id="generalstats-container" class="flex-container flex-horizontal">
 
-                    <!--- General account info --->
-                    <div id="accountpart">
+                    <!-- General account info -->
+                    <div id="accountpart" class="basic-container">
                         <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear">Account info</h2>
                         <img id="accountloading" src="Static/spinner.gif" alt="Loading...">
+                        
                         <br>
                         <ul id="account">
+                            
                             <li id="accountName"><img class="listimg" src="Static/accountname.png" alt="Account Name"><p class="accinfo" id="accname">account name</p></li>
                             <li id="characterAmount"><img class="listimg" src="Static/charactersamount.png" alt="Characters"><p class="accinfo" id="chars">characters</p></li>
                             <li id="accountAge"><img class="listimg" src="Static/accountage.png" alt="Age"><p class="accinfo" id="accage">account age</p></li>
@@ -205,11 +208,11 @@
                         </ul>
                     </div>
 
-                    <!--- Piecharts --->
-                    <div id ="actualpiechartpart">
-                        <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Pie charts (wip)</h2>
+                    <!-- Piecharts -->
+                    <div id ="actualpiechartpart" class="basic-container">
+                        <h2 class="divtitle"><img class="listimg" src="Static/character.png" alt="Character Gear"> Character Distribution</h2>
                         <br>
-                        <div id ="piesvgpart"></div>
+                        <div id="piesvgpart"></div>
                     
                     </div>
 
