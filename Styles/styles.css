@@ -96,9 +96,33 @@ Rare interactie met flexbox die ik niet begrijp.  */
 
 }
 
+/* #barchartpart {
+	flex-basis: 90%;
+	
+}
+
+#tooltip-container {
+	flex-basis: 10%;
+	
+} */
+
+#gearcheck-container{
+	height: 800px;
+}
+
+#barchart-container{
+	flex-basis: 55%;
+}
 
 
 
+#piechartpart{
+	flex-basis: 30%;
+}
+
+#legendpart{
+	flex-basis: 10%;
+}
 
 
 
@@ -124,171 +148,7 @@ Rare interactie met flexbox die ik niet begrijp.  */
 	width: 80% !important;
 	margin-left: 5px;
 }
-#wrapperdiv{
-	width: 100%;
-	margin-top: 20px;
-	background-color: #EEEEEE;
-	margin-bottom: 20px
-}
-#wrapperdivfront{
-	width: 100%;
-	margin-top: 20px;
-	background-color: #EEEEEE;
-	margin-bottom: 20px
-}
-#wrapperdivaccount{
-	width: 100%;
-	margin-top: 20px;
-	background-color: #EEEEEE;
-	margin-bottom: 20px
-}
-#leftwrapper {
-	padding: 0 auto;
-	display: inline-block;
-	height: 820px;
-	width: 50%;
-	overflow: hidden;
-	margin-right: 0 auto;
-	padding: 0 auto;
-}
-#rightwrapper {
-	display: inline-block;
-	width: 49%;
-	float: top;
-	height: 820px;
-	overflow: hidden;
-	margin-left: 0 auto;
-	padding: 0 auto;
-}
-#accountwrapper {
-	height: 1000;
-}
 
-#account{
-	padding: 10px;
-	margin: 0px;
-}
-#accountpart{
-	width: 30%;
-	height: 250px;
-	display: inline-block;
-	float: left;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	margin-left: 10px;
-	margin-left: 10px;
-	margin-left: 0px;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#barchartpart{
-	width: 98%;
-	height: 425px;
-	display: inline-block;
-	float: left;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	margin-left: 10px;
-	margin-left: 10px;
-	margin-left: 0px;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#legendpart{
-	width: 30%;
-	height: 775px;
-	margin: 10px;
-	margin-left: 0 auto;
-	display: inline-block;
-	padding: 10px;
-	float: top;
-	background-color: #DDDDDD;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#piechartpart{
-	float: top;
-	float: left;
-	width: 65%;
-	height: 775px;
-	margin: 10px;
-	margin-left: 10px;
-	margin-left: 0;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#actualpiechartpart{
-	width: 67%;
-	height: 900px;
-	margin: 10px;
-    margin-left: 20px;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#achievementpart{
-	width: 830px;
-	height: 330px;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	float: left;
-	float: top;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#characterinfopart{
-	width: 40.5%;
-	height: 330px;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	margin-left: 0px;
-	float: left;
-    margin-right: 0 auto;
-	box-shadow: 2px 2px 3px #EFEFEF;
-}
-#tooltippart{
-	width: 55%;
-	height: 330px;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	float: left;
-    margin-right: 0 auto;
-	box-shadow: 2px 2px 3px #EFEFEF;
-
-}
-#intropart{
-	width: 40%;
-	height: 330px;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	margin-left: 0px;
-	float: left;
-    margin-right: 0 auto;
-	box-shadow: 2px 2px 3px #EFEFEF;
-
-}
-#intropartright{
-	width: 58%;
-	height: 330px;
-	display: inline-block;
-	padding: 10px;
-	background-color: #DDDDDD;
-	margin: 10px;
-	margin-left: 0px;
-	float: left;
-    margin-right: 0 auto;
-	box-shadow: 2px 2px 3px #EFEFEF;
-
-}
 #sunburstinnerwrapper{
     width: 90%;
     height: 120px;
