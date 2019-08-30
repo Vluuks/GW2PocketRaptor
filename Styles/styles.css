@@ -29,6 +29,11 @@ h2{
 /* Flexbox inside said tab, which in turn manages order of divs within. */
 .flex-container{
 	display: flex;
+	/* flex-wrap: wrap; */
+}
+
+.flex-container-wrap{
+	display: flex;
 	flex-wrap: wrap;
 }
 
@@ -96,17 +101,30 @@ Rare interactie met flexbox die ik niet begrijp.  */
 
 }
 
+#charoverview-container{
+	height: 750px;
+}
+
+#character-filters{
+	flex-basis: 5%;
+}
+
+#character-list{
+	flex-basis: 85%;
+	
+}
+
 #barchartpart {
 	flex-basis: 40%;
 	
 }
 
 #tooltip-container {
-	flex-basis: 30%
+	flex-basis: 33%
 } 
 
 #gearcheck-container{
-	height: 720px;
+	height: 750px;
 }
 
 #barchart-container{

@@ -197,8 +197,8 @@ function makeSunburst(data) {
         svgChart.remove();
 
     // Set dimensions of the visualization.
-    var width = 460,
-        height = 460,
+    var width = 530,
+        height = 530,
         radius = Math.min(width, height) / 2;
 
     // Make x and y scales.

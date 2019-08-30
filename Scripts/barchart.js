@@ -8,22 +8,12 @@ window.onload = function(){
 // Set the dimensions of the canvas.
     config.margin = {
         top: 20,
-        right: 20,
-        bottom: 50,
+        right: 50,
+        bottom: 20,
         left: 50
     },
-    config.width = 700 - config.margin.left - config.margin.right,
+    config.width = 980 - config.margin.left - config.margin.right,
     config.height = 400 - config.margin.top - config.margin.bottom;
-
-    // Add the SVG element.
-    // d3.select("#barchartpart").append("svg")
-    //     .attr("id", "barchartsvg")
-    //     .attr("width", config.width + config.margin.left + config.margin.right)
-    //     .attr("height", config.height + config.margin.top + config.margin.bottom)
-    //     .append("g")
-    //     .attr("id", "bar-svg-g")
-    //     .attr("transform",
-    //         "translate(" + config.margin.left + "," + config.margin.top + ")");
 
 }
 
