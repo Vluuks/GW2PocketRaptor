@@ -26,11 +26,29 @@
         <script src="Scripts/dictionaries.js"></script>
         <script src="Scripts/prototypes.js"></script>
 
+        <script src="Scripts/components.js"></script>
         <script src="Scripts/characterListHandler.js"></script>
         <script src="Scripts/dataTransformation.js"></script>
         <script src="Scripts/dataRetrieval.js"></script>
 
-	</head>
+    </head>
+    
+    <script type="text/x-template" id="character-template">
+        <div class="basic-container character-container">
+
+            <p class="charname">{{ character.name }} </p>
+            <p class="charage"> Level {{ character.level }}</p>
+            <!-- '<p class ="charprofession" style="color:' + colorDictionary[character.profession] + ' \">' + -->
+            <!-- '<img class="profimg" src="Static/Professions/' + professionImageDictionary[profession] + '.png" alt="Achievements">' + profession + '</p>' + -->
+            <p class ="charage"> Played for {{ character.hoursPlayed }} hours </p>
+            <p class ="charage"> {{ character.deaths }} deaths </p>
+
+        </div>
+    </script>   
+
+
+
+
 
 	<body class="standard-background">
         
@@ -121,9 +139,11 @@
                         <!-- Holds character items. -->
                         <div id="character-list" class="flex-container-wrap flex-horizontal">
                             
-                            <div v-for="character in characters">
-                                {{ character }}
-                            </div>
+                            <character 
+                                v-for="(character, index) in characters"
+                                v-bind:key="index"
+                                v-bind:character="character">
+                            </character>
 
                         </div>
                                 
