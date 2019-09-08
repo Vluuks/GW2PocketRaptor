@@ -240,3 +240,33 @@ function makeSunburst(data) {
         return (ang > 90) ? 180 + ang : ang;
     }
 }
+
+/* 
+    Shows details about the item currently selected in the sunburst. 
+*/
+function showItemTooltip(item) {
+
+    console.log(item);
+
+    $('#tooltipcontent').hide();
+
+    // If it's an actual item proceed to show tooltip
+    if (item.slot != undefined) {
+
+        // Only show AR for items where it is not NaN
+        // TODO add check for whether item has slots at all?
+        let agonyPart = isNaN(item.agonyResist) ? "0 Agony Resist" : '<p class=\"itemagonyresist\">' + item.agonyResist + ' Agony Resist</p>';
+
+        $('#tooltipcontent').html(
+            '<p class=\"itemname\">' + item.name + '</p>' +
+            '<p class=\"itemrarity\" style=\"color:' + colorDictionary[item.rarity] + ' \">' + item.rarity + '</p>' +
+            '<p class=\"itemtype\">' + item.slot + '</p>' +
+            agonyPart
+        );
+        $('#tooltipcontent').show();
+    }
+}
+
+function hideItemTooltip() {
+    $('#tooltipcontent').hide();
+}
