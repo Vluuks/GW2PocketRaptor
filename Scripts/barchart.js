@@ -1,6 +1,3 @@
-/* redraw when new data is present
- every character iteration?
- or maybe in batches  */
 var firstTime = true;
 var config = {};
 
