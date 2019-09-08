@@ -23,7 +23,7 @@ function showCurrencies() {
     Is horribly inefficient for now, needs fixing asap.
 */
 function makePieChart() {
-    
+
     var w = 298;
     var h = 298;
     var r = h/2;
@@ -38,6 +38,7 @@ function makePieChart() {
     .attr("width", w)
     .attr("height", h)
     .attr("id", "piesvg")
+    .attr("class", "piesvg")
     .append("svg:g")
     .attr("transform", "translate(" + r + "," + r + ")");
 
@@ -92,6 +93,7 @@ function makePieChart() {
     .attr("width", w)
     .attr("height", h)
     .attr("id", "piesvg")
+    .attr("class", "piesvg")
     .append("svg:g")
     .attr("transform", "translate(" + r + "," + r + ")");
 
@@ -138,6 +140,7 @@ function makePieChart() {
     .attr("width", w)
     .attr("height", h)
     .attr("id", "piesvg")
+    .attr("class", "piesvg")
     .append("svg:g")
     .attr("transform", "translate(" + r + "," + r + ")");
 

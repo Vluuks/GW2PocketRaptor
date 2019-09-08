@@ -18,9 +18,9 @@ function getUserApi() {
         $("#barchartsvg").remove();
         firstTime = true;
     }
-    // if($("#actualpiechartpart")) {
-    //     $("#actualpiechartpart").remove();
-    // }
+    if($(".piesvg")) {
+        $(".piesvg").remove();
+    }
 
     // Hide and show corresponding DOM elements.
     $('#error').hide();
