@@ -54,6 +54,12 @@ h2{
 	flex-grow: 1;
 }
 
+.basic-container-items{
+	background-color: #EEEEEE;
+	padding: 20px;
+	margin: 10px;
+}
+
 /* Als ik hier een pixelwaarde van maak gaat het goed, maar met een percentage niet. 
 Rare interactie met flexbox die ik niet begrijp.  */
 .dual-column{
@@ -349,11 +355,10 @@ path{
 }
 
 .character-page-container {
-	width: 200px;
+	width: 300px;
 	height: 200px;
-	/* background-color:  */
 }
 
 #character-list {
-	/* flex: 1 1 0; */
+	justify-content: flex-start;
 }
