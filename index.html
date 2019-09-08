@@ -142,9 +142,11 @@
                             <br>
                             <br>
 
-                            <div id="select-containers">
+                            <div id="filter-options-container">
+
+                                <input id="search-input" v-model="search" type="text" placeholder="search"> 
+
                                 <span>Base Profession</span>
-                                
                                 <select>
                                     <option value="all">All</option>
                                     <option value="necromancer">Necromancer</option>
@@ -164,7 +166,7 @@
                         <div id="character-list" class="flex-container-wrap flex-horizontal">
                             
                             <character 
-                                v-for="(character, index) in characters"
+                                v-for="(character, index) in filteredCharacters"
                                 v-bind:key="index"
                                 v-bind:character="character">
                             </character>
