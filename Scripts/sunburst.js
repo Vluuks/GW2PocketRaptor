@@ -246,8 +246,6 @@ function makeSunburst(data) {
 */
 function showItemTooltip(item) {
 
-    console.log(item);
-
     $('#tooltipcontent').hide();
 
     // If it's an actual item proceed to show tooltip
@@ -269,4 +267,31 @@ function showItemTooltip(item) {
 
 function hideItemTooltip() {
     $('#tooltipcontent').hide();
+}
+
+/* 
+    Show data about the character to accompany the sunburst. 
+*/
+function showCharacterData(characterName) {
+
+    // Determine whether to display vanilla class or elitespec
+    var character = account.characterDictionary[characterName];
+    var profession = character.profession;
+
+    if(character.eliteSpec != "" && character.eliteSpec != undefined) {
+        profession = character.eliteSpec;
+    }
+
+    // Select the div and append html.
+    $('#sunburstextra').html(
+        '<p class=\"charname\">' + characterName + '</p>' +
+        '<p class=\"charage"> Level ' + character.level + '</p>' +
+        '<p class =\"charprofession\" style=\"color:' + colorDictionary[character.profession] + ' \">' +
+        '<img class="profimg" src="Static/Professions/' + professionImageDictionary[profession] + '.png" alt="Achievements">' + profession + '</p>' +
+        '<p class =\"charage\"> Played for ' + character.hoursPlayed + ' hours </p>' +
+        '<p class =\"charage\">' + character.deaths + ' deaths </p>'
+    );
+
+    // Show div that contains this data
+    $('#sunburstextra').show();
 }
