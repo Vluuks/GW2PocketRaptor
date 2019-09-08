@@ -12,6 +12,10 @@ $('document').ready(function() {
     $('#achievementloading').hide();
     $('#sunburstloading').hide();
 
+
+    // Initialize vue
+    initialize();
+
 });
 
 /* 
