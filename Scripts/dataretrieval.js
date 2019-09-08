@@ -110,8 +110,11 @@ function getUserApi() {
     }); // end of ajax    
 }
 
-/* Called after the API key has been verified and handles the subsequent calls to other functions
-which retrieve more information from the API. */
+
+/* 
+    Called after the API key has been verified and handles the subsequent calls to other functions
+    which retrieve more information from the API. 
+*/
 function apiCheckCallback(apiKey) {
 
     // Make api global now that it has been verified.
@@ -130,7 +133,10 @@ function apiCheckCallback(apiKey) {
     getFractalAchievements(prepareFractalAchievements);
 }
 
-/* Retrieves general information about the account, such as name, age, etc. */
+
+/* 
+    Retrieves general information about the account, such as name, age, etc. 
+*/
 function getGeneralAccountInfo(callback) {
 
     $.ajax({
@@ -157,7 +163,9 @@ function getGeneralAccountInfo(callback) {
     });
 }
 
-/* Retrieves general information about the account, such as name, age, etc. */
+/* 
+    Retrieves fractal currencies (for now).
+*/
 function getCurrencies(callback) {
 
     $.ajax({
@@ -194,8 +202,10 @@ function getCurrencies(callback) {
 }
 
 
-/* This function retrieves a list of the characters on the account from the API and then
-calls the callback which will retrieve additional info based on the character names. */
+/* 
+    This function retrieves a list of the characters on the account from the API and then
+    calls the callback which will retrieve additional info based on the character names. 
+*/
 function getCharacters(callback) {
 
     $.ajax({
@@ -222,9 +232,11 @@ function getCharacters(callback) {
     });
 }
 
-/* Retrieves information about a character based on the name of the character and
-stores the information in a character object which will be globally accessible by the
-other functions in the script. */
+/* 
+    Retrieves information about a character based on the name of the character and
+    stores the information in a character object which will be globally accessible by the
+    other functions in the script. 
+*/
 function getGeneralCharacterInfo() {
 
     var characterArray = account.characters;
@@ -280,31 +292,14 @@ function getGeneralCharacterInfo() {
 }
 
 
-/* Takes the specialization object from the character, going through it and finding the specialization
-ids, based on this we then determine what elite spec is being run from our dictionary. We get PvE spec
-array, take the 3rd entry (this is the slot that holds elite specs) and then determine the id from this. */
-function determineEliteSpec(characterSpecs){
-
-    // Get PvE spec overview
-    if(characterSpecs.pve[2] != undefined){
-        var eliteSpecId = characterSpecs.pve[2].id;
-        return eliteSpecDictionary[eliteSpecId];
-    }
-    // No 3rd spec has been set, so it can never be an elite spec
-    else {
-        return "";
-    }
-}
-
-
-/* This function extracts the equipment array from the dictionary of characters and their info
-and checks for every piece what type it is and whether it is of ascended (best in slot) rarity.
-For every item we look up the rarity and the type and this is stored in an object which in turn is stored
-in the dictionary with the character name as a key. This dictionary is globally accessible and will, after
-the callback, be available for use by the visualizations. */
+/* 
+    This function extracts the equipment array from the dictionary of characters and their info
+    and checks for every piece what type it is and whether it is of ascended (best in slot) rarity.
+    For every item we look up the rarity and the type and this is stored in an object which in turn is stored
+    in the dictionary with the character name as a key. This dictionary is globally accessible and will, after
+    the callback, be available for use by the visualizations. 
+*/
 function fetchEquipment() {
-
-    var promises = [];
 
     // Iterate over the characters in the dictionary and access equipment array for each.
     for (let character in account.characterDictionary) {
@@ -404,128 +399,9 @@ function fetchEquipment() {
     }
 }
 
-
-/* For a given armor piece, calculate the agony infusions present, and based on the ID of these
-infusions return the total amount of agony resist present in the armor piece, trinket or weapon.
-There are many different infusions in this game due to ArenaNet's inconsistent additions and
-revamps of the system, which makes a dictionary necessary to account for all possible types.
-If no infusions are present the infusionsarray will not exist and the function will return 0. */
-function calculateAgonyResist(equipment, character) {
-
-    // Instantiate new agonyresist object.
-    var agonyResist = new AgonyResist();
-    
-    // Iterate over all the items.
-    for (item in equipment) {
-        // If the item has one or multiple infusions.
-        if (typeof equipment[item].infusions !== undefined && equipment[item].infusions.length > 0 ) {
-
-            // Loop over all the infusions in the item.
-            for (var i = 0; i < equipment[item].infusions.length; i++) {
-
-                var infusion = equipment[item].infusions[i];
-
-                // Add agony resist back to the item object for later reference.
-                equipment[item].agonyResist += infusionDictionary[infusion];
-
-                // If it's a weapon, check which one.
-                if (equipment[item].type == "Weapon") {
-
-                    switch (equipment[item].weaponSlot) {
-
-                        case "WeaponA1":
-                            agonyResist.weaponsA += infusionDictionary[infusion];
-                            break;
-                        case "WeaponA2":
-                            agonyResist.weaponsA += infusionDictionary[infusion];
-                            break;
-                        case "WeaponB1":
-                            agonyResist.weaponsB += infusionDictionary[infusion];
-                            break;
-                        case "WeaponB2":
-                            agonyResist.weaponsB += infusionDictionary[infusion];
-                            break;
-                        case "WeaponAquaticA":
-                            agonyResist.aquatic += infusionDictionary[infusion];
-                            break;
-                        case "WeaponAquaticB":
-                            agonyResist.aquatic += infusionDictionary[infusion];
-                            break;
-                    }
-                }
-
-                // If it's a trinket or backpiece, add to total. Discard amulet since these infusions are not AR ones.
-                else if ((equipment[item].type == "Trinket" && equipment[item].slot != "Amulet") || equipment[item].type == "Back") {
-       
-                    // catch unaccounted for (like aurillium)
-                    if(infusionDictionary[infusion]) {
-                        agonyResist.trinkets += infusionDictionary[infusion];
-                    }
-                }
-
-                // If it's armor, check for aquabreather and else add to total.
-                else if (equipment[item].type == "Armor") {
-
-                    if (equipment[item].slot != "HelmAquatic") {
-
-                        // Validate that infusion exists to avoid NaN
-                        if(infusionDictionary[infusion]) {
-                            agonyResist.armor += infusionDictionary[infusion];
-                        }
-
-                        // we need to know what to map this id to because hmm
-                        if(character == "Asvata") {
-
-                            console.log(equipment[item]);
-                            console.log("aurillium" + infusion);
-                            console.log(infusionDictionary[infusion]);
-                        }
-                    }
-                    // for under water
-                    else {    
-
-                        agonyResist.aquatic += infusionDictionary[infusion];
-                    }
-                }
-            }
-        }
-    }
-
-    // Calculate the effective total using the weapon set with the biggest amount and discarding underwater weapons.
-    agonyResist.total = agonyResist.armor + agonyResist.trinkets;
-
-    // Take the weapon set with the higher agony resist.
-    if (agonyResist.weaponsA < agonyResist.weaponsB) {
-        agonyResist.total += agonyResist.weaponsB;
-    }
-	else if (agonyResist.weaponsA > agonyResist.weaponsB) {
-        agonyResist.total += agonyResist.weaponsA;
-    }
-	else {
-        agonyResist.total += agonyResist.weaponsA;
-    }
-
-    return agonyResist;
-}
-
-function prepForBarsInefficient() {
-    
-    var dataArray = [];
-    
-    for (let character in account.characterDictionary) {
-        
-        var dataObject = {
-            characterName: character,
-            agonyResist: account.characterDictionary[character].agonyResist.total
-        }
-
-        dataArray.push(dataObject);
-    }
-    
-    return dataArray;
-}
-
-/* Get the array of fractal achievements from the API. */
+/* 
+    Get the array of fractal achievements from the API. 
+*/
 function getFractalAchievements(callback) {
 
     // Get the array of API
@@ -577,9 +453,9 @@ function getFractalAchievements(callback) {
     });
 }
 
-/* This function writes the data that has been retrieved from the API to a text file in JSON format.
-This ensures that even if the API is down the visualization can be run with this data. The back up
-data is stored locally an can be used to replace the finished "account" object in onDataReady.*/
+/* 
+    This function writes the data that has been retrieved from the API to JSON format.
+*/
 function makeBackUp() {
 
     var jsonString = JSON.stringify(account);
