@@ -391,6 +391,8 @@ function fetchEquipment() {
                         if(agonyResist.total > 0) {
                             updateBarChartWithTransition();
                         }
+
+                        addCharacter(account.characterDictionary[character])
                     }
                 }) // end of ajax
 

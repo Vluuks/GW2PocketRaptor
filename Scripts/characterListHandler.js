@@ -9,7 +9,10 @@ function initialize() {
     });
 }
 
-function addCharacter() {
-    Vue.set(app.characters, app.characters.length, "test")
+function addCharacter(character) {
+
+    console.log(character)
+    let char = character; // if i push character directly, it does not work?
+    Vue.set(app.characters, app.characters.length, char)
 
 }
