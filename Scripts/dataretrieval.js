@@ -34,6 +34,7 @@ function getUserApi() {
 
     // Reset account variable
     resetAccount();
+    app.characters = [];
 
     //apiKey = ""
     // apiKey = "F42B9440-82CB-0D4A-AA45-1594E292B1FB08137C88-69C5-4779-8740-43FA4C501EE0";
