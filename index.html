@@ -8,7 +8,9 @@
 
 		<!-- External scripts and stylesheets. -->
 		<link rel="stylesheet" href="Libraries/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="Styles/styles.css">
+        <link rel="stylesheet" href="Styles/styles.css">
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="Libraries/d3.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="Libraries/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -24,19 +26,18 @@
 	</head>
 
 	<body class="standard-background">
-
-            <span class="error" id="error"></span>
+        
+        <!-- Error message span. -->
+        <span class="error" id="error"></span>
         <img src="Static/Layout/header-pr.png" class="page-header">
 
-        <!-- Error message span. -->
-		
-
+        <!-- Nav bar -->
         <ul class="nav nav-pills nav-justified">
             <li class="active"><a data-toggle="tab" href="#home">Getting Started</a></li>
             <li><a data-toggle="tab" href="#menu0">Your Characters</a></li>
             <li><a data-toggle="tab" href="#menu1">Agony Resist and Gear</a></li>
             <li><a data-toggle="tab" href="#menu2">General Account Statistics</a></li>
-            <li><a data-toggle="tab" href="#menu3">Fractal Dailes and Achievements</a></li>
+            <!-- <li><a data-toggle="tab" href="#menu3">Fractal Dailes and Achievements</a></li> -->
         </ul>
 
         <div class="tab-content">
@@ -223,16 +224,16 @@
 
             </div>
 
-            <!--- FRACTAL ACHIEVEMENTS ---->
-            <div id="menu3" class="tab-pane fade">
+            <!--- FRACTAL ACHIEVEMENTS -->
+            <!-- <div id="menu3" class="tab-pane fade"> -->
 
                 <!-- Achievements. -->
-                <div id="achievementpart">
-                    <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2>
-                    <!-- <img id="achievementloading" src="Static/spinner.gif" alt="Loading..."> -->
-                </div>
+                <!-- <div id="achievementpart"> -->
+                    <!-- <h2 class="divtitle"><img class="listimg" src="Static/achievements.png" alt="Achievements"> Fractal Achievement overview</h2> -->
+                
+                <!-- </div> -->
 
-            </div>
+            <!-- </div> -->
 
             <!-- SCATTERPLOT OF DOOM -->
             <!-- <div id="menu4" class="tab-pane fade in active">
