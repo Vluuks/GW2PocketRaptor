@@ -1,11 +1,29 @@
+function showAccountInfo() {
+
+    // Hide loading spinner.
+    $('#accountloading').hide();
+
+    // Select account data paragraph and set the text.
+    $('#accname').text(account.name);
+    $('#chars').text(account.characterAmount + " characters");
+    $('#accage').text(account.hoursPlayed + " hours played");
+    $('#fraclevel').text("Fractal Level " + account.fractalLevel);
+
+}
+
+function showCurrencies() {
+
+    $('#fractalrelics').text("Relics " + account.fractalRelics);
+    $('#pristinerelics').text("Pristines " + account.fractalPristine);
+}
+
+
 /*
     Draws pie charts based on general account statistics, such as gender/class/race. 
     Is horribly inefficient for now, needs fixing asap.
 */
 function makePieChart() {
-
-    console.log("pie");
-
+    
     var w = 298;
     var h = 298;
     var r = h/2;

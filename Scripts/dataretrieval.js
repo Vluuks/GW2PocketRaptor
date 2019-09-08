@@ -1,48 +1,13 @@
-/*
-TIM IS LIEF TEST
-Created by Renske Spring 2017
-
-This file retrieves all the necessary data from the Guild Wars 2 API. This data is used
-to create various data visualizations.
-
-
-TODOS
-- add more details to the tooltip
-- fix duplicate trinkets not showing up
-- make barchart for ascended % ?
-- show rune also if possible
-
+/* 
+    Check the given API and then start retrieving data if it has been verified.
+    This function is invoked by pressing the button on the webpage. 
 */
-
-
-/* Wait until page is ready. */
-$('document').ready(function() {
-
-    // Manage DOM element visibilities.
-    $('#error').hide();
-    $('#accountloading').hide();
-    $('#sunburstextra').hide();
-    $('#sunburstwait').hide();
-    $('#barchartloading').hide();
-    $('#achievementloading').hide();
-    $('#sunburstloading').hide();
-
-});
-
-/* Small function that takes a string and shows it in the error span on top of the page. */
-function showError(errorMessage) {
-    $('#error').show();
-    $('#error').text(errorMessage);
-}
-
-/* Check the given API and then start retrieving data if it has been verified.
-This function is invoked by pressing the button on the webpage. */
 function getUserApi() {
 
     // Check if svgs were already made, if so, delete.
-    // if ($("#barchartsvg")) {
-    //     $("#barchartsvg").remove();
-    // }
+    if ($("#barchartsvg")) {
+        $("#barchartsvg").remove();
+    }
     if ($("#sunburstsvg")) {
         $("#sunburstsvg").remove();
     }
@@ -53,6 +18,9 @@ function getUserApi() {
         $("#barchartsvg").remove();
         firstTime = true;
     }
+    // if($("#actualpiechartpart")) {
+    //     $("#actualpiechartpart").remove();
+    // }
 
     // Hide and show corresponding DOM elements.
     $('#error').hide();
