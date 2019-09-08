@@ -362,3 +362,9 @@ path{
 #character-list {
 	justify-content: flex-start;
 }
+
+.profession-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}

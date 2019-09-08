@@ -38,8 +38,8 @@ function filter(collection, searchTerm, category) {
     return collection.filter((item) => {
 
         // Apply category filter
-        if(category != "all")
-            return category == item.category && (matchStringNoCase(item.name, searchTerm))
+        if(app.checkedProfessions.length > 0)
+            return app.checkedProfessions.includes(item.profession.toLowerCase())  && (matchStringNoCase(item.name, searchTerm))
 
         return matchStringNoCase(item.name, searchTerm) ;
     });

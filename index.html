@@ -146,29 +146,37 @@
 
                                 <input id="search-input" v-model="search" type="text" placeholder="search"> 
 
-                                <span>Base Profession</span>
+                                <p>Base Profession</p>
                                 
-                                <input type="checkbox" id="necromancer" value="necromancer" v-model="checkedProfessions">
-                                <label for="necromancer">Necromancer</label>
-                                <input type="checkbox" id="mesmer" value="mesmer" v-model="checkedProfessions">
-                                <label for="mesmer">Mesmer</label>
-                                <input type="checkbox" id="elementalist" value="elementalist" v-model="checkedProfessions">
-                                <label for="elementalist">Elementalist</label>
-
-                                <input type="checkbox" id="thief" value="thief" v-model="checkedProfessions">
-                                <label for="thief">Thief</label>
-                                <input type="checkbox" id="ranger" value="ranger" v-model="checkedProfessions">
-                                <label for="ranger">Ranger</label>
-                                <input type="checkbox" id="engineer" value="engineer" v-model="checkedProfessions">
-                                <label for="engineer">Engineer</label>
-
-                                <input type="checkbox" id="warrior" value="warrior" v-model="checkedProfessions">
-                                <label for="warrior">Warrior</label>
-                                <input type="checkbox" id="revenant" value="revenant" v-model="checkedProfessions">
-                                <label for="revenant">Revenant</label>
-                                <input type="checkbox" id="guardian" value="guardian" v-model="checkedProfessions">
-                                <label for="guardian">Guardian</label>
-                                
+                                <ul class="profession-list">
+                                        <li><input type="checkbox" id="necromancer" value="necromancer" v-model="checkedProfessions">
+                                        <label for="necromancer">Necromancer</label></li>
+                                        
+                                        <li><input type="checkbox" id="mesmer" value="mesmer" v-model="checkedProfessions">
+                                        <label for="mesmer">Mesmer</label></li>
+                                        
+                                        <li><input type="checkbox" id="elementalist" value="elementalist" v-model="checkedProfessions">
+                                        <label for="elementalist">Elementalist</label></li>
+    
+                                        <li><input type="checkbox" id="thief" value="thief" v-model="checkedProfessions">
+                                        <label for="thief">Thief</label></li>
+                                        
+                                        <li><input type="checkbox" id="ranger" value="ranger" v-model="checkedProfessions">
+                                        <label for="ranger">Ranger</label></li>
+                                        
+                                        <li><input type="checkbox" id="engineer" value="engineer" v-model="checkedProfessions">
+                                        <label for="engineer">Engineer</label></li>
+    
+                                        <li><input type="checkbox" id="warrior" value="warrior" v-model="checkedProfessions">
+                                        <label for="warrior">Warrior</label></li>
+                                        
+                                        <li><input type="checkbox" id="revenant" value="revenant" v-model="checkedProfessions">
+                                        <label for="revenant">Revenant</label></li>
+                                        
+                                        <li><input type="checkbox" id="guardian" value="guardian" v-model="checkedProfessions">
+                                        <label for="guardian">Guardian</label></li>
+                                    </ul>
+                                    
                                 
                                 <!-- <select>
                                     <option value="all">All</option>
