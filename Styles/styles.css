@@ -347,3 +347,13 @@ path{
 .extratext {
 	font-size: 13px;
 }
+
+.character-page-container {
+	width: 200px;
+	height: 200px;
+	/* background-color:  */
+}
+
+#character-list {
+	flex: 1 1 0;
+}

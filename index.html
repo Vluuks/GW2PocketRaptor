@@ -34,12 +34,17 @@
     </head>
     
     <script type="text/x-template" id="character-template">
-        <div class="basic-container character-container">
+        <div class="basic-container character-page-container">
 
             <p class="charname">{{ character.name }} </p>
             <p class="charage"> Level {{ character.level }}</p>
-            <!-- '<p class ="charprofession" style="color:' + colorDictionary[character.profession] + ' \">' + -->
-            <!-- '<img class="profimg" src="Static/Professions/' + professionImageDictionary[profession] + '.png" alt="Achievements">' + profession + '</p>' + -->
+            
+            <p class ="charprofession" :style="{ color: professionColor }">
+                <img class="profimg" :src="professionImage">
+                {{ professionName }}
+            </p>
+            
+            
             <p class ="charage"> Played for {{ character.hoursPlayed }} hours </p>
             <p class ="charage"> {{ character.deaths }} deaths </p>
 
