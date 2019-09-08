@@ -6,7 +6,7 @@ function initialize() {
         data: {
             characters: [],
             search: "",
-            professionCriteria: [],
+            checkedProfessions: [],
             sort: "",
         },
         computed: {
