@@ -11,7 +11,7 @@ function initialize() {
         },
         computed: {
             filteredCharacters() {
-                return filter(this.characters, this.search, selected);
+                return filter(this.characters, this.search, this.selected);
             }
         },
         methods : {
@@ -62,14 +62,17 @@ function sort(collection, criterion) {
 
         switch(criterion) {
 
-            case "level":
-                break;
-            case "age" :
-                break;
             case "name":
                 return a.name.localeCompare(b.name);
             case "profession":
                 return a.profession.localeCompare(b.profession);
+            case "level":
+                return a.level > b.level;
+            case "age" :
+                break;
+            case "playtime" :
+                return +a.hoursPlayed > +b.hoursPlayed;
+            
         }
     })
 } 
