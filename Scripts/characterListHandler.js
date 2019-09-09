@@ -11,7 +11,7 @@ function initialize() {
         },
         computed: {
             filteredCharacters() {
-                return filter(this.characters, this.search, "all");
+                return filter(this.characters, this.search, selected);
             }
         },
         methods : {
@@ -40,9 +40,11 @@ function matchStringNoCase(source, comparison){
     Filters items in the collection based on the selected category and search field input. Compares against
     tags, description and item name. 
 */
-function filter(collection, searchTerm, category) {
+function filter(collection, searchTerm, criterion) {
 
-    sort(collection, "profession");
+    if(criterion != "none") {
+        sort(collection, criterion);
+    }
     
     return collection.filter((item) => {
 
