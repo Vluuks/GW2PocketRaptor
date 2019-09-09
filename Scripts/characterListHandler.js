@@ -64,14 +64,21 @@ function sort(collection, criterion) {
 
             case "name":
                 return a.name.localeCompare(b.name);
+            case "race":
+                return a.race.localeCompare(b.race);
             case "profession":
-                return a.profession.localeCompare(b.profession);
+                let toCheck = (a.profession === b.profession && (a.eliteSpec != undefined && b.eliteSpec != undefined)) ? "eliteSpec" : "profession";
+                return a[toCheck].localeCompare(b[toCheck]);
             case "level":
                 return a.level > b.level;
             case "age" :
                 break;
             case "playtime" :
                 return +a.hoursPlayed > +b.hoursPlayed;
+            case "deaths" :
+                return +a.deaths > +b.deaths;
+            case "bispercentage" :
+                return +a.bestInSlot.percentage > +b.bestInSlot.percentage;
             
         }
     })

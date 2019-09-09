@@ -25,7 +25,7 @@ Vue.component('character', {
             return 'Static/Professions/' + professionImageDictionary[this.character.profession] + '.png';
         },
         bestInSlot() {
-            return calculateBestInSlotPercentage(this.character.bestInSlot.distribution);
+            return this.character.bestInSlot.percentage + "%";
         }
     },
     methods : {

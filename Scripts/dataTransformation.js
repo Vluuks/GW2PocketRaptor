@@ -27,6 +27,8 @@ function calculateBestInSlot(equipment, character) {
         pieBase.distribution[equipment[item].rarity]++;
     }
 
+    pieBase.percentage = calculateBestInSlotPercentage(pieBase.distribution);
+
     return pieBase;
 }
 
@@ -57,7 +59,7 @@ function calculateBestInSlotPercentage(distribution) {
     https://www.quora.com/How-do-I-do-percentages-in-JavaScript
 */
 function getWholePercent(percentFor, percentOf) {
-    return Math.floor(percentFor/percentOf*100) + "%";
+    return Math.floor(percentFor/percentOf*100);
 }
 
 /* 
