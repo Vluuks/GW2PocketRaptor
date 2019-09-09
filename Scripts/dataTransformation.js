@@ -16,6 +16,9 @@ function determineEliteSpec(characterSpecs){
     }
 }
 
+/*
+    Iterate over equipment and create distribution of item rarities.
+*/
 function calculateBestInSlot(equipment, character) {
 
     let pieBase = new PieBase();
@@ -27,12 +30,16 @@ function calculateBestInSlot(equipment, character) {
     return pieBase;
 }
 
+/*
+    Based on the two top tier rarities (ascended and legendary), calculate
+    what the percentage of currently equipped best in slot items on a character is. 
+*/
 function calculateBestInSlotPercentage(distribution) {
 
     let bestInSlot = 0;
     let notBestInSlot = 0;
 
-    Object.keys(distribution).forEach(function(rarity){
+    Object.keys(distribution).forEach(function(rarity) {
 
         if(rarity == "Ascended" || rarity == "Legendary") {
             bestInSlot += distribution[rarity];
@@ -46,8 +53,10 @@ function calculateBestInSlotPercentage(distribution) {
     return getWholePercent(bestInSlot, (bestInSlot+notBestInSlot));
 }
 
-function getWholePercent(percentFor,percentOf)
-{
+/*
+    https://www.quora.com/How-do-I-do-percentages-in-JavaScript
+*/
+function getWholePercent(percentFor, percentOf) {
     return Math.floor(percentFor/percentOf*100) + "%";
 }
 
