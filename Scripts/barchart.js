@@ -23,7 +23,6 @@ window.onload = function(){
     // If it's the first time, initialize. 
     if(firstTime) {
 
-        console.log("hoi_barchart");
         makePieChart();
 
         d3.select("#barchartpart").append("svg")
@@ -128,7 +127,6 @@ window.onload = function(){
         .on('mouseout', config.tip.hide)
         .on("click", function(d) {
             transformDataForSunburst(d.characterName);
-            console.log(d);
         });
 
     // Add X axis, done after bar chart so text is over it instead of under it.

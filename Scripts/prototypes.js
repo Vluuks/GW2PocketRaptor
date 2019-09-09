@@ -13,6 +13,8 @@ function Character() {
     this.equipment = [];
     this.equipmentRarity = [];
     this.sunburstDataCache = undefined;
+    this.bestInSlot = {};
+
 }
 
 function AgonyResist() {
@@ -22,6 +24,18 @@ function AgonyResist() {
     this.weaponsA = 0;
     this.weaponsB = 0;
     this.aquatic = 0;
+}
+
+function PieBase() {
+    this.distribution = {
+        "Basic" : 0,
+        "Fine" : 0,
+        "Masterwork" : 0,
+        "Rare" : 0,
+        "Exotic" : 0,
+        "Ascended" : 0,
+        "Legendary" : 0
+    }
 }
 
 function Item(id, name, rarity, infusions, type, slot, weaponSlot) {

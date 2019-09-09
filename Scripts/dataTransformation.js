@@ -16,6 +16,19 @@ function determineEliteSpec(characterSpecs){
     }
 }
 
+function calculateBestInSlot(equipment, character) {
+
+    let pieBase = new PieBase();
+
+    for(item in equiment) {
+        // determine rarity
+        pieBase.distribution[item.rarity]++;
+        // push to array? check what pie requires
+    }
+
+    return pieBase;
+}
+
 /* 
     For a given armor piece, calculate the agony infusions present, and based on the ID of these
     infusions return the total amount of agony resist present in the armor piece, trinket or weapon.

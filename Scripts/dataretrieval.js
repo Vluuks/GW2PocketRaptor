@@ -384,9 +384,14 @@ function fetchEquipment() {
                             }
                         }
 
-                        // Equipment data is ready, so we can calculate and store AR.
-                        agonyResist = calculateAgonyResist(account.characterDictionary[character].equipmentRarity, character);
+                        // Equipment data is ready, so we can calculate and store AR + BIS distribution.
+                        let equimentRarity = account.characterDictionary[character].equipmentRarity;
+                        
+                        let agonyResist = calculateAgonyResist(equimentRarity, character);
                         account.characterDictionary[character].agonyResist = agonyResist;
+
+                        let bestInSlot = calculateBestInSlot(equimentRarity, character)
+                        account.characterDictionary[character].bestInSlot = bestInSlot;
 
                         // Only update the chart if new data is present.
                         if(agonyResist.total > 0) {
