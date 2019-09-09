@@ -13,7 +13,11 @@ function initialize() {
             filteredCharacters() {
                 return filter(this.characters, this.search, "all");
             }
+        },
+        methods : {
+            
         }
+
     });
 
     // Add click handler to the divs?
@@ -37,6 +41,8 @@ function matchStringNoCase(source, comparison){
     tags, description and item name. 
 */
 function filter(collection, searchTerm, category) {
+
+    sort(collection, "profession");
     
     return collection.filter((item) => {
 
@@ -48,3 +54,20 @@ function filter(collection, searchTerm, category) {
     });
 
 }
+
+function sort(collection, criterion) {
+    collection.sort(function(a, b){
+
+        switch(criterion) {
+
+            case "level":
+                break;
+            case "age" :
+                break;
+            case "name":
+                return a.name.localeCompare(b.name);
+            case "profession":
+                return a.profession.localeCompare(b.profession);
+        }
+    })
+} 
