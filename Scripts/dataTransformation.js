@@ -43,7 +43,12 @@ function calculateBestInSlotPercentage(distribution) {
     })
 
     // percentage that is best in slot
-    return bestInSlot / (bestInSlot + notBestInSlot);
+    return getWholePercent(bestInSlot, (bestInSlot+notBestInSlot));
+}
+
+function getWholePercent(percentFor,percentOf)
+{
+    return Math.floor(percentFor/percentOf*100) + "%";
 }
 
 /* 

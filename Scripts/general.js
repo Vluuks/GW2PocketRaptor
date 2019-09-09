@@ -25,3 +25,7 @@ function showError(errorMessage) {
     $('#error').show();
     $('#error').text(errorMessage);
 }
+
+function toPercentage(number) {
+    
+}
