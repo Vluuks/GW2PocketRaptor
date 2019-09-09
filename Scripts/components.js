@@ -27,6 +27,11 @@ Vue.component('character', {
         bestInSlot() {
             return calculateBestInSlotPercentage(this.character.bestInSlot.distribution);
         }
+    },
+    methods : {
+        triggerSunburst() {
+            transformDataForSunburst(this.character.name);
+        }
     }
 });
 
