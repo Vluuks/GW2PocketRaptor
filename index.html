@@ -37,7 +37,7 @@
         <div v-on:click="triggerSunburst" class="basic-container-items character-page-container">
 
             <p class="charname">{{ character.name }} </p>
-            <p class="charage"> Level {{ character.level }}</p>
+            <p class="charlevel"> Level {{ character.level }} {{ character.race }}</p>
             
             <p class ="charprofession" :style="{ color: professionColor }">
                 <img class="profimg" :src="professionImage">
@@ -146,7 +146,7 @@
 
                                 <input id="search-input" v-model="search" type="text" placeholder="search"> 
 
-                                <select v-model="selected">
+                                <select id="sort-select" v-model="selected">
                                     <option value="none">None</option>
                                     <option value="name">Name</option>
                                     <option value="race">Race</option>

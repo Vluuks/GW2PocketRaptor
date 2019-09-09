@@ -19,9 +19,6 @@ function initialize() {
         }
 
     });
-
-    // Add click handler to the divs?
-    // document.getElementsByClassName("character-page-container").addEventListener("click", console.log("test"));
 }
 
 function addCharacter(character) {

@@ -173,6 +173,14 @@ Rare interactie met flexbox die ik niet begrijp.  */
 	flex-basis: 10%;
 }
 
+.charlevel {
+	font-size: 15px;
+}
+
+#sort-select {
+	margin: 10px;
+	margin-left: 0px;
+}
 
 
 
