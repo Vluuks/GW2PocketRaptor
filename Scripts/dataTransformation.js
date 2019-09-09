@@ -20,13 +20,30 @@ function calculateBestInSlot(equipment, character) {
 
     let pieBase = new PieBase();
 
-    for(item in equiment) {
-        // determine rarity
-        pieBase.distribution[item.rarity]++;
-        // push to array? check what pie requires
+    for(item in equipment) {
+        pieBase.distribution[equipment[item].rarity]++;
     }
 
     return pieBase;
+}
+
+function calculateBestInSlotPercentage(distribution) {
+
+    let bestInSlot = 0;
+    let notBestInSlot = 0;
+
+    Object.keys(distribution).forEach(function(rarity){
+
+        if(rarity == "Ascended" || rarity == "Legendary") {
+            bestInSlot += distribution[rarity];
+        }
+        else {
+            notBestInSlot += distribution[rarity];
+        }
+    })
+
+    // percentage that is best in slot
+    return bestInSlot / (bestInSlot + notBestInSlot);
 }
 
 /* 

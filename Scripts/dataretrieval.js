@@ -399,6 +399,7 @@ function fetchEquipment() {
                         }
 
                         addCharacter(account.characterDictionary[character])
+                        console.log(account.characterDictionary[character]);
                     }
                 }) // end of ajax
 
