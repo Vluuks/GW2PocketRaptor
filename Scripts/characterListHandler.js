@@ -7,7 +7,7 @@ function initialize() {
             characters: [],
             search: "",
             checkedProfessions: [],
-            sort: "",
+            selected : "none"
         },
         computed: {
             filteredCharacters() {
