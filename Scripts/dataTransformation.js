@@ -3,11 +3,14 @@
     ids, based on this we then determine what elite spec is being run from our dictionary. We get PvE spec
     array, take the 3rd entry (this is the slot that holds elite specs) and then determine the id from this. 
 */
-function determineEliteSpec(characterSpecs){
+function determineEliteSpec(characterSpecs, character){
 
     // Get PvE spec overview
     if(characterSpecs.pve[2] != undefined){
         var eliteSpecId = characterSpecs.pve[2].id;
+        
+        console.log(character + " " + characterSpecs.pve[2].id);
+
         return eliteSpecDictionary[eliteSpecId];
     }
     // No 3rd spec has been set, so it can never be an elite spec

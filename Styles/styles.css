@@ -23,13 +23,11 @@ h2{
 
 /* Content of the bootstrap tab */
 .tab-content{
-	/* padding: 20px; */
 }
 
 /* Flexbox inside said tab, which in turn manages order of divs within. */
 .flex-container{
 	display: flex;
-	/* flex-wrap: wrap; */
 }
 
 .flex-container-wrap{
