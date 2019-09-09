@@ -364,7 +364,7 @@ path{
 
 .character-page-container {
 	width: 300px;
-	height: 200px;
+	height: 220px;
 }
 
 #character-list {
@@ -375,4 +375,8 @@ path{
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+}
+
+.charpageprofession {
+	margin: 10px;
 }
