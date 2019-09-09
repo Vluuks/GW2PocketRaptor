@@ -36,7 +36,7 @@ var colorDictionary = {
     "Berserker": "#e2ad18",
     "Engineer": "#915a31",
     "Scrapper": "#915a31",
-    "Thief": "#66605b",
+    "Thief": "#7a6a6d",
     "Daredevil": "#66605b",
     "Ranger": "#99c661",
     "Druid": "#99c661",
@@ -145,15 +145,15 @@ var eliteSpecDictionary = {
 
     // Warrior
     18 : "Berserker",
-    // Spellbreaker
+    61 : "Spellbreaker",
 
     // Guardian
     27 : "Dragonhunter",
-    // Firebrand
+    62 : "Firebrand",
 
     // Revenant
     52 : "Herald",
-    // Renegade
+    63 : "Renegade",
 
     // Engineer
     43 : "Scrapper",
@@ -161,23 +161,23 @@ var eliteSpecDictionary = {
 
     // Thief
     7 :  "Daredevil",
-    // Deadeye
+    58 : "Deadeye",
 
     // Ranger
-    5: "Druid",
+    5 : "Druid",
     55 : "Soulbeast",
 
     // Elementalist
     48: "Tempest",
-    // Weaver
+    56: "Weaver",
 
     // Necromancer
     34 : "Reaper",
-    // Scourge
+    60 : "Scourge",
 
     // Mesmer
-    40 : "Chronomancer"
-    // Mirage
+    40 : "Chronomancer",
+    59 : "Mirage"
 }
 
 
