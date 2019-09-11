@@ -27,7 +27,9 @@ function calculateBestInSlot(equipment, character) {
         pieBase.distribution[equipment[item].rarity]++;
     }
 
-    pieBase.percentage = calculateBestInSlotPercentage(pieBase.distribution);
+    let percentageInfo = calculateBestInSlotPercentage(pieBase.distribution)
+    pieBase.percentage = percentageInfo[0];
+    pieBase.percentageArray = percentageInfo[1];
 
     return pieBase;
 }
@@ -38,21 +40,33 @@ function calculateBestInSlot(equipment, character) {
 */
 function calculateBestInSlotPercentage(distribution) {
 
-    let bestInSlot = 0;
+    let percentageArray = [];
+
+    let legendary = 0;
+    let ascended = 0;
     let notBestInSlot = 0;
 
     Object.keys(distribution).forEach(function(rarity) {
 
-        if(rarity == "Ascended" || rarity == "Legendary") {
-            bestInSlot += distribution[rarity];
+        if(rarity == "Legendary"){
+            legendary += distribution[rarity];
+        }
+        else if(rarity == "Ascended") {
+            ascended += distribution[rarity];
         }
         else {
             notBestInSlot += distribution[rarity];
         }
     })
 
+    let bestInSlot = legendary + ascended;
+    let totalItems = legendary + ascended + notBestInSlot;
+
+    percentageArray.push(getWholePercent(legendary, totalItems));
+    percentageArray.push(getWholePercent(ascended, totalItems));
+    percentageArray.push(getWholePercent(notBestInSlot, totalItems))
     // percentage that is best in slot
-    return getWholePercent(bestInSlot, (bestInSlot+notBestInSlot));
+    return [getWholePercent(bestInSlot, totalItems), percentageArray];
 }
 
 /*
