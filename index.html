@@ -48,6 +48,8 @@
             <p class ="charage"> {{ character.deaths }} deaths </p>
             <p class ="charage">{{ bestInSlot }} Best in Slot items</p>
 
+            <svg v-bind:id="character.name" class="progressbar"></svg>
+            {{ drawGearProgress(character.name) }}
         </div>
     </script>   
 

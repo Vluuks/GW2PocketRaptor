@@ -8,9 +8,6 @@ function determineEliteSpec(characterSpecs, character){
     // Get PvE spec overview
     if(characterSpecs.pve[2] != undefined){
         var eliteSpecId = characterSpecs.pve[2].id;
-        
-        console.log(character + " " + characterSpecs.pve[2].id);
-
         return eliteSpecDictionary[eliteSpecId];
     }
     // No 3rd spec has been set, so it can never be an elite spec
@@ -135,13 +132,6 @@ function calculateAgonyResist(equipment, character) {
                             agonyResist.armor += infusionDictionary[infusion];
                         }
 
-                        // we need to know what to map this id to because hmm
-                        if(character == "Asvata") {
-
-                            console.log(equipment[item]);
-                            console.log("aurillium" + infusion);
-                            console.log(infusionDictionary[infusion]);
-                        }
                     }
                     // for under water
                     else {    
