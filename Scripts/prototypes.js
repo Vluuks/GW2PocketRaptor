@@ -36,7 +36,8 @@ function PieBase() {
         "Ascended" : 0,
         "Legendary" : 0
     }
-    this.percentage = 0;
+    this.percentage = 0,
+    this.percentageArray = [0, 0, 100];
 }
 
 function Item(id, name, rarity, infusions, type, slot, weaponSlot) {

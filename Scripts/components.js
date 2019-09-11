@@ -31,7 +31,38 @@ Vue.component('character', {
     methods : {
         triggerSunburst() {
             transformDataForSunburst(this.character.name);
+        },
+        drawGearProgress(character) {
+            console.log(character);
+            var svg = d3.select("#"+character)
+
+            if(!svg) return;
+
+            let percentages = this.character.bestInSlot.percentageArray;
+            let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
+        
+            var g = svg.append("g")
+                .attr("width", 200)
+                .attr("height", 20)
+        
+            let offset = 0;
+            percentages.forEach(function(prct, i){
+                
+                g.append("rect")
+                    .attr("width", prct*2)
+                    .attr("height", 20)
+                    .style("fill", colors[i])
+                    .attr("x", offset)      
+                    
+                offset+=(prct*2)
+            })
         }
+    },
+    mounted() {
+        this.drawGearProgress(this.character.name.split(' ').join('x'));
+    },
+    beforeUpdate() {
+        this.drawGearProgress(this.character.name.split(' ').join('x'));
     }
 });
 

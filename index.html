@@ -48,6 +48,9 @@
             <p class ="charage"> {{ character.deaths }} deaths </p>
             <p class ="charage">{{ bestInSlot }} Best in Slot items</p>
 
+            <svg v-bind:id="character.name.split(' ').join('x')" class="progressbar"></svg>
+
+
         </div>
     </script>   
 
@@ -152,7 +155,7 @@
                                     <option value="race">Race</option>
                                     <option value="profession">Base Profession</option>
                                     <option value="level">Level</option>
-                                    <option value="age">Age</option>
+                                    <!-- <option value="age">Age</option> -->
                                     <option value="playtime">Playtime</option>
                                     <option value="deaths">Deaths</option>
                                     <option value="bispercentage">Best in Slot %</option>
@@ -195,7 +198,7 @@
                             
                             <character 
                                 v-for="(character, index) in filteredCharacters"
-                                v-bind:key="index"
+                                v-bind:key="character.name"
                                 v-bind:character="character">
                             </character>
 

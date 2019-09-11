@@ -8,9 +8,6 @@ function determineEliteSpec(characterSpecs, character){
     // Get PvE spec overview
     if(characterSpecs.pve[2] != undefined){
         var eliteSpecId = characterSpecs.pve[2].id;
-        
-        console.log(character + " " + characterSpecs.pve[2].id);
-
         return eliteSpecDictionary[eliteSpecId];
     }
     // No 3rd spec has been set, so it can never be an elite spec
@@ -30,7 +27,9 @@ function calculateBestInSlot(equipment, character) {
         pieBase.distribution[equipment[item].rarity]++;
     }
 
-    pieBase.percentage = calculateBestInSlotPercentage(pieBase.distribution);
+    let percentageInfo = calculateBestInSlotPercentage(pieBase.distribution)
+    pieBase.percentage = percentageInfo[0];
+    pieBase.percentageArray = percentageInfo[1];
 
     return pieBase;
 }
@@ -41,21 +40,33 @@ function calculateBestInSlot(equipment, character) {
 */
 function calculateBestInSlotPercentage(distribution) {
 
-    let bestInSlot = 0;
+    let percentageArray = [];
+
+    let legendary = 0;
+    let ascended = 0;
     let notBestInSlot = 0;
 
     Object.keys(distribution).forEach(function(rarity) {
 
-        if(rarity == "Ascended" || rarity == "Legendary") {
-            bestInSlot += distribution[rarity];
+        if(rarity == "Legendary"){
+            legendary += distribution[rarity];
+        }
+        else if(rarity == "Ascended") {
+            ascended += distribution[rarity];
         }
         else {
             notBestInSlot += distribution[rarity];
         }
     })
 
+    let bestInSlot = legendary + ascended;
+    let totalItems = legendary + ascended + notBestInSlot;
+
+    percentageArray.push(getWholePercent(legendary, totalItems));
+    percentageArray.push(getWholePercent(ascended, totalItems));
+    percentageArray.push(getWholePercent(notBestInSlot, totalItems))
     // percentage that is best in slot
-    return getWholePercent(bestInSlot, (bestInSlot+notBestInSlot));
+    return [getWholePercent(bestInSlot, totalItems), percentageArray];
 }
 
 /*
@@ -135,13 +146,6 @@ function calculateAgonyResist(equipment, character) {
                             agonyResist.armor += infusionDictionary[infusion];
                         }
 
-                        // we need to know what to map this id to because hmm
-                        if(character == "Asvata") {
-
-                            console.log(equipment[item]);
-                            console.log("aurillium" + infusion);
-                            console.log(infusionDictionary[infusion]);
-                        }
                     }
                     // for under water
                     else {    

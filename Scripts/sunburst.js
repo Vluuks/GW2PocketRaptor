@@ -186,9 +186,7 @@ function makeSunburst(data) {
 
     // Function that handles clicks on the sunburst so that it can zoom.
     function click(d) {
-
-        // console.log(d);
-
+        
         showItemTooltip(d);
 
         // Fade out text elements.
