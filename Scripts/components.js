@@ -32,14 +32,14 @@ Vue.component('character', {
         triggerSunburst() {
             transformDataForSunburst(this.character.name);
         },
-        drawGearProgress( character) {
+        drawGearProgress(character) {
+            console.log(character);
             var svg = d3.select("#"+character)
-            console.log(svg);
             let percentages = [15, 60, 25];
             let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
         
             var g = svg.append("g")
-                .attr("width", 250)
+                .attr("width", 200)
                 .attr("height", 20)
         
             let offset = 0;
@@ -54,6 +54,9 @@ Vue.component('character', {
                 offset+=(prct*2)
             })
         }
+    },
+    mounted() {
+        this.drawGearProgress(this.character.name.split(' ').join('x'));
     }
 });
 

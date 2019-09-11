@@ -28,8 +28,10 @@ function addCharacter(character) {
 }
 
 
-function drawGearProgress(percentage, character) {
-    var svg = d3.select("#progressbar-"+ character)
+function drawGearProgress2(percentage, character) {
+
+    
+    var svg = d3.select("#"+character)
     let percentages = [15, 60, 25];
     let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
 
