@@ -173,6 +173,7 @@ Rare interactie met flexbox die ik niet begrijp.  */
 
 .charlevel {
 	font-size: 15px;
+	margin-left: 10px;
 }
 
 #sort-select {
@@ -376,5 +377,11 @@ path{
 }
 
 .charpageprofession {
+	margin: 10px;
+}
+
+.progressbar {
+	width: 250px;
+	height: 20px;
 	margin: 10px;
 }
