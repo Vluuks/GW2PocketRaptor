@@ -35,6 +35,9 @@ Vue.component('character', {
         drawGearProgress(character) {
             console.log(character);
             var svg = d3.select("#"+character)
+
+            if(!svg) return;
+
             let percentages = this.character.bestInSlot.percentageArray;
             let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
         
@@ -56,6 +59,9 @@ Vue.component('character', {
         }
     },
     mounted() {
+        this.drawGearProgress(this.character.name.split(' ').join('x'));
+    },
+    beforeUpdate() {
         this.drawGearProgress(this.character.name.split(' ').join('x'));
     }
 });

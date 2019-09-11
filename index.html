@@ -50,6 +50,7 @@
 
             <svg v-bind:id="character.name.split(' ').join('x')" class="progressbar"></svg>
 
+
         </div>
     </script>   
 
@@ -197,7 +198,7 @@
                             
                             <character 
                                 v-for="(character, index) in filteredCharacters"
-                                v-bind:key="index"
+                                v-bind:key="character.name"
                                 v-bind:character="character">
                             </character>
 

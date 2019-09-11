@@ -63,6 +63,7 @@ function matchStringNoCase(source, comparison){
 */
 function filter(collection, searchTerm, criterion) {
 
+
     if(criterion != "none") {
         sort(collection, criterion);
     }
