@@ -12,6 +12,12 @@ window.onload = function(){
     config.width = 980 - config.margin.left - config.margin.right,
     config.height = 400 - config.margin.top - config.margin.bottom;
 
+    var element = document.getElementById('barchartpart');
+    var positionInfo = element.getBoundingClientRect();
+    var height = positionInfo.height;
+    var width = positionInfo.width;
+    console.log(height + " " + width + " " + element.scrollWidth);
+
 }
 
 /* Update with transition and withour remaking the canvas. */
