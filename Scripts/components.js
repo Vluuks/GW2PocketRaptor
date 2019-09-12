@@ -35,19 +35,12 @@ Vue.component('character', {
         drawGearProgress(character) {
             
             var svg = d3.select("#"+character)
-
-            
-
             if(!svg) return;
 
             let percentages = this.character.bestInSlot.percentageArray;
-            console.log(character + percentages.toString());
             let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"];
             let type = ["Legendary", "Ascended", "Exotic or lower"]
 
-            console.log(character);
-            console.log( percentages[0] + percentages[1] + percentages[2]);
-        
             var g = svg.append("g")
                 .attr("width", 200)
                 .attr("height", 10)

@@ -46,10 +46,10 @@
             
             <p class ="charage"> Played for <b>{{ character.hoursPlayed }}</b> hours </p>
             <p class ="charage"> <b>{{ character.deaths }}</b> deaths </p>
-            <p class ="charage"><b>{{ bestInSlot }}</b> Best in Slot items</p>
-
+            <br>
+            
             <svg v-bind:id="character.name.split(' ').join('x')" class="progressbar"></svg>
-
+            <p class ="charbis"><b>{{ bestInSlot }}</b> Best in Slot items</p>
 
         </div>
     </script>   
