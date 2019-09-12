@@ -33,29 +33,47 @@ Vue.component('character', {
             transformDataForSunburst(this.character.name);
         },
         drawGearProgress(character) {
-            console.log(character);
+            
             var svg = d3.select("#"+character)
-
             if(!svg) return;
 
             let percentages = this.character.bestInSlot.percentageArray;
-            let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
-        
+            let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"];
+            let type = ["Legendary", "Ascended", "Exotic or lower"]
+
             var g = svg.append("g")
                 .attr("width", 200)
-                .attr("height", 20)
+                .attr("height", 10)
         
-            let offset = 0;
-            percentages.forEach(function(prct, i){
-                
-                g.append("rect")
-                    .attr("width", prct*2)
-                    .attr("height", 20)
-                    .style("fill", colors[i])
-                    .attr("x", offset)      
-                    
-                offset+=(prct*2)
-            })
+            // make progress bar
+            var x = d3.scale.linear()
+                .range([0, 200]).nice()
+                .domain([0, 100]).nice();
+
+            var tip = d3.tip()
+                .attr('class', 'progress-tooltip')
+                .offset([-2, 0])
+                .html(function(d, i) {
+                    return "<span>" + d + "% is " + type[i] + "</span>";
+                });
+                d3.select("#"+character).call(tip);
+
+            g.selectAll("rect")
+                .data(percentages)
+                .enter()
+                .append("rect")
+                .attr("width", function(d) {
+                    return x(d); })
+                .attr("height", 10)
+                .style("fill", function(d, i) { 
+                    return colors[i];
+                })
+                .attr("x", function(d, i) {
+                    return i > 0 ? x(percentages[i-1] + ( i > 1 ? percentages[i-2] : 0)) : 0;
+                })
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);  
+  
         }
     },
     mounted() {

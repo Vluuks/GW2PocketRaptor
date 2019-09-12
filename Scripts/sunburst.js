@@ -286,8 +286,8 @@ function showCharacterData(characterName) {
         '<p class=\"charage"> Level ' + character.level + '</p>' +
         '<p class =\"charprofession\" style=\"color:' + colorDictionary[character.profession] + ' \">' +
         '<img class="profimg" src="Static/Professions/' + professionImageDictionary[profession] + '.png" alt="Achievements">' + profession + '</p>' +
-        '<p class =\"charage\"> Played for ' + character.hoursPlayed + ' hours </p>' +
-        '<p class =\"charage\">' + character.deaths + ' deaths </p>'
+        '<p class =\"charage\"> Played for <b>' + character.hoursPlayed + '</b> hours </p>' +
+        '<p class =\"charage\"> <b>' + character.deaths + '</b> deaths </p>'
     );
 
     // Show div that contains this data
