@@ -391,5 +391,6 @@ path{
 .progress-tooltip {
 	font-size: 12px;
 	background-color: #c0c0c0;
-	padding: 3px;
+	padding: 5px;
+	padding-top: 6px;
 }

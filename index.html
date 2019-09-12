@@ -44,9 +44,9 @@
                 {{ professionName }}
             </p>
             
-            <p class ="charage"> Played for {{ character.hoursPlayed }} hours </p>
-            <p class ="charage"> {{ character.deaths }} deaths </p>
-            <p class ="charage">{{ bestInSlot }} Best in Slot items</p>
+            <p class ="charage"> Played for <b>{{ character.hoursPlayed }}</b> hours </p>
+            <p class ="charage"> <b>{{ character.deaths }}</b> deaths </p>
+            <p class ="charage"><b>{{ bestInSlot }}</b> Best in Slot items</p>
 
             <svg v-bind:id="character.name.split(' ').join('x')" class="progressbar"></svg>
 

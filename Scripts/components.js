@@ -43,6 +43,7 @@ Vue.component('character', {
             let percentages = this.character.bestInSlot.percentageArray;
             console.log(character + percentages.toString());
             let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"];
+            let type = ["Legendary", "Ascended", "Exotic or lower"]
 
             console.log(character);
             console.log( percentages[0] + percentages[1] + percentages[2]);
@@ -59,8 +60,8 @@ Vue.component('character', {
             var tip = d3.tip()
                 .attr('class', 'progress-tooltip')
                 .offset([-2, 0])
-                .html(function(d) {
-                    return "<span>" + d + "% of total gear" + "</span>";
+                .html(function(d, i) {
+                    return "<span>" + d + "% is " + type[i] + "</span>";
                 });
                 d3.select("#"+character).call(tip);
 
