@@ -33,12 +33,13 @@ Vue.component('character', {
             transformDataForSunburst(this.character.name);
         },
         drawGearProgress(character) {
-            console.log(character);
+            
             var svg = d3.select("#"+character)
 
             if(!svg) return;
 
             let percentages = this.character.bestInSlot.percentageArray;
+            console.log(character + percentages.toString());
             let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
         
             var g = svg.append("g")
@@ -47,8 +48,8 @@ Vue.component('character', {
         
             // make progress bar
             var x = d3.scale.linear()
-                .range([0, 250])
-                .domain([0, 100]);
+                .range([0, 250]).nice()
+                .domain([0, 100]).nice();
 
             var tip = d3.tip()
                 .attr('class', 'bartooltip')
@@ -62,26 +63,14 @@ Vue.component('character', {
                 .data(percentages)
                 .enter()
                 .append("rect")
-                .attr("width", 20)
+                .attr("width", function(d){ return x(d); })
                 .attr("height", 10)
                 .style("fill", function(d, i){ 
                     return colors[i];
                 })
-                .attr("x", function(d, i){
-                    return i*20;
+                .attr("x", function(d, i) {
+                    return i > 0 ? x(percentages[i-1]) : 0;
                 })  
-
-            // let offset = 0;
-            // percentages.forEach(function(prct, i){
-                
-            //     g.append("rect")
-            //         .attr("width", prct*2)
-            //         .attr("height", 10)
-            //         .style("fill", colors[i])
-            //         .attr("x", offset)      
-                    
-            //     offset+=(prct*2)
-            // })
         }
     },
     mounted() {
