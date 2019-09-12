@@ -36,11 +36,18 @@ Vue.component('character', {
             
             var svg = d3.select("#"+character)
 
+            
+
             if(!svg) return;
 
             let percentages = this.character.bestInSlot.percentageArray;
             console.log(character + percentages.toString());
-            let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"]
+            let colors = ["#8119d1", "#dd1a7f", "#d3d3d3"];
+
+            console.log(character);
+            console.log( percentages[0] + percentages[1] + percentages[2]);
+
+
         
             var g = svg.append("g")
                 .attr("width", 200)
@@ -48,7 +55,7 @@ Vue.component('character', {
         
             // make progress bar
             var x = d3.scale.linear()
-                .range([0, 250]).nice()
+                .range([0, 200]).nice()
                 .domain([0, 100]).nice();
 
             var tip = d3.tip()
@@ -57,19 +64,21 @@ Vue.component('character', {
                 .html(function(d) {
                     return "<span>" + d + "</span>";
                 });
-                svg.call(tip);
+                d3.select("#"+character).call(tip);
 
             g.selectAll("rect")
                 .data(percentages)
                 .enter()
                 .append("rect")
-                .attr("width", function(d){ return x(d); })
+                .attr("width", function(d){
+                    console.log(x(d)); 
+                    return Math.ceil(x(d)); })
                 .attr("height", 10)
                 .style("fill", function(d, i){ 
                     return colors[i];
                 })
                 .attr("x", function(d, i) {
-                    return i > 0 ? x(percentages[i-1]) : 0;
+                    return i > 0 ? Math.ceil(x(percentages[i-1])) : 0;
                 })  
         }
     },

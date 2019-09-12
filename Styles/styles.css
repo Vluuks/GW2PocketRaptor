@@ -381,9 +381,9 @@ path{
 }
 
 .progressbar {
-	width: 250px;
-	height: 20px;
+	width: 200px;
+	height: 10px;
 	margin: 10px;
-	margin-left: 0px;
-	border: black solid 2px;
+	margin-left: 2px;
+	border: green solid 2px;
 }
