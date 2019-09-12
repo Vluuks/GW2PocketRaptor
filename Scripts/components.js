@@ -43,19 +43,45 @@ Vue.component('character', {
         
             var g = svg.append("g")
                 .attr("width", 200)
-                .attr("height", 20)
+                .attr("height", 10)
         
-            let offset = 0;
-            percentages.forEach(function(prct, i){
+            // make progress bar
+            var x = d3.scale.linear()
+                .range([0, 250])
+                .domain([0, 100]);
+
+            var tip = d3.tip()
+                .attr('class', 'bartooltip')
+                .offset([-2, 0])
+                .html(function(d) {
+                    return "<span>" + d + "</span>";
+                });
+                svg.call(tip);
+
+            g.selectAll("rect")
+                .data(percentages)
+                .enter()
+                .append("rect")
+                .attr("width", 20)
+                .attr("height", 10)
+                .style("fill", function(d, i){ 
+                    return colors[i];
+                })
+                .attr("x", function(d, i){
+                    return i*20;
+                })  
+
+            // let offset = 0;
+            // percentages.forEach(function(prct, i){
                 
-                g.append("rect")
-                    .attr("width", prct*2)
-                    .attr("height", 20)
-                    .style("fill", colors[i])
-                    .attr("x", offset)      
+            //     g.append("rect")
+            //         .attr("width", prct*2)
+            //         .attr("height", 10)
+            //         .style("fill", colors[i])
+            //         .attr("x", offset)      
                     
-                offset+=(prct*2)
-            })
+            //     offset+=(prct*2)
+            // })
         }
     },
     mounted() {
