@@ -200,6 +200,12 @@ Rare interactie met flexbox die ik niet begrijp.  */
 #piesvg {
 	margin: 10px;
 	float: left;
+	margin-top: 40px;
+}
+
+.pie-title{
+	font-size: 20px;
+	/* margin-left: 30px; */
 }
 
 #error{

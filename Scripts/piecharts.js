@@ -32,14 +32,16 @@ function makePieChart() {
         data_account = account.raceDictionary,
         data_gender = account.genderDictionary;
 
+
     var vis = d3.select('#piesvgpart')
     .append("svg:svg")
     .data([data])
     .attr("width", w)
-    .attr("height", h)
+    .attr("height", h + 200)
     .attr("id", "piesvg")
     .attr("class", "piesvg")
     .append("svg:g")
+    .attr("id", "svggroup-1")
     .attr("transform", "translate(" + r + "," + r + ")");
 
     // Tooltip.
@@ -57,7 +59,7 @@ function makePieChart() {
         .data(pie).enter()
         .append("svg:g")
         .attr("class", "slice");
-    arcs.append("svg:path")
+        arcs.append("svg:path")
         .attr("fill", function(d, i){ return colorDictionary[data[i].label]; })
         .attr("d", function (d) { return arc(d); })
         .on("mouseover", function(d) {
@@ -84,6 +86,13 @@ function makePieChart() {
         )
         .attr("text-anchor", "middle")
         .text( function(d, i) { return data[i].value; });
+    
+        d3.select("#svggroup-1")
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("class", "pie-title")
+        .attr("transform", "translate( 0, 200 )")
+        .text("Profession");
 
     // ------
 
@@ -91,10 +100,11 @@ function makePieChart() {
     .append("svg:svg")
     .data([data_account])
     .attr("width", w)
-    .attr("height", h)
+    .attr("height", h + 200)
     .attr("id", "piesvg")
     .attr("class", "piesvg")
     .append("svg:g")
+    .attr("id", "svggroup-2")
     .attr("transform", "translate(" + r + "," + r + ")");
 
     var pie = d3.layout.pie().value(function(d) { return d.value; });
@@ -132,17 +142,26 @@ function makePieChart() {
         .attr("text-anchor", "middle")
         .text( function(d, i) { return data_account[i].value; });
 
+        d3.select("#svggroup-2")
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("class", "pie-title")
+        .attr("transform", "translate( 0, 200 )")
+        .text("Race");
+
     // ------
 
     var vis = d3.select('#piesvgpart')
-    .append("svg:svg")
-    .data([data_gender])
-    .attr("width", w)
-    .attr("height", h)
-    .attr("id", "piesvg")
-    .attr("class", "piesvg")
-    .append("svg:g")
-    .attr("transform", "translate(" + r + "," + r + ")");
+        .append("svg:svg")
+        .data([data_gender])
+        .attr("width", w)
+        .attr("height", h + 200)
+        .attr("id", "piesvg")
+        .attr("class", "piesvg")
+        .append("svg:g")
+        .attr("id", "svggroup-3")
+        .attr("transform", "translate(" + r + "," + r + ")");
+        
 
     var pie = d3.layout.pie().value(function(d) { return d.value; });
 
@@ -179,6 +198,14 @@ function makePieChart() {
         )
         .attr("text-anchor", "middle")
         .text( function(d, i) { return data_gender[i].value; });
+
+    d3.select("#svggroup-3")
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("class", "pie-title")
+        .attr("transform", "translate( 0, 200 )")
+        .text("Gender");
+
 }
 
 function pieSectionClicked(d) {
