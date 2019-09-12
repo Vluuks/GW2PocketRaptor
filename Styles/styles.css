@@ -114,7 +114,7 @@ Rare interactie met flexbox die ik niet begrijp.  */
 
 #character-list{
 	flex-basis: 85%;
-	
+	align-content: flex-start;
 }
 
 #barchartpart {
@@ -394,4 +394,9 @@ path{
 	background-color: #c0c0c0;
 	padding: 5px;
 	padding-top: 6px;
+}
+
+.charlevel-overview {
+	font-size: 15px;
+	margin-left: 5px;
 }
