@@ -73,7 +73,7 @@ function calculateBestInSlotPercentage(distribution) {
     https://www.quora.com/How-do-I-do-percentages-in-JavaScript
 */
 function getWholePercent(percentFor, percentOf) {
-    return Math.ceil(percentFor/percentOf*100);
+    return Math.floor(percentFor/percentOf*100);
 }
 
 /* 

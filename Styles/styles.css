@@ -386,3 +386,10 @@ path{
 	margin: 10px;
 	margin-left: 2px;
 }
+
+
+.progress-tooltip {
+	font-size: 12px;
+	background-color: #c0c0c0;
+	padding: 3px;
+}

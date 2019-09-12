@@ -57,22 +57,18 @@ Vue.component('character', {
                 .domain([0, 100]).nice();
 
             var tip = d3.tip()
-                .attr('class', 'bartooltip')
+                .attr('class', 'progress-tooltip')
                 .offset([-2, 0])
                 .html(function(d) {
-                    return "<span>" + d + "</span>";
+                    return "<span>" + d + "% of total gear" + "</span>";
                 });
                 d3.select("#"+character).call(tip);
 
-            var offset = 0;
             g.selectAll("rect")
                 .data(percentages)
                 .enter()
                 .append("rect")
                 .attr("width", function(d) {
-                    console.log(character + percentages.toString());
-                    console.log(x(d));
-                    offset += d; 
                     return x(d); })
                 .attr("height", 10)
                 .style("fill", function(d, i) { 
@@ -80,7 +76,9 @@ Vue.component('character', {
                 })
                 .attr("x", function(d, i) {
                     return i > 0 ? x(percentages[i-1] + ( i > 1 ? percentages[i-2] : 0)) : 0;
-                })  
+                })
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);  
   
         }
     },
