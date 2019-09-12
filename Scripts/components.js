@@ -46,8 +46,6 @@ Vue.component('character', {
 
             console.log(character);
             console.log( percentages[0] + percentages[1] + percentages[2]);
-
-
         
             var g = svg.append("g")
                 .attr("width", 200)
@@ -66,20 +64,24 @@ Vue.component('character', {
                 });
                 d3.select("#"+character).call(tip);
 
+            var offset = 0;
             g.selectAll("rect")
                 .data(percentages)
                 .enter()
                 .append("rect")
-                .attr("width", function(d){
-                    console.log(x(d)); 
-                    return Math.ceil(x(d)); })
+                .attr("width", function(d) {
+                    console.log(character + percentages.toString());
+                    console.log(x(d));
+                    offset += d; 
+                    return x(d); })
                 .attr("height", 10)
-                .style("fill", function(d, i){ 
+                .style("fill", function(d, i) { 
                     return colors[i];
                 })
                 .attr("x", function(d, i) {
-                    return i > 0 ? Math.ceil(x(percentages[i-1])) : 0;
+                    return i > 0 ? x(percentages[i-1] + ( i > 1 ? percentages[i-2] : 0)) : 0;
                 })  
+  
         }
     },
     mounted() {
