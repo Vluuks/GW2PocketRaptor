@@ -204,8 +204,8 @@ Rare interactie met flexbox die ik niet begrijp.  */
 }
 
 .pie-title{
-	font-size: 30px;
-	margin-left: 30px;
+	font-size: 20px;
+	/* margin-left: 30px; */
 }
 
 #error{
